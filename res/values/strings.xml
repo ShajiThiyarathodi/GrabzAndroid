@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Grabz</string>
+    <string name="tap_here_message">Tap your phone on NFC tag</string>
+    <string name="tap_and_go_description">Tap your phone on the NFC tag</string>
+    <string name="action_settings">Settings</string>
+    <string name="message"></string>
+    <string name="title_activity_items_in_aisle">ItemsInAisleActivity</string>
+    <string name="item_name_header">Item Name</string>
+    <string name="price_header">Price</string>
+
+</resources>
