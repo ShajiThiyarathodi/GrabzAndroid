@@ -31,21 +31,14 @@ public class ItemsInAisleActivity extends Activity {
 	
 	List<AisleItem> aisleItemList = new ArrayList<AisleItem>();
 	AisleItemAdapter aisleItemAdapter;
-	
-	//Intent intent = getIntent();
-	//String tagId = intent.getStringExtra(MainActivity.TAG_ID);
-	
-
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_items_in_aisle);
 
-		// initItemList();
-
 		(new AsyncListViewLoader())
-				.execute("http://grabznewenv-zr9gfiaui3.elasticbeanstalk.com/tags/3/items");
+				.execute("http://amitdikkar.x10host.com/grabz/GetAisleItems.php?tagId=3");
 
 		ListView lv = (ListView) findViewById(R.id.listView);
 		aisleItemAdapter = new AisleItemAdapter(this, aisleItemList);
@@ -72,10 +65,9 @@ public class ItemsInAisleActivity extends Activity {
 	}
 
 	private void initItemList() {
-		// List<AisleItem> aisleItems = new ArrayList<AisleItem>();
+
 		aisleItemList.add(new AisleItem("Bread_item_Id", 10.5f));
-		// aisleItemList.add(new LayoutModel("123", aisleItems, "2",
-		// "abc123","outlet1"));
+
 
 	}
 
@@ -109,8 +101,7 @@ public class ItemsInAisleActivity extends Activity {
 			
 			Log.d(LOG_PREFIX, "In Post Execute"+String.valueOf(result.size()));
 			dialog.dismiss();
-			List<AisleItem> aisleItems = new ArrayList<AisleItem>();
-			//aisleItems.add(new AisleItem("Bread_item_Id", 10.5f));
+
 			aisleItemAdapter.addAll(result);
 			aisleItemAdapter.notifyDataSetChanged();
 		}
