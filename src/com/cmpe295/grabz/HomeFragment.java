@@ -2,7 +2,7 @@ package com.cmpe295.grabz;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.nfc.NdefMessage;
@@ -20,28 +20,40 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class HomeFragment extends Fragment {
-	
+
 	public static final String HomeTabTitle = "Grabz";
 	public static final String MIME_TEXT_PLAIN = "text/plain";
 	public static final String LOG_PREFIX = "HomeFragment";
 	public static final String TAG_ID = "TAG_ID";
-	
+
 	private TextView mTextView;
 	private NfcAdapter mNfcAdapter;
-	
-	 
-	public HomeFragment(){}
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	private static final String ARG_SECTION_NUMBER = "section_number";
 
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+	public HomeFragment() {
+	}
 
-        getActivity().setTitle(HomeTabTitle);
-        mTextView = (TextView) rootView.findViewById(R.id.textView_message);
-        
-        Context parentCtx = getActivity().getApplicationContext();
-        mNfcAdapter = NfcAdapter.getDefaultAdapter(parentCtx);
+	public static HomeFragment newInstance(int sectionNumber) {
+		HomeFragment fragment = new HomeFragment();
+		Bundle args = new Bundle();
+		args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+		fragment.setArguments(args);
+		return fragment;
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+
+		View rootView = inflater.inflate(R.layout.fragment_home, container,
+				false);
+
+		getActivity().setTitle(HomeTabTitle);
+		mTextView = (TextView) rootView.findViewById(R.id.textView_message);
+
+		Context parentCtx = getActivity().getApplicationContext();
+		mNfcAdapter = NfcAdapter.getDefaultAdapter(parentCtx);
 
 		if (mNfcAdapter == null) {
 
@@ -59,11 +71,11 @@ public class HomeFragment extends Fragment {
 
 		handleIntent(getActivity().getIntent(), parentCtx);
 
-        return rootView;
+		return rootView;
 
-    }
-    
-    private void handleIntent(Intent intent, Context context) {
+	}
+
+	private void handleIntent(Intent intent, Context context) {
 		String action = intent.getAction();
 		if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {
 
@@ -78,8 +90,8 @@ public class HomeFragment extends Fragment {
 			}
 		}
 	}
-    
-    private class NdefReaderTask extends AsyncTask<Tag, Void, String> {
+
+	private class NdefReaderTask extends AsyncTask<Tag, Void, String> {
 
 		private Context parentCtx;
 
