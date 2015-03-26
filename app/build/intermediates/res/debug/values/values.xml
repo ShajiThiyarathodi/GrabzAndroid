@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid1/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string-array name="left_navigation_array">
+        <item>Home</item>
+        <item>Promotions</item>
+        <item>Contact Us</item>
+    </string-array>
+    <!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid1/app/src/main/res/values/dimens.xml -->
+    <eat-comment/>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid1/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="action_settings">Settings</string>
+    <string name="app_name">Grabz</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="item_name_header">Item Name</string>
+    <string name="message"/>
+    <string name="price_header">Price</string>
+    <string name="tap_and_go_description">Tap your phone on the NFC tag</string>
+    <string name="tap_here_message">Tap your phone on NFC tag</string>
+    <string name="title_activity_home_tabbed">HomeTabbedActivity</string>
+    <string name="title_activity_items_in_aisle">ItemsInAisleActivity</string>
+    <string name="title_section1">Aisle Items</string>
+    <string name="title_section2">My Baskets</string>
+    <string name="title_section3">Section 3</string>
+    <!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid1/app/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+</resources>

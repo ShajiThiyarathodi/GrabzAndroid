@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+    <gradient
+        android:angle="270.0"
+        android:endColor="#f6fafc"
+        android:startColor="#c9dbe4" />
+
+</shape>
+<!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid1/app/src/main/res/drawable-xxhdpi/list_divider.xml -->

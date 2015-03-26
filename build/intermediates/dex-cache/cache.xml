@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\Sina\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67">
+        <dex dex="C:\Workspace\cmpe295\GrabzAndroid1\app\build\intermediates\pre-dexed\debug\support-v4-19.1.0-f35d3e66ac16381ede64ffbcee0d49ddbaee74a9.jar" />
+    </item>
+    <item
+        jar="C:\Workspace\cmpe295\GrabzAndroid1\app\libs\android-support-v13.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="6623c91d454d2939626814676781c0e694717eda">
+        <dex dex="C:\Workspace\cmpe295\GrabzAndroid1\app\build\intermediates\pre-dexed\debug\android-support-v13-d0c842c1cfdac83555e535aa6611c75f72c9e389.jar" />
+    </item>
+
+</items>
