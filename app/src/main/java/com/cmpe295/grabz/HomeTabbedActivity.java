@@ -126,13 +126,21 @@ public class HomeTabbedActivity extends Fragment
 			// getItem is called to instantiate the fragment for the given page.
 			// Return a PlaceholderFragment (defined as a static inner class
 			// below).
-			return HomeFragment.newInstance(position + 1);
+            switch (position){
+                case 0:
+                    return HomeFragment.newInstance(position + 1);
+                case 1:
+                    return BasketsListFragment.newInstance(position + 1);
+                default:
+                    return HomeFragment.newInstance(position + 1);
+
+            }
 		}
 
 		@Override
 		public int getCount() {
-			// Show 3 total pages.
-			return 3;
+			// Show 2 total pages.
+			return 2;
 		}
 
 		@Override

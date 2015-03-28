@@ -27,29 +27,35 @@ public final class R {
         public static final int tap_and_go=0x7f020006;
     }
     public static final class id {
-        public static final int action_settings=0x7f09000d;
+        public static final int action_settings=0x7f090011;
+        public static final int basketList=0x7f090009;
+        public static final int basketNames=0x7f090006;
+        public static final int btnAdd=0x7f090008;
         public static final int content_frame=0x7f090004;
         public static final int drawer_layout=0x7f090003;
-        public static final int itemName=0x7f09000b;
-        public static final int itemNameHeader=0x7f090009;
+        public static final int itemName=0x7f09000f;
+        public static final int itemNameHeader=0x7f09000d;
         public static final int left_drawer=0x7f090005;
         public static final int listView=0x7f090002;
         public static final int pager=0x7f090000;
         public static final int pager_tab_strip=0x7f090001;
-        public static final int price=0x7f09000c;
-        public static final int priceHeader=0x7f09000a;
-        public static final int tap_and_go_image=0x7f090007;
-        public static final int tap_message=0x7f090006;
-        public static final int textView_message=0x7f090008;
+        public static final int price=0x7f090010;
+        public static final int priceHeader=0x7f09000e;
+        public static final int tap_and_go_image=0x7f09000b;
+        public static final int tap_message=0x7f09000a;
+        public static final int textView_message=0x7f09000c;
+        public static final int txtItem=0x7f090007;
     }
     public static final class layout {
         public static final int activity_home_tabbed=0x7f030000;
         public static final int activity_items_in_aisle=0x7f030001;
         public static final int activity_main=0x7f030002;
-        public static final int drawer_list_item=0x7f030003;
-        public static final int fragment_home=0x7f030004;
-        public static final int header=0x7f030005;
-        public static final int item_row_layout=0x7f030006;
+        public static final int basket_names=0x7f030003;
+        public static final int baskets_list=0x7f030004;
+        public static final int drawer_list_item=0x7f030005;
+        public static final int fragment_home=0x7f030006;
+        public static final int header=0x7f030007;
+        public static final int item_row_layout=0x7f030008;
     }
     public static final class menu {
         public static final int home_tabbed=0x7f080000;
@@ -62,16 +68,19 @@ public final class R {
         public static final int drawer_close=0x7f060002;
         public static final int drawer_open=0x7f060003;
         public static final int hello_world=0x7f060004;
-        public static final int item_name_header=0x7f060005;
-        public static final int message=0x7f060006;
-        public static final int price_header=0x7f060007;
-        public static final int tap_and_go_description=0x7f060008;
-        public static final int tap_here_message=0x7f060009;
-        public static final int title_activity_home_tabbed=0x7f06000a;
-        public static final int title_activity_items_in_aisle=0x7f06000b;
-        public static final int title_section1=0x7f06000c;
-        public static final int title_section2=0x7f06000d;
-        public static final int title_section3=0x7f06000e;
+        public static final int hintTxtItem=0x7f060005;
+        public static final int item_name_header=0x7f060006;
+        public static final int lblBtnAdd=0x7f060007;
+        public static final int message=0x7f060008;
+        public static final int price_header=0x7f060009;
+        public static final int tap_and_go_description=0x7f06000a;
+        public static final int tap_here_message=0x7f06000b;
+        public static final int title_activity_home_tabbed=0x7f06000c;
+        public static final int title_activity_items_in_aisle=0x7f06000d;
+        public static final int title_section1=0x7f06000e;
+        public static final int title_section2=0x7f06000f;
+        public static final int title_section3=0x7f060010;
+        public static final int txtEmpty=0x7f060011;
     }
     public static final class style {
         /** 
