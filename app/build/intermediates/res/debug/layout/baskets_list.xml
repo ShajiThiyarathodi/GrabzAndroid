@@ -27,7 +27,7 @@
         />
 
     <TextView
-        android:id="@android:id/empty"
+        android:id="@+id/emptyTxt"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/txtItem"

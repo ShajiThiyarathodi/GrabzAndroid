@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -39,7 +40,12 @@ public class BasketsListFragment extends Fragment {
     // This is the Adapter being used to display the list's data
     ArrayAdapter<String> mAdapter;
     Context parentCtx;
+    View rootView;
+
     public static final String LOG_PREFIX = "BasketList";
+
+    public BasketsListFragment() {
+    }
 
     public static BasketsListFragment newInstance(int sectionNumber) {
         BasketsListFragment fragment = new BasketsListFragment();
@@ -53,7 +59,7 @@ public class BasketsListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        final View rootView = inflater.inflate(R.layout.baskets_list, container,
+        rootView = inflater.inflate(R.layout.baskets_list, container,
                 false);
         ListView lView = (ListView) rootView.findViewById(R.id.basketList);
         parentCtx = getActivity().getApplicationContext();
@@ -103,11 +109,14 @@ public class BasketsListFragment extends Fragment {
         protected void onPostExecute(List<String> result) {
             super.onPostExecute(result);
 
-            Log.d(LOG_PREFIX, "In Post Execute" + String.valueOf(result.size()));
+            Log.d(LOG_PREFIX, "In Post Execute " + String.valueOf(result.size()));
 //            dialog.dismiss();
-
-            mAdapter.addAll(result);
-            mAdapter.notifyDataSetChanged();
+            if (result != null) {
+                TextView tv = (TextView) rootView.findViewById(R.id.emptyTxt);
+                tv.setVisibility(View.INVISIBLE);
+                mAdapter.addAll(result);
+                mAdapter.notifyDataSetChanged();
+            }
         }
 
         @Override
