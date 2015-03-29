@@ -57,6 +57,8 @@ public class BasketsListFragment extends Fragment {
                 false);
         ListView lView = (ListView) rootView.findViewById(R.id.basketList);
         parentCtx = getActivity().getApplicationContext();
+
+
         // Create an empty adapter we will use to display the loaded data.
         // We pass null for the cursor, then update it in onLoadFinished()
         mAdapter = new ArrayAdapter<String>(parentCtx,
@@ -73,7 +75,8 @@ public class BasketsListFragment extends Fragment {
                 mAdapter.notifyDataSetChanged();
             }
         });
-
+        (new AsyncListViewLoader())
+                .execute("http://amitdikkar.x10host.com/grabz/GetUserBaskets.php?phoneId=1");
         return rootView;
     }
     private class ListItemClickListener implements
@@ -101,17 +104,17 @@ public class BasketsListFragment extends Fragment {
             super.onPostExecute(result);
 
             Log.d(LOG_PREFIX, "In Post Execute" + String.valueOf(result.size()));
-            dialog.dismiss();
+//            dialog.dismiss();
 
             mAdapter.addAll(result);
-           mAdapter.notifyDataSetChanged();
+            mAdapter.notifyDataSetChanged();
         }
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog.setMessage("Fetching items on the aisle...");
-            dialog.show();
+//            dialog.setMessage("Fetching items on the aisle...");
+//            dialog.show();
         }
 
         @Override
@@ -135,12 +138,10 @@ public class BasketsListFragment extends Fragment {
                     baos.write(b);
 
                 String JSONResp = new String(baos.toByteArray());
-                JSONObject obj = new JSONObject(JSONResp);
-                JSONArray arr = obj.getJSONArray("baskets");
+                JSONArray arr = new JSONArray(JSONResp);
                 Log.d(LOG_PREFIX, arr.toString());
-
                 for (int i = 0; i < arr.length(); i++) {
-                    result.add(parseItems(arr.getJSONObject(i)));
+                    result.add(arr.getJSONObject(i).getJSONObject("basket").getString("name"));
                 }
 
                 Log.d(LOG_PREFIX, String.valueOf(result.size()));
@@ -152,12 +153,11 @@ public class BasketsListFragment extends Fragment {
             return null;
         }
 
-        private AisleItem parseItems(JSONObject obj) throws JSONException {
+        private String parseItems(JSONObject obj) throws JSONException {
 
-            String name = obj.getString("itemId");
-            Double price = obj.getDouble("price");
+            String name = obj.getString("name");
 
-            return new AisleItem(name, price.floatValue());
+            return name;
         }
 
     }
