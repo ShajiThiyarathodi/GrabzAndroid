@@ -1,7 +1,11 @@
 package com.cmpe295.grabz;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -28,6 +33,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.support.v4.app.FragmentManager;
 /**
  * Created by Sina on 3/27/2015.
  */
@@ -35,10 +41,10 @@ public class BasketsListFragment extends Fragment {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
     /** Items entered by the user is stored in this ArrayList variable */
-    ArrayList<String> list = new ArrayList<String>();
+    ArrayList<BasketDto> list = new ArrayList<BasketDto>();
     /** Declaring an ArrayAdapter to set items to ListView */
     // This is the Adapter being used to display the list's data
-    ArrayAdapter<String> mAdapter;
+    ArrayAdapter<BasketDto> mAdapter;
     Context parentCtx;
     View rootView;
 
@@ -63,12 +69,12 @@ public class BasketsListFragment extends Fragment {
                 false);
         ListView lView = (ListView) rootView.findViewById(R.id.basketList);
         parentCtx = getActivity().getApplicationContext();
-
+        (new AsyncListViewLoader())
+                .execute("http://amitdikkar.x10host.com/grabz/GetUserBaskets.php?phoneId=1");
 
         // Create an empty adapter we will use to display the loaded data.
         // We pass null for the cursor, then update it in onLoadFinished()
-        mAdapter = new ArrayAdapter<String>(parentCtx,
-                R.layout.basket_names, list);
+        mAdapter = new BasketListAdapter(parentCtx,list);
         lView.setAdapter(mAdapter);
         lView.setOnItemClickListener(new ListItemClickListener());
         Button btn = (Button) rootView.findViewById(R.id.btnAdd);
@@ -76,37 +82,42 @@ public class BasketsListFragment extends Fragment {
             public void onClick(View v) {
                 // Do something in response to button click
                 EditText edit = (EditText) rootView.findViewById(R.id.txtItem);
-                list.add(edit.getText().toString());
-                edit.setText("");
-                mAdapter.notifyDataSetChanged();
+                if (!edit.getText().toString().equals("")) {
+                    BasketModel basket = new BasketModel();
+                    basket.set_id("??");
+                    basket.setName(edit.getText().toString());
+                    basket.setItemIds(new ArrayList<String>());
+                    list.add(new BasketDto(basket));
+                    edit.setText("");
+                    mAdapter.notifyDataSetChanged();
+                }
             }
         });
-        (new AsyncListViewLoader())
-                .execute("http://amitdikkar.x10host.com/grabz/GetUserBaskets.php?phoneId=1");
+
         return rootView;
     }
     private class ListItemClickListener implements
-            ListView.OnItemClickListener {
+            AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
-            selectItem(position);
+            selectItem(position,"Basket");
         }
     }
 
-    private void selectItem(int position) {
+    private void selectItem(int position, String msg) {
         Toast.makeText(
                 parentCtx,
-                " Position [" + position
+                msg+" [" + position
                         + "]", Toast.LENGTH_SHORT).show();
     }
     private class AsyncListViewLoader extends
-            AsyncTask<String, Void, List<String>> {
+            AsyncTask<String, Void, List<BasketDto>> {
         private final ProgressDialog dialog = new ProgressDialog(
                 parentCtx);
 
         @Override
-        protected void onPostExecute(List<String> result) {
+        protected void onPostExecute(List<BasketDto> result) {
             super.onPostExecute(result);
 
             Log.d(LOG_PREFIX, "In Post Execute " + String.valueOf(result.size()));
@@ -127,10 +138,11 @@ public class BasketsListFragment extends Fragment {
         }
 
         @Override
-        protected List<String> doInBackground(String... params) {
-            List<String> result = new ArrayList<String>();
+        protected List<BasketDto> doInBackground(String... params) {
+            List<BasketDto> result = new ArrayList<BasketDto>();
 
             try {
+
                 URL u = new URL(params[0]);
 
                 HttpURLConnection conn = (HttpURLConnection) u.openConnection();
@@ -149,8 +161,16 @@ public class BasketsListFragment extends Fragment {
                 String JSONResp = new String(baos.toByteArray());
                 JSONArray arr = new JSONArray(JSONResp);
                 Log.d(LOG_PREFIX, arr.toString());
+                BasketDto bDto;
+                BasketModel bModel;
                 for (int i = 0; i < arr.length(); i++) {
-                    result.add(arr.getJSONObject(i).getJSONObject("basket").getString("name"));
+                    bDto = new BasketDto();
+                    bModel = new BasketModel();
+                    bModel.setName(arr.getJSONObject(i).getJSONObject("basket").getString("name"));
+                    bModel.set_id("??");
+                    bModel.setItemIds(new ArrayList<String>());
+                    bDto.setBasketItem(bModel);
+                    result.add(bDto);
                 }
 
                 Log.d(LOG_PREFIX, String.valueOf(result.size()));
@@ -170,6 +190,80 @@ public class BasketsListFragment extends Fragment {
         }
 
     }
+
+    public class BasketListAdapter extends ArrayAdapter<BasketDto>  {
+        public BasketListAdapter(Context ctx,
+                                List<BasketDto> itemList) {
+            super(ctx, R.layout.basket_names, itemList);
+        }
+
+        public View getView(final int position, View convertedView, final ViewGroup parent) {
+            View v = convertedView;
+            LayoutInflater inflater = (LayoutInflater) parentCtx
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            v = inflater.inflate(R.layout.basket_names, parent, false);
+
+            BasketDto basket = list.get(position);
+            TextView bName = (TextView) v.findViewById(R.id.basketNames);
+            bName.setText(basket.getBasket().getName());
+            ImageButton del = (ImageButton) v.findViewById(R.id.basketDelBtn);
+            del.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    selectItem(position,"Delete");
+/*
+                    SomeDialog newFragment = SomeDialog.newInstance(
+                            android.R.string.dialog_alert_title);
+                    newFragment.show(getFragmentManager(), "dialog");
+*/
+                }
+            });
+            ImageButton edit = (ImageButton) v.findViewById(R.id.basketEditBtn);
+            edit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    selectItem(position,"Edit");
+                }
+            });
+            return v;
+        }
+    }
+
+    public static class SomeDialog extends DialogFragment {
+        Context mContext;
+        public SomeDialog(){
+            mContext = getActivity();
+        }
+        public static SomeDialog newInstance(int title) {
+            SomeDialog frag = new SomeDialog();
+            Bundle args = new Bundle();
+            args.putInt("title", title);
+            frag.setArguments(args);
+            return frag;
+        }
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            return new AlertDialog.Builder(getActivity())
+                    .setTitle("Title")
+                    .setMessage("Sure you wanna do this!")
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // do nothing (will close dialog)
+                            Log.i("FragmentAlertDialog", "Negative click!");
+//                            selectItem(position,"Remove Yes");
+                        }
+                    })
+                    .setPositiveButton(android.R.string.yes,  new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // do something
+//                            selectItem(position,"Remove No");
+                            Log.i("FragmentAlertDialog", "Positive click!");
+                        }
+                    })
+                    .create();
+        }
+    }
 }
 
-// http://amitdikkar.x10host.com/grabz/GetUserBaskets.php?phoneId=1

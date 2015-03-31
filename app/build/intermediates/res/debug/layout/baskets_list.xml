@@ -19,6 +19,17 @@
         android:drawableLeft="@android:drawable/ic_menu_add"
         />
 
+    <TextView
+        android:id="@+id/emptyTxt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtItem"
+        android:paddingTop="16dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/txtEmpty"
+        android:gravity="center_horizontal"
+        />
+
     <ListView
         android:id="@+id/basketList"
         android:layout_width="fill_parent"
@@ -26,13 +37,6 @@
         android:layout_below="@id/txtItem"
         />
 
-    <TextView
-        android:id="@+id/emptyTxt"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtItem"
-        android:text="@string/txtEmpty"
-        android:gravity="center_horizontal"
-        />
+
 
 </RelativeLayout><!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/src/main/res/layout/baskets_list.xml -->

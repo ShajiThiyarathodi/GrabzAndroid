@@ -18,7 +18,7 @@
     <string name="drawer_close">Close navigation drawer</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="hello_world">Hello world!</string>
-    <string name="hintTxtItem">Enter an item here ...</string>
+    <string name="hintTxtItem">Enter your basket name here ...</string>
     <string name="item_name_header">Item Name</string>
     <string name="lblBtnAdd">Add</string>
     <string name="message"/>
