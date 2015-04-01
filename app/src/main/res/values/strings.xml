@@ -24,7 +24,8 @@
     <string name="title_section3">Section 3</string>
     <string name="hello_world">Hello world!</string>
 
-    <string name="hintTxtItem">Enter your basket name here ...</string>
+    <string name="hintTxtItem">New basket name...</string>
     <string name="lblBtnAdd">Add</string>
     <string name="txtEmpty">Basket list is empty</string>
+    <string name="rename">Rename</string>
 </resources>

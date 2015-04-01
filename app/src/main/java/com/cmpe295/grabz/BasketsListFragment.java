@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -33,7 +34,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.support.v4.app.FragmentManager;
 /**
  * Created by Sina on 3/27/2015.
  */
@@ -41,10 +41,10 @@ public class BasketsListFragment extends Fragment {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
     /** Items entered by the user is stored in this ArrayList variable */
-    ArrayList<BasketDto> list = new ArrayList<BasketDto>();
+    static ArrayList<BasketDto> list = new ArrayList<BasketDto>();
     /** Declaring an ArrayAdapter to set items to ListView */
     // This is the Adapter being used to display the list's data
-    ArrayAdapter<BasketDto> mAdapter;
+    static ArrayAdapter<BasketDto> mAdapter;
     Context parentCtx;
     View rootView;
 
@@ -192,9 +192,12 @@ public class BasketsListFragment extends Fragment {
     }
 
     public class BasketListAdapter extends ArrayAdapter<BasketDto>  {
+
+        android.app.FragmentManager fm;
         public BasketListAdapter(Context ctx,
                                 List<BasketDto> itemList) {
             super(ctx, R.layout.basket_names, itemList);
+            fm = getActivity().getFragmentManager();
         }
 
         public View getView(final int position, View convertedView, final ViewGroup parent) {
@@ -211,58 +214,100 @@ public class BasketsListFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     selectItem(position,"Delete");
-/*
-                    SomeDialog newFragment = SomeDialog.newInstance(
-                            android.R.string.dialog_alert_title);
-                    newFragment.show(getFragmentManager(), "dialog");
-*/
+                    DeletionAlertDialog newFragment = DeletionAlertDialog.newInstance(
+                            android.R.string.dialog_alert_title, position);
+                    newFragment.show(fm, "dialog");
+
                 }
             });
-            ImageButton edit = (ImageButton) v.findViewById(R.id.basketEditBtn);
+            final ImageButton edit = (ImageButton) v.findViewById(R.id.basketEditBtn);
             edit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     selectItem(position,"Edit");
+                    EditingDialog editDiolog =  EditingDialog.newInstance(R.string.rename, position);
+                    editDiolog.show(fm,"Edit");
                 }
             });
             return v;
         }
     }
 
-    public static class SomeDialog extends DialogFragment {
+    public static class DeletionAlertDialog extends DialogFragment {
         Context mContext;
-        public SomeDialog(){
+        public DeletionAlertDialog(){
             mContext = getActivity();
         }
-        public static SomeDialog newInstance(int title) {
-            SomeDialog frag = new SomeDialog();
+        public static DeletionAlertDialog newInstance(int title, int position) {
+            DeletionAlertDialog frag = new DeletionAlertDialog();
             Bundle args = new Bundle();
             args.putInt("title", title);
+            args.putInt("position",position);
             frag.setArguments(args);
             return frag;
         }
         @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
+        public Dialog onCreateDialog(final Bundle savedInstanceState) {
             return new AlertDialog.Builder(getActivity())
-                    .setTitle("Title")
-                    .setMessage("Sure you wanna do this!")
+                    .setTitle("Deletion Confirmation")
+                    .setMessage("Delete this basket permanently?")
+                    .setIcon(android.R.drawable.ic_menu_delete)
                     .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             // do nothing (will close dialog)
-                            Log.i("FragmentAlertDialog", "Negative click!");
-//                            selectItem(position,"Remove Yes");
+                            Log.i("FragmentAlertDialog", "Negative click!"+getArguments().getInt("position"));
                         }
                     })
                     .setPositiveButton(android.R.string.yes,  new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             // do something
-//                            selectItem(position,"Remove No");
-                            Log.i("FragmentAlertDialog", "Positive click!");
+                            list.remove(getArguments().getInt("position"));
+                            mAdapter.notifyDataSetChanged();
+                            Log.i("FragmentAlertDialog", "Positive click! "+getArguments().getInt("position"));
                         }
                     })
                     .create();
+        }
+    }
+    public static class EditingDialog extends DialogFragment {
+        Context mContext;
+        public EditingDialog(){
+            mContext = getActivity();
+        }
+        public static EditingDialog newInstance(int title, int position) {
+            EditingDialog frag = new EditingDialog();
+            Bundle args = new Bundle();
+            args.putInt("title", title);
+            args.putInt("position",position);
+            frag.setArguments(args);
+            return frag;
+        }
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View view = inflater.inflate(R.layout.edit_name_fragment,container);
+            final EditText text = (EditText) view.findViewById(R.id.nameEdit);
+            String oldName = list.get(getArguments().getInt("position")).getBasket().getName();
+            text.setText(oldName);
+            text.requestFocus();
+            getDialog().getWindow().setSoftInputMode(
+                    WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+            getDialog().setTitle(getArguments().getInt("title"));
+            ImageButton btn = (ImageButton) view.findViewById(R.id.renameDone);
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    BasketDto basket = list.get(getArguments().getInt("position"));
+                    basket.getBasket().setName(text.getText().toString());
+                    list.set(getArguments().getInt("position"),basket);
+                    mAdapter.notifyDataSetChanged();
+                    dismiss();
+                }
+            });
+            return view;
+
         }
     }
 }

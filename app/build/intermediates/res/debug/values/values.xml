@@ -18,11 +18,12 @@
     <string name="drawer_close">Close navigation drawer</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="hello_world">Hello world!</string>
-    <string name="hintTxtItem">Enter your basket name here ...</string>
+    <string name="hintTxtItem">New basket name...</string>
     <string name="item_name_header">Item Name</string>
     <string name="lblBtnAdd">Add</string>
     <string name="message"/>
     <string name="price_header">Price</string>
+    <string name="rename">Rename</string>
     <string name="tap_and_go_description">Tap your phone on the NFC tag</string>
     <string name="tap_here_message">Tap your phone on NFC tag</string>
     <string name="title_activity_home_tabbed">HomeTabbedActivity</string>
