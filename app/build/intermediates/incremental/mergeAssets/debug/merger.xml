@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="C:\Workspace\cmpe295\GrabzAndroid\app\src\main\assets"/></dataSet><dataSet config="debug"><source path="C:\Workspace\cmpe295\GrabzAndroid\app\src\debug\assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/Users/shaji.thiyara/project/GrabzAndroid/app/src/main/assets"/></dataSet><dataSet config="debug"><source path="/Users/shaji.thiyara/project/GrabzAndroid/app/src/debug/assets"/></dataSet></merger>

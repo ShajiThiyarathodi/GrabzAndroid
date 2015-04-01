@@ -28,4 +28,5 @@
     <string name="lblBtnAdd">Add</string>
     <string name="txtEmpty">Basket list is empty</string>
     <string name="rename">Rename</string>
+    <string name="title_activity_item_detail">ItemDetail</string>
 </resources>

@@ -30,4 +30,4 @@
         android:src="@android:drawable/ic_menu_edit"
         android:layout_toLeftOf="@id/basketDelBtn"
         />
-</RelativeLayout><!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/src/main/res/layout/basket_names.xml -->
+</RelativeLayout><!-- From: file:/Users/shaji.thiyara/project/GrabzAndroid/app/src/main/res/layout/basket_names.xml -->

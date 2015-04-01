@@ -2,18 +2,18 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Sina\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\support-v4-19.1.0-f35d3e66ac16381ede64ffbcee0d49ddbaee74a9.jar" />
-    </item>
-    <item
-        jar="C:\Workspace\cmpe295\GrabzAndroid\app\libs\TestJar.jar"
+        jar="/Users/shaji.thiyara/project/GrabzAndroid/app/libs/TestJar.jar"
         jumboMode="false"
         revision="22.0.0"
         sha1="41f91343743df974c5356af62426d3297863a788">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\TestJar-80ecacf9ce978be87f3cc574dfc34b551ac2a0ef.jar" />
+        <dex dex="/Users/shaji.thiyara/project/GrabzAndroid/app/build/intermediates/pre-dexed/debug/TestJar-f9b468d4da074149bd22aca9bfe458dfcccf4e9e.jar" />
+    </item>
+    <item
+        jar="/Users/shaji.thiyara/Library/Android/sdk/extras/android/m2repository/com/android/support/support-v4/19.1.0/support-v4-19.1.0.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67">
+        <dex dex="/Users/shaji.thiyara/project/GrabzAndroid/app/build/intermediates/pre-dexed/debug/support-v4-19.1.0-8f63a2ebf7b7da859091d2220bd8a305ef604b03.jar" />
     </item>
 
 </items>
