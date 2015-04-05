@@ -9,6 +9,12 @@ android {
         minSdkVersion 14
         targetSdkVersion 19
     }
+    packagingOptions{
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+    }
 
     buildTypes {
         release {
@@ -19,7 +25,9 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:19.1.0'
     compile files('app/libs/android-support-v13.jar')
     compile files('libs/TestJar.jar')
+    compile 'com.android.support:support-v4:22.0.0'
+    compile 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
 }

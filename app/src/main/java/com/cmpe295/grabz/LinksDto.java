@@ -27,5 +27,6 @@ public class LinksDto {
 	public void addLink(LinkDto link) {
 		links.add(link);
 	    }
-	
+
+    public LinksDto(){}
 }

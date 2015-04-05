@@ -1,5 +1,7 @@
 package com.cmpe295.grabz;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * @author Sina Nikkhah, Amit Dikkar, Shaji Thiyarathodi, Priyanka Deo
  *
@@ -10,7 +12,7 @@ public class LinkDto {
 	private String href = "#";
 	private String method = "GET";
 
-	public LinkDto(String rel, String href, String method) {
+	public LinkDto(@JsonProperty("rel")String rel, @JsonProperty("href")String href, @JsonProperty("method")String method) {
 		this.rel = rel;
 		this.href = href;
 		this.method = method;
@@ -40,5 +42,7 @@ public class LinkDto {
 		this.method = method;
 	}
 	
-	
+	public LinkDto(){
+
+    }
 }

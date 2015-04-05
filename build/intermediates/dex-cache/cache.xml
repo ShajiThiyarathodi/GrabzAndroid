@@ -2,18 +2,67 @@
 <items version="2" >
 
     <item
-        jar="/Users/shaji.thiyara/project/GrabzAndroid/app/libs/TestJar.jar"
+        jar="C:\Users\Sina\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-databind\2.3.2\c75edc740a6d8cb1cef6fa82fa594e0bce561916\jackson-databind-2.3.2.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="c75edc740a6d8cb1cef6fa82fa594e0bce561916">
+        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\jackson-databind-2.3.2-fe0e6e2fe5e8ab052e1860d28032c9ab4f3edbd4.jar" />
+    </item>
+    <item
+        jar="C:\Users\Sina\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-core\2.3.2\559b70ac8a0d5cad611da4223137a920147201ba\jackson-core-2.3.2.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="559b70ac8a0d5cad611da4223137a920147201ba">
+        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\jackson-core-2.3.2-6d75902b85f163a78847ecf96af04c9941470883.jar" />
+    </item>
+    <item
+        jar="C:\Users\Sina\.gradle\caches\modules-2\files-2.1\org.springframework.android\spring-android-rest-template\1.0.1.RELEASE\e132d929bd181941f79b0d63edafb8a86ae6fd33\spring-android-rest-template-1.0.1.RELEASE.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="e132d929bd181941f79b0d63edafb8a86ae6fd33">
+        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\spring-android-rest-template-1.0.1.RELEASE-4000ee5a580c935dc6f52dec3cbb151d10b2a8d2.jar" />
+    </item>
+    <item
+        jar="C:\Users\Sina\.gradle\caches\modules-2\files-2.1\org.springframework.android\spring-android-core\1.0.1.RELEASE\e68f0e8e4b636ee30c4de58953be38d9b72a5e3b\spring-android-core-1.0.1.RELEASE.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="e68f0e8e4b636ee30c4de58953be38d9b72a5e3b">
+        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\spring-android-core-1.0.1.RELEASE-b1eeaa7bf914e937a8431569fb5249651e7a4aab.jar" />
+    </item>
+    <item
+        jar="C:\Users\Sina\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-annotations\2.3.0\f5e853a20b60758922453d56f9ae1e64af5cb3da\jackson-annotations-2.3.0.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="f5e853a20b60758922453d56f9ae1e64af5cb3da">
+        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\jackson-annotations-2.3.0-23b4d01bce5478751b4da1f9fc1ff79800d3abea.jar" />
+    </item>
+    <item
+        jar="C:\Workspace\cmpe295\GrabzAndroid\app\libs\TestJar.jar"
         jumboMode="false"
         revision="22.0.0"
         sha1="41f91343743df974c5356af62426d3297863a788">
-        <dex dex="/Users/shaji.thiyara/project/GrabzAndroid/app/build/intermediates/pre-dexed/debug/TestJar-f9b468d4da074149bd22aca9bfe458dfcccf4e9e.jar" />
+        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\TestJar-80ecacf9ce978be87f3cc574dfc34b551ac2a0ef.jar" />
     </item>
     <item
-        jar="/Users/shaji.thiyara/Library/Android/sdk/extras/android/m2repository/com/android/support/support-v4/19.1.0/support-v4-19.1.0.jar"
+        jar="C:\Users\Sina\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.0.0\support-annotations-22.0.0.jar"
         jumboMode="false"
         revision="22.0.0"
-        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67">
-        <dex dex="/Users/shaji.thiyara/project/GrabzAndroid/app/build/intermediates/pre-dexed/debug/support-v4-19.1.0-8f63a2ebf7b7da859091d2220bd8a305ef604b03.jar" />
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\support-annotations-22.0.0-b6f1b4dcab0f995baef36bf86fa203dc5c07fc91.jar" />
+    </item>
+    <item
+        jar="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\libs\internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-7a209d81fdd4f15a2fa26a66422ea4fc1e549e8b.jar" />
+    </item>
+    <item
+        jar="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-679997a902afbd6e3a7231f1f5a5b80a91cd0313.jar" />
     </item>
 
 </items>

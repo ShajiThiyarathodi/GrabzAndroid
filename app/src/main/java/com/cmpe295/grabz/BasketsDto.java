@@ -1,32 +1,32 @@
 package com.cmpe295.grabz;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Sina Nikkhah, Amit Dikkar, Shaji Thiyarathodi, Priyanka Deo
  *
  */
-public class BasketsDto extends LinksDto {
+public class BasketsDto{
 
-	private List<BasketModel> baskets;
+	private List<BasketDto> baskets = new ArrayList<BasketDto>();
 	
 	/**
 	 * 
 	 */
 	public BasketsDto() {
-		super();
+        baskets = new ArrayList<BasketDto>();
 	}
 
-	public BasketsDto (List<BasketModel> basketItems) {
-		super();
+	public BasketsDto (List<BasketDto> basketItems) {
 		this.baskets = basketItems;
 	}
 	
-	public List<BasketModel> getBasketItems() {
+	public List<BasketDto> getBasketItems() {
 		return baskets;
 	}
 
-	public void setBasketItems(List<BasketModel> basketItems) {
+	public void setBasketItems(List<BasketDto> basketItems) {
 		this.baskets = basketItems;
 	}
 
