@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,10 +23,18 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,8 +54,7 @@ public class BasketsListFragment extends Fragment {
     Context parentCtx;
     View rootView;
     EditText edit;
-    public static final String LOG_PREFIX = "BasketList";
-
+    static String deviceId;
     public BasketsListFragment() {
     }
 
@@ -64,12 +72,14 @@ public class BasketsListFragment extends Fragment {
 
         rootView = inflater.inflate(R.layout.baskets_list, container,
                 false);
+        TelephonyManager telephonyManager = (TelephonyManager)this.
+                getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+        deviceId = telephonyManager.getDeviceId();
+        Log.d("DEVICE ID",deviceId);
         ListView lView = (ListView) rootView.findViewById(R.id.basketList);
         parentCtx = getActivity().getApplicationContext();
-//        (new AsyncListViewLoader())
-//                .execute("http://amitdikkar.x10host.com/grabz/GetUserBaskets.php?phoneId=1");
         (new BasketListGetRequestTask())
-                .execute("http://grabztestenv.elasticbeanstalk.com/baskets?phoneId=myPhone-4");
+                .execute("http://grabztestenv.elasticbeanstalk.com/baskets?phoneId="+deviceId);
 
         // Create an empty adapter we will use to display the loaded data.
         // We pass null for the cursor, then update it in onLoadFinished()
@@ -83,7 +93,7 @@ public class BasketsListFragment extends Fragment {
                 edit = (EditText) rootView.findViewById(R.id.txtItem);
                 if (!edit.getText().toString().equals("")) {
                     (new BasketPostRequestTask())
-                            .execute("http://grabztestenv.elasticbeanstalk.com/baskets?phoneId=myPhone-4");
+                            .execute("http://grabztestenv.elasticbeanstalk.com/baskets?phoneId="+deviceId);
                 }
             }
         });
@@ -95,6 +105,7 @@ public class BasketsListFragment extends Fragment {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
+            //TODO: Initiate new activity
             selectItem(position,"Basket");
         }
     }
@@ -105,87 +116,7 @@ public class BasketsListFragment extends Fragment {
                 msg+" [" + position
                         + "]", Toast.LENGTH_SHORT).show();
     }
-/*
-    private class AsyncListViewLoader extends
-            AsyncTask<String, Void, List<BasketDto>> {
-        private final ProgressDialog dialog = new ProgressDialog(
-                parentCtx);
 
-        @Override
-        protected void onPostExecute(List<BasketDto> result) {
-            super.onPostExecute(result);
-
-            Log.d(LOG_PREFIX, "In Post Execute " + String.valueOf(result.size()));
-//            dialog.dismiss();
-            if (result != null) {
-                TextView tv = (TextView) rootView.findViewById(R.id.emptyTxt);
-                tv.setVisibility(View.INVISIBLE);
-                mAdapter.addAll(result);
-                mAdapter.notifyDataSetChanged();
-            }
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-//            dialog.setMessage("Fetching items on the aisle...");
-//            dialog.show();
-        }
-
-        @Override
-        protected List<BasketDto> doInBackground(String... params) {
-            List<BasketDto> result = new ArrayList<BasketDto>();
-
-            try {
-
-                URL u = new URL(params[0]);
-
-                HttpURLConnection conn = (HttpURLConnection) u.openConnection();
-                conn.setRequestMethod("GET");
-
-                conn.connect();
-                InputStream is = conn.getInputStream();
-
-                // Read the stream
-                byte[] b = new byte[1024];
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-                while (is.read(b) != -1)
-                    baos.write(b);
-
-                String JSONResp = new String(baos.toByteArray());
-                JSONArray arr = new JSONArray(JSONResp);
-                Log.d(LOG_PREFIX, arr.toString());
-                BasketDto bDto;
-                BasketModel bModel;
-                for (int i = 0; i < arr.length(); i++) {
-                    bDto = new BasketDto();
-                    bModel = new BasketModel();
-                    bModel.setName(arr.getJSONObject(i).getJSONObject("basket").getString("name"));
-//                    bModel.set_id("??");
-                    bModel.setItemIds(new ArrayList<String>());
-                    bDto.setBasketItem(bModel);
-                    result.add(bDto);
-                }
-
-                Log.d(LOG_PREFIX, String.valueOf(result.size()));
-
-                return result;
-            } catch (Throwable t) {
-                t.printStackTrace();
-            }
-            return null;
-        }
-
-        private String parseItems(JSONObject obj) throws JSONException {
-
-            String name = obj.getString("name");
-
-            return name;
-        }
-
-    }
-*/
     public class BasketListAdapter extends ArrayAdapter<BasketDto>  {
 
         android.app.FragmentManager fm;
@@ -208,7 +139,6 @@ public class BasketsListFragment extends Fragment {
             del.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    selectItem(position,"Delete");
                     DeletionAlertDialog newFragment = DeletionAlertDialog.newInstance(
                             android.R.string.dialog_alert_title, position);
                     newFragment.show(fm, "dialog");
@@ -219,7 +149,6 @@ public class BasketsListFragment extends Fragment {
             edit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    selectItem(position,"Edit");
                     EditingDialog editDiolog =  EditingDialog.newInstance(R.string.rename, position);
                     editDiolog.show(fm,"Edit");
                 }
@@ -303,31 +232,44 @@ public class BasketsListFragment extends Fragment {
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    BasketDto basket = list.get(getArguments().getInt("position"));
-                    basket.getBasket().setName(text.getText().toString());
-                    list.set(getArguments().getInt("position"),basket);
-                    mAdapter.notifyDataSetChanged();
+                    BasketDto clickedBasket = list.get(getArguments().getInt("position"));
+                    List<LinkDto> clickedLinks = clickedBasket.getLinks();
+                    for (LinkDto link : clickedLinks){
+                        if (link.getMethod().equals("PUT")){
+                            (new BasketRenameRequestTask()).execute(getString(R.string.awsLink)+
+                                    link.getHref(),String.valueOf(getArguments().getInt("position"))
+                                    ,text.getText().toString());
+                            break;
+                        }
+                    }
                     dismiss();
                 }
             });
             return view;
-
         }
     }
 
     private class BasketListGetRequestTask extends AsyncTask<String, Void, BasketDto[]> {
+        HttpStatus responseCode;
         @Override
         protected BasketDto[] doInBackground(String... params) {
             try {
                 final String url = params[0];
-
+                // Set the Accept header
+                HttpHeaders requestHeaders = new HttpHeaders();
+                requestHeaders.setAccept(Collections.singletonList(new MediaType("application", "json")));
+                HttpEntity<?> requestEntity = new HttpEntity<Object>(requestHeaders);
                 RestTemplate restTemplate = new RestTemplate();
                 MappingJackson2HttpMessageConverter mapper = new MappingJackson2HttpMessageConverter();
                 restTemplate.getMessageConverters().add(mapper);
-                BasketDto[] baskets = restTemplate.getForObject(url, BasketDto[].class);
+//                BasketDto[] baskets = restTemplate.getForObject(url, BasketDto[].class);
+                ResponseEntity<BasketDto[]> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity,BasketDto[].class);
+                BasketDto[] baskets = responseEntity.getBody();
+                responseCode =  responseEntity.getStatusCode();
+                Log.d("GET Task on", url+" " + responseCode.toString());
                 return baskets;
             } catch (Exception e) {
-                Log.e("MainActivity", e.getMessage(), e);
+                Log.e("BasketListGetRequest", e.getMessage(), e);
             }
 
             return null;
@@ -335,10 +277,10 @@ public class BasketsListFragment extends Fragment {
 
         @Override
         protected void onPostExecute(BasketDto[] baskets) {
-            if (baskets != null) {
+            if (baskets.length != 0 && responseCode == HttpStatus.OK) {
                 TextView tv = (TextView) rootView.findViewById(R.id.emptyTxt);
                 tv.setVisibility(View.INVISIBLE);
-                //TODO: Clearing the list is not right look for a better solution
+                //TODO: Clearing the list is not right look for a better solution. Shouldn't it be list.addAll or list.clear ?
                 mAdapter.clear();
                 mAdapter.addAll(baskets);
                 mAdapter.notifyDataSetChanged();
@@ -347,19 +289,27 @@ public class BasketsListFragment extends Fragment {
     }
 
     private class BasketPostRequestTask extends AsyncTask<String, Void, BasketDto> {
+        HttpStatus responseCode;
         @Override
         protected BasketDto doInBackground(String... params) {
             try {
                 String url= params[0];
+                HttpHeaders requestHeaders = new HttpHeaders();
+                requestHeaders.setAccept(Collections.singletonList(new MediaType("application", "json")));
                 RestTemplate restTemplate = new RestTemplate();
                 MappingJackson2HttpMessageConverter mapper = new MappingJackson2HttpMessageConverter();
                 restTemplate.getMessageConverters().add(mapper);
                 Map<String,String> bName = new HashMap<String, String>();
                 bName.put("name",edit.getText().toString());
-                BasketDto basket = restTemplate.postForObject(url,bName,BasketDto.class);
+                HttpEntity<Map> requestEntity = new HttpEntity<Map>(bName,requestHeaders);
+//                BasketDto basket = restTemplate.postForObject(url,bName,BasketDto.class);
+                ResponseEntity<BasketDto> responseEntity = restTemplate.exchange(url, HttpMethod.POST, requestEntity,BasketDto.class);
+                BasketDto basket = responseEntity.getBody();
+                responseCode =  responseEntity.getStatusCode();
+                Log.d("POST Task on", url+" " + responseCode.toString());
                 return basket;
             } catch (Exception e) {
-                Log.e("MainActivity", e.getMessage(), e);
+                Log.e("BasketPostRequestTask", e.getMessage(), e);
             }
 
             return null;
@@ -367,29 +317,35 @@ public class BasketsListFragment extends Fragment {
 
         @Override
         protected void onPostExecute(BasketDto basket) {
-            if (basket != null) {
+            if (basket != null && responseCode == HttpStatus.CREATED) {
                 TextView tv = (TextView) rootView.findViewById(R.id.emptyTxt);
                 tv.setVisibility(View.INVISIBLE);
                 edit.setText("");
-                //TODO: Clearing the list is not right look for a better solution
-                mAdapter.add(basket);
+                list.add(basket);
                 mAdapter.notifyDataSetChanged();
             }
         }
     }
     private static class BasketDeleteRequestTask extends AsyncTask<String, Void, String> {
-
         int position;
+        HttpStatus responseCode;
         @Override
         protected String doInBackground(String... params) {
             try {
                 String url= params[0];
                 position = Integer.parseInt(params[1]);
+                // Set the Accept header
+                HttpHeaders requestHeaders = new HttpHeaders();
+                requestHeaders.setAccept(Collections.singletonList(new MediaType("application", "json")));
+                HttpEntity<?> requestEntity = new HttpEntity<Object>(requestHeaders);
                 RestTemplate restTemplate = new RestTemplate();
-                restTemplate.delete(url);
+                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+                ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.DELETE, requestEntity,String.class);
+                responseCode =  responseEntity.getStatusCode();
+                Log.d("Delete Task on", url+" " + responseCode.toString());
                 return "";
             } catch (Exception e) {
-                Log.e("MainActivity", e.getMessage(), e);
+                Log.e("BasketDeleteRequestTask", e.getMessage(), e);
             }
 
             return null;
@@ -397,9 +353,51 @@ public class BasketsListFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String dummy) {
-            //TODO: Clearing the list is not right look for a better solution
-            list.remove(position);
-            mAdapter.notifyDataSetChanged();
+            if (responseCode == HttpStatus.OK) {
+                list.remove(position);
+                mAdapter.notifyDataSetChanged();
+            }
+        }
+    }
+
+    private static class BasketRenameRequestTask extends AsyncTask<String, Void, String> {
+        int position;
+        String name;
+        HttpStatus responseCode;
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                String url= params[0];
+                position = Integer.parseInt(params[1]);
+                name = params[2];
+                HttpHeaders requestHeaders = new HttpHeaders();
+                requestHeaders.setContentType(new MediaType("application","json"));
+                RestTemplate restTemplate = new RestTemplate();
+                MappingJackson2HttpMessageConverter mapper = new MappingJackson2HttpMessageConverter();
+                restTemplate.getMessageConverters().add(mapper);
+                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+                Map<String,String> bName = new HashMap<String, String>();
+                bName.put("action","rename_basket");
+                bName.put("basketName", name);
+                HttpEntity<Map> requestEntity = new HttpEntity<Map>(bName,requestHeaders);
+                ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity,String.class);
+//                restTemplate.put(url,bName);
+                responseCode =  responseEntity.getStatusCode();
+                Log.d("PUT Task on", url+" " + responseCode.toString() + " " + responseEntity.getBody());
+                return "";
+            } catch (Exception e) {
+                Log.e("BasketRenameRequestTask", e.getMessage(), e);
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String dummy) {
+            if (responseCode == HttpStatus.OK) {
+                list.get(position).getBasket().setName(name);
+                mAdapter.notifyDataSetChanged();
+            }
         }
     }
 }
