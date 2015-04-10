@@ -1,32 +1,67 @@
 package com.cmpe295.grabz;
 
-public class AisleItem {
+public class AisleItem{
 
-	private String itemId;
+    /**
+     * This id represents one of the items of Items collection.
+     * **/
+    private String itemId;
 
-	private float price;
+    /**
+     * Name of the item.
+     * **/
+    private String name;
 
-	public AisleItem(String itemId, float price) {
-		super();
-		this.itemId = itemId;
-		this.price = price;
-	}
+    /**
+     * Price of the Item (of given id) in a specific outlet.
+     * **/
+    private float price;
 
+    /**
+     * @return the itemId
+     */
+    public AisleItem(){}
+    public String getItemId() {
+        return itemId;
+    }
 
-	public String getItemId() {
-		return itemId;
-	}
+    public void setItemId(String itemId){
+        this.itemId = itemId;
+		/*try{
+			System.out.println("Inside AisleItem - setting the item name");
+			ItemsDao dao = new ItemsDaoImpl();
+			this.name = dao.getItemNameById(itemId);
+		}
+		catch(UnknownHostException ex){
+			this.name = "NO_NAME";
+		}*/
+    }
 
-	public void setItemId(String itemId) {
-		this.itemId = itemId;
-	}
+    /**
+     * @return the price
+     */
+    public float getPrice() {
+        return price;
+    }
 
-	public float getPrice() {
-		return price;
-	}
+    /**
+     * @param price the price to set
+     */
+    public void setPrice(float price) {
+        this.price = price;
+    }
 
-	public void setPrice(float price) {
-		this.price = price;
-	}
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
 
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 }

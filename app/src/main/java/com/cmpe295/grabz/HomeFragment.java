@@ -1,16 +1,6 @@
 package com.cmpe295.grabz;
 
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import android.app.ProgressDialog;
-import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.nfc.NdefMessage;
@@ -20,21 +10,33 @@ import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
+
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
@@ -49,8 +51,8 @@ public class HomeFragment extends Fragment {
     ListView lv;
     private ViewGroup header;
 
-    List<AisleItem> aisleItemList = new ArrayList<AisleItem>();
-    AisleItemAdapter aisleItemAdapter;
+    List<AisleItemDto> aisleItemList = new ArrayList<AisleItemDto>();
+    ArrayAdapter aisleItemAdapter;
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -214,7 +216,7 @@ public class HomeFragment extends Fragment {
 				startActivity(intent); */
 
                 (new AsyncListViewLoader())
-                        .execute("http://amitdikkar.x10host.com/grabz/GetAisleItems.php?tagId=3");
+                        .execute("http://grabztestenv.elasticbeanstalk.com/tags/OUTe1eb38866bAN7/items");
             } else {
                 Log.e(LOG_PREFIX, "Tag reading failed");
                 mTextView.setText("Could not read the tag.");
@@ -224,22 +226,21 @@ public class HomeFragment extends Fragment {
     }
 
     private class AsyncListViewLoader extends
-            AsyncTask<String, Void, List<AisleItem>> {
+            AsyncTask<String, Void, AisleItemDto[]> {
         private final ProgressDialog dialog = new ProgressDialog(
                 getActivity());
-
+        HttpStatus responseCode;
         @Override
-        protected void onPostExecute(List<AisleItem> result) {
-            super.onPostExecute(result);
-            Log.d(LOG_PREFIX, "In Post Execute"+String.valueOf(result.size()));
-            dialog.dismiss();
-            // relativeLayout.setVisibility(View.GONE);
-            ((LinearLayout)relativeLayout.getParent()).removeView(relativeLayout);
-
-            lv.addHeaderView(header, null, false);
-            aisleItemAdapter.addAll(result);
-            aisleItemAdapter.notifyDataSetChanged();
-
+        protected void onPostExecute(AisleItemDto[] result) {
+            if (responseCode ==  HttpStatus.OK && result!=null) {
+                Log.d(LOG_PREFIX, "In Post Execute"+String.valueOf(result.length));
+                dialog.dismiss();
+                // relativeLayout.setVisibility(View.GONE);
+                ((LinearLayout)relativeLayout.getParent()).removeView(relativeLayout);
+                lv.addHeaderView(header, null, false);
+                aisleItemAdapter.addAll(result);
+                aisleItemAdapter.notifyDataSetChanged();
+            }
         }
 
         @Override
@@ -250,49 +251,27 @@ public class HomeFragment extends Fragment {
         }
 
         @Override
-        protected List<AisleItem> doInBackground(String... params) {
-            List<AisleItem> result = new ArrayList<AisleItem>();
+        protected AisleItemDto[] doInBackground(String... params) {
 
             try {
-                URL u = new URL(params[0]);
+                String url = params[0];
+                HttpHeaders requestHeaders = new HttpHeaders();
+                requestHeaders.setAccept(Collections.singletonList(new MediaType("application", "json")));
+                HttpEntity<?> requestEntity = new HttpEntity<Object>(requestHeaders);
+                RestTemplate restTemplate = new RestTemplate();
+                MappingJackson2HttpMessageConverter mapper = new MappingJackson2HttpMessageConverter();
+                restTemplate.getMessageConverters().add(mapper);
+//                BasketDto[] baskets = restTemplate.getForObject(url, BasketDto[].class);
+                ResponseEntity<AisleItemDto[]> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity,AisleItemDto[].class);
+                AisleItemDto[] items = responseEntity.getBody();
+                responseCode =  responseEntity.getStatusCode();
+                Log.d(LOG_PREFIX, String.valueOf(items.length));
 
-                HttpURLConnection conn = (HttpURLConnection) u.openConnection();
-                conn.setRequestMethod("GET");
-
-                conn.connect();
-                InputStream is = conn.getInputStream();
-
-                // Read the stream
-                byte[] b = new byte[1024];
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-                while (is.read(b) != -1)
-                    baos.write(b);
-
-                String JSONResp = new String(baos.toByteArray());
-                JSONObject obj = new JSONObject(JSONResp);
-                JSONArray arr = obj.getJSONArray("aisleItems");
-                Log.d(LOG_PREFIX, arr.toString());
-
-                for (int i = 0; i < arr.length(); i++) {
-                    result.add(parseItems(arr.getJSONObject(i)));
-                }
-
-                Log.d(LOG_PREFIX, String.valueOf(result.size()));
-
-                return result;
+                return items;
             } catch (Throwable t) {
                 t.printStackTrace();
             }
             return null;
-        }
-
-        private AisleItem parseItems(JSONObject obj) throws JSONException {
-
-            String name = obj.getString("itemId");
-            Double price = obj.getDouble("price");
-
-            return new AisleItem(name, price.floatValue());
         }
 
     }

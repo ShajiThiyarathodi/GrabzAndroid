@@ -1,9 +1,5 @@
 package com.cmpe295.grabz;
 
-import java.util.List;
-
-
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,23 +7,25 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class AisleItemAdapter extends ArrayAdapter<AisleItem>  {
+import java.util.List;
+
+public class AisleItemAdapter extends ArrayAdapter<AisleItemDto>  {
 	
-	private List<AisleItem> itemList;
+	private List<AisleItemDto> itemList;
 	private Context context;
 	private int[] listItemBackground = new int[] { R.drawable.list_background1,
 			R.drawable.list_background2 };
 	
-	public List<AisleItem> getItemList() {
+	public List<AisleItemDto> getItemList() {
 		return itemList;
 	}
-	public void setItemList(List<AisleItem> itemList) {
+	public void setItemList(List<AisleItemDto> itemList) {
 		this.itemList = itemList;
 		
 	}
 	
 	public AisleItemAdapter(Context ctx,
-			List<AisleItem> itemList) {
+			List<AisleItemDto> itemList) {
 		super(ctx, R.layout.item_row_layout, itemList);
 		this.itemList = itemList;
 		this.context = ctx;
@@ -55,9 +53,9 @@ public class AisleItemAdapter extends ArrayAdapter<AisleItem>  {
 		int listItemBackgroundPosition = position % listItemBackground.length;
 		v.setBackgroundResource(listItemBackground[listItemBackgroundPosition]);
 
-		AisleItem aisleItem = itemList.get(position);  
-		holder.itemNameView.setText(aisleItem.getItemId());
-		holder.priceView.setText(String.valueOf(aisleItem.getPrice()));
+        AisleItemDto aisleItem = itemList.get(position);
+		holder.itemNameView.setText(aisleItem.getAisleItem().getName());
+		holder.priceView.setText(String.valueOf(aisleItem.getAisleItem().getPrice()));
 
 		return v;
 	}
