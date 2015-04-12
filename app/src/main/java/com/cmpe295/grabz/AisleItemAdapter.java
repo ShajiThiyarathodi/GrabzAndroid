@@ -5,7 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
@@ -15,6 +18,7 @@ public class AisleItemAdapter extends ArrayAdapter<AisleItemDto>  {
 	private Context context;
 	private int[] listItemBackground = new int[] { R.drawable.list_background1,
 			R.drawable.list_background2 };
+    ImageLoader imageLoader;
 	
 	public List<AisleItemDto> getItemList() {
 		return itemList;
@@ -43,8 +47,11 @@ public class AisleItemAdapter extends ArrayAdapter<AisleItemDto>  {
 			TextView itemNameListV = (TextView) v.findViewById(R.id.itemName);
 			TextView priceListV = (TextView) v
 					.findViewById(R.id.price);
+            ImageView imageListV = (ImageView) v
+                    .findViewById(R.id.thumbImage);
 			holder.itemNameView = itemNameListV;
 			holder.priceView = priceListV;
+            holder.imageView = imageListV;
 
 			v.setTag(holder);
 		} else
@@ -55,14 +62,20 @@ public class AisleItemAdapter extends ArrayAdapter<AisleItemDto>  {
 
         AisleItemDto aisleItem = itemList.get(position);
 		holder.itemNameView.setText(aisleItem.getAisleItem().getName());
-		holder.priceView.setText(String.valueOf(aisleItem.getAisleItem().getPrice()));
+        String price = '$'+ String.valueOf(aisleItem.getAisleItem().getPrice());
+		holder.priceView.setText(price);
+        String imageUrl = aisleItem.getAisleItem().getImageUrl();
+        imageLoader = ImageLoader.getInstance();
 
-		return v;
+        imageLoader.displayImage(imageUrl, holder.imageView);
+
+        return v;
 	}
 	
 	private static class ItemHolder {
 		public TextView itemNameView;
 		public TextView priceView;
+        public ImageView imageView;
 	}
 
 

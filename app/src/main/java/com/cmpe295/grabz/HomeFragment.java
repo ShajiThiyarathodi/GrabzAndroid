@@ -43,13 +43,11 @@ public class HomeFragment extends Fragment {
     public static final String HomeTabTitle = "Grabz";
     public static final String MIME_TEXT_PLAIN = "text/plain";
     public static final String LOG_PREFIX = "HomeFragment";
-    public static final String TAG_ID = "TAG_ID";
 
     private TextView mTextView;
     private NfcAdapter mNfcAdapter;
     private RelativeLayout relativeLayout;
     ListView lv;
-    private ViewGroup header;
 
     List<AisleItemDto> aisleItemList = new ArrayList<AisleItemDto>();
     ArrayAdapter aisleItemAdapter;
@@ -76,7 +74,7 @@ public class HomeFragment extends Fragment {
 
         getActivity().setTitle(HomeTabTitle);
         mTextView = (TextView) rootView.findViewById(R.id.textView_message);
-        relativeLayout = (RelativeLayout)rootView.findViewById(R.id.tap_view_group);
+        relativeLayout = (RelativeLayout) rootView.findViewById(R.id.tap_view_group);
         Context parentCtx = getActivity().getApplicationContext();
 
         //NFC Tap screen
@@ -98,12 +96,11 @@ public class HomeFragment extends Fragment {
 
 
         //Aisle item list view, empty list now
-
         lv = (ListView) rootView.findViewById(R.id.aisleItemListView);
-        aisleItemAdapter = new AisleItemAdapter(parentCtx, aisleItemList);
-        header = (ViewGroup) inflater.inflate(R.layout.header, lv,
-                false);
 
+
+
+        aisleItemAdapter = new AisleItemAdapter(parentCtx, aisleItemList);
 
         lv.setAdapter(aisleItemAdapter);
 
@@ -111,12 +108,11 @@ public class HomeFragment extends Fragment {
 
             public void onItemClick(AdapterView<?> parentAdapter, View view,
                                     int position, long id) {
-               	Intent intent = new Intent(getActivity().getApplicationContext(),
-						ItemDetailActivity.class);
-				startActivity(intent);
+                Intent intent = new Intent(getActivity().getApplicationContext(),
+                        ItemDetailActivity.class);
+                startActivity(intent);
             }
         });
-
 
 
         handleIntent(getActivity().getIntent(), parentCtx);
@@ -124,6 +120,7 @@ public class HomeFragment extends Fragment {
         return rootView;
 
     }
+
 
     private void handleIntent(Intent intent, Context context) {
         String action = intent.getAction();
@@ -178,7 +175,7 @@ public class HomeFragment extends Fragment {
 
         private String readText(NdefRecord record)
                 throws UnsupportedEncodingException {
-			/*
+            /*
 			 * See NFC forum specification for "Text Record Type Definition" at
 			 * 3.2.1
 			 * 
@@ -210,13 +207,9 @@ public class HomeFragment extends Fragment {
         protected void onPostExecute(String result) {
             if (result != null) {
                 Log.d(LOG_PREFIX, "Tag content is: " + result);
-			/*	Intent intent = new Intent(parentCtx,
-						ItemsInAisleActivity.class);
-				intent.putExtra(TAG_ID, result);
-				startActivity(intent); */
 
                 (new AsyncListViewLoader())
-                        .execute("http://grabztestenv.elasticbeanstalk.com/tags/OUTe1eb38866bAN7/items");
+                        .execute("http://grabztestenv.elasticbeanstalk.com/tags/OUTe1eb38866bAN4-6/items");
             } else {
                 Log.e(LOG_PREFIX, "Tag reading failed");
                 mTextView.setText("Could not read the tag.");
@@ -230,14 +223,14 @@ public class HomeFragment extends Fragment {
         private final ProgressDialog dialog = new ProgressDialog(
                 getActivity());
         HttpStatus responseCode;
+
         @Override
         protected void onPostExecute(AisleItemDto[] result) {
-            if (responseCode ==  HttpStatus.OK && result!=null) {
-                Log.d(LOG_PREFIX, "In Post Execute"+String.valueOf(result.length));
+            if (responseCode == HttpStatus.OK && result != null) {
+                Log.d(LOG_PREFIX, "In Post Execute" + String.valueOf(result.length));
                 dialog.dismiss();
                 // relativeLayout.setVisibility(View.GONE);
-                ((LinearLayout)relativeLayout.getParent()).removeView(relativeLayout);
-                lv.addHeaderView(header, null, false);
+                ((LinearLayout) relativeLayout.getParent()).removeView(relativeLayout);
                 aisleItemAdapter.addAll(result);
                 aisleItemAdapter.notifyDataSetChanged();
             }
@@ -261,10 +254,9 @@ public class HomeFragment extends Fragment {
                 RestTemplate restTemplate = new RestTemplate();
                 MappingJackson2HttpMessageConverter mapper = new MappingJackson2HttpMessageConverter();
                 restTemplate.getMessageConverters().add(mapper);
-//                BasketDto[] baskets = restTemplate.getForObject(url, BasketDto[].class);
-                ResponseEntity<AisleItemDto[]> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity,AisleItemDto[].class);
+                ResponseEntity<AisleItemDto[]> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity, AisleItemDto[].class);
                 AisleItemDto[] items = responseEntity.getBody();
-                responseCode =  responseEntity.getStatusCode();
+                responseCode = responseEntity.getStatusCode();
                 Log.d(LOG_PREFIX, String.valueOf(items.length));
 
                 return items;

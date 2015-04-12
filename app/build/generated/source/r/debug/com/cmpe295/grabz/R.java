@@ -27,7 +27,7 @@ public final class R {
         public static final int tap_and_go=0x7f020006;
     }
     public static final class id {
-        public static final int action_settings=0x7f090018;
+        public static final int action_settings=0x7f09001a;
         public static final int aisleItemListView=0x7f090013;
         public static final int basketDelBtn=0x7f090006;
         public static final int basketEditBtn=0x7f090007;
@@ -37,20 +37,22 @@ public final class R {
         public static final int content_frame=0x7f090003;
         public static final int drawer_layout=0x7f090002;
         public static final int emptyTxt=0x7f09000b;
+        public static final int imageHeader=0x7f090014;
         public static final int inputRow=0x7f090008;
-        public static final int itemName=0x7f090016;
-        public static final int itemNameHeader=0x7f090014;
+        public static final int itemName=0x7f090018;
+        public static final int itemNameHeader=0x7f090015;
         public static final int left_drawer=0x7f090004;
         public static final int nameEdit=0x7f09000d;
         public static final int pager=0x7f090000;
         public static final int pager_tab_strip=0x7f090001;
-        public static final int price=0x7f090017;
-        public static final int priceHeader=0x7f090015;
+        public static final int price=0x7f090019;
+        public static final int priceHeader=0x7f090016;
         public static final int renameDone=0x7f09000e;
         public static final int tap_and_go_image=0x7f090011;
         public static final int tap_message=0x7f090010;
         public static final int tap_view_group=0x7f09000f;
         public static final int textView_message=0x7f090012;
+        public static final int thumbImage=0x7f090017;
         public static final int txtItem=0x7f090009;
     }
     public static final class layout {
