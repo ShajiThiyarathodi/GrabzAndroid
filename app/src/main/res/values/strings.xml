@@ -30,4 +30,5 @@
     <string name="rename">Rename</string>
     <string name="title_activity_item_detail">ItemDetail</string>
     <string name="awsLink">http://grabztestenv.elasticbeanstalk.com</string>
+    <string name="title_activity_basket">BasketActivity</string>
 </resources>

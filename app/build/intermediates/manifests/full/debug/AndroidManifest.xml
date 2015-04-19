@@ -62,6 +62,10 @@
             android:name="com.cmpe295.grabz.ItemDetailActivity"
             android:label="@string/title_activity_item_detail" >
         </activity>
+        <activity
+            android:name="com.cmpe295.grabz.BasketActivity"
+            android:label="@string/title_activity_basket" >
+        </activity>
     </application>
 
 </manifest>

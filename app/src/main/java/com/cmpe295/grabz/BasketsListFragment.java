@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -107,6 +108,30 @@ public class BasketsListFragment extends Fragment {
                                 long id) {
             //TODO: Initiate new activity
             selectItem(position,"Basket");
+            Intent basketActivity = new Intent(parentCtx,BasketActivity.class);
+            BasketDto selectedBasket = list.get(position);
+            String basketGet = null;
+            String basketDel = null;
+            String basketPut = null;
+            List<LinkDto> clickedLinks = selectedBasket.getLinks();
+            for (LinkDto link : clickedLinks){
+                if (link.getMethod().equals("GET")){
+                    basketGet = link.getHref();
+                }
+                if (link.getMethod().equals("DELETE")){
+                    basketDel = link.getHref();
+                }
+                if (link.getMethod().equals("PUT")){
+                    basketPut = link.getHref();
+                }
+            }
+            Bundle bundle = new Bundle();
+            bundle.putString("basketName",selectedBasket.getBasket().getName());
+            bundle.putString("basketGet",basketGet);
+            bundle.putString("basketDel",basketDel);
+            bundle.putString("basketPut",basketPut);
+            basketActivity.putExtras(bundle);
+            startActivity(basketActivity);
         }
     }
 
