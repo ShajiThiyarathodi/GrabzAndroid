@@ -65,7 +65,7 @@ MERGED from com.android.support:support-v4:22.0.0:22:5
 		ADDED from AndroidManifest.xml:28:9
 	android:theme
 		ADDED from AndroidManifest.xml:30:9
-activity#com.cmpe295.grabz.MainActivity
+activity#com.cmpe295.grabz.activity.MainActivity
 ADDED from AndroidManifest.xml:31:9
 	android:label
 		ADDED from AndroidManifest.xml:33:13
@@ -95,13 +95,13 @@ data
 ADDED from AndroidManifest.xml:44:17
 	android:mimeType
 		ADDED from AndroidManifest.xml:44:23
-activity#com.cmpe295.grabz.ItemDetailActivity
+activity#com.cmpe295.grabz.activity.ItemDetailActivity
 ADDED from AndroidManifest.xml:48:9
 	android:label
 		ADDED from AndroidManifest.xml:50:13
 	android:name
 		ADDED from AndroidManifest.xml:49:13
-activity#com.cmpe295.grabz.BasketActivity
+activity#com.cmpe295.grabz.activity.BasketActivity
 ADDED from AndroidManifest.xml:52:9
 	android:label
 		ADDED from AndroidManifest.xml:54:13

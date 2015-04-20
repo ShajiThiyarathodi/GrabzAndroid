@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.cmpe295.grabz.HomeTabbedActivity" >
+    tools:context="com.cmpe295.grabz.fragment.HomeTabbedFragment" >
 
     <item
         android:id="@+id/action_settings"
