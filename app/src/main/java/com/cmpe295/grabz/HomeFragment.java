@@ -43,11 +43,14 @@ public class HomeFragment extends Fragment {
     public static final String HomeTabTitle = "Grabz";
     public static final String MIME_TEXT_PLAIN = "text/plain";
     public static final String LOG_PREFIX = "HomeFragment";
+    public static final String TAG_ID = "Tag_Id";
+    public static final String ITEM_ID = "Item_Id";
 
     private TextView mTextView;
     private NfcAdapter mNfcAdapter;
     private RelativeLayout relativeLayout;
     ListView lv;
+    private String tagId;
 
     List<AisleItemDto> aisleItemList = new ArrayList<AisleItemDto>();
     ArrayAdapter aisleItemAdapter;
@@ -110,6 +113,9 @@ public class HomeFragment extends Fragment {
                                     int position, long id) {
                 Intent intent = new Intent(getActivity().getApplicationContext(),
                         ItemDetailActivity.class);
+
+                intent.putExtra(TAG_ID, tagId);
+                intent.putExtra(ITEM_ID, ((AisleItemDto) lv.getItemAtPosition(position)).getAisleItem().getItemId());
                 startActivity(intent);
             }
         });
@@ -175,15 +181,7 @@ public class HomeFragment extends Fragment {
 
         private String readText(NdefRecord record)
                 throws UnsupportedEncodingException {
-            /*
-			 * See NFC forum specification for "Text Record Type Definition" at
-			 * 3.2.1
-			 * 
-			 * http://www.nfc-forum.org/specs/
-			 * 
-			 * bit_7 defines encoding bit_6 reserved for future use, must be 0
-			 * bit_5..0 length of IANA language code
-			 */
+
 
             byte[] payload = record.getPayload();
 
@@ -194,11 +192,8 @@ public class HomeFragment extends Fragment {
             // Get the Language Code
             int languageCodeLength = payload[0] & 0063;
 
-            // String languageCode = new String(payload, 1, languageCodeLength,
-            // "US-ASCII");
-            // e.g. "en"
 
-            // Get the Text
+            // Read the Text
             return new String(payload, languageCodeLength + 1, payload.length
                     - languageCodeLength - 1, textEncoding);
         }
@@ -207,9 +202,12 @@ public class HomeFragment extends Fragment {
         protected void onPostExecute(String result) {
             if (result != null) {
                 Log.d(LOG_PREFIX, "Tag content is: " + result);
+                tagId = result;
+                String url = getString(R.string.awsLink)+"/tags/"+tagId+"/items/";
+                Log.e(LOG_PREFIX, "Url is : "+url);
 
                 (new AsyncListViewLoader())
-                        .execute("http://grabztestenv.elasticbeanstalk.com/tags/OUTe1eb38866bAN4-6/items");
+                        .execute(url);
             } else {
                 Log.e(LOG_PREFIX, "Tag reading failed");
                 mTextView.setText("Could not read the tag.");
@@ -229,7 +227,6 @@ public class HomeFragment extends Fragment {
             if (responseCode == HttpStatus.OK && result != null) {
                 Log.d(LOG_PREFIX, "In Post Execute" + String.valueOf(result.length));
                 dialog.dismiss();
-                // relativeLayout.setVisibility(View.GONE);
                 ((LinearLayout) relativeLayout.getParent()).removeView(relativeLayout);
                 aisleItemAdapter.addAll(result);
                 aisleItemAdapter.notifyDataSetChanged();

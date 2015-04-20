@@ -21,7 +21,6 @@
     <string name="title_activity_home_tabbed">HomeTabbedActivity</string>
     <string name="title_section1">Aisle Items</string>
     <string name="title_section2">My Baskets</string>
-    <string name="title_section3">Section 3</string>
     <string name="hello_world">Hello world!</string>
 
     <string name="hintTxtItem">New basket name...</string>

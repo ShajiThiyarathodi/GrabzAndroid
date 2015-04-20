@@ -10,7 +10,9 @@
         android:id="@+id/basketItemList"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:choiceMode="multipleChoiceModal"
+        android:focusable="false"
         />
 
 </RelativeLayout>
-<!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/src/main/res/layout/activity_basket.xml -->
+<!-- From: file:/Users/shajithiyarathodi/project/GrabzAndroid/app/src/main/res/layout/activity_basket.xml -->
