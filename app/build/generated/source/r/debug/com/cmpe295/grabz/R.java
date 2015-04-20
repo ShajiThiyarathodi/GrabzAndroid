@@ -84,7 +84,7 @@ public final class R {
         public static final int drawer_list_item=0x7f030007;
         public static final int edit_name_fragment=0x7f030008;
         public static final int fargment_add_item=0x7f030009;
-        public static final int fragment_home=0x7f03000a;
+        public static final int fragment_aisle_items=0x7f03000a;
         public static final int fragment_search_item=0x7f03000b;
         public static final int header=0x7f03000c;
         public static final int item_row_layout=0x7f03000d;
@@ -102,22 +102,23 @@ public final class R {
         public static final int awsLink=0x7f060002;
         public static final int drawer_close=0x7f060003;
         public static final int drawer_open=0x7f060004;
-        public static final int hello_world=0x7f060005;
-        public static final int hintTxtItem=0x7f060006;
-        public static final int item_name_header=0x7f060007;
-        public static final int lblBtnAdd=0x7f060008;
-        public static final int message=0x7f060009;
-        public static final int price_header=0x7f06000a;
-        public static final int rename=0x7f06000b;
-        public static final int tap_and_go_description=0x7f06000c;
-        public static final int tap_here_message=0x7f06000d;
-        public static final int title_activity_basket=0x7f06000e;
-        public static final int title_activity_home_tabbed=0x7f06000f;
-        public static final int title_activity_item_detail=0x7f060010;
-        public static final int title_activity_items_in_aisle=0x7f060011;
-        public static final int title_section1=0x7f060012;
-        public static final int title_section2=0x7f060013;
-        public static final int txtEmpty=0x7f060014;
+        public static final int hello_blank_fragment=0x7f060005;
+        public static final int hello_world=0x7f060006;
+        public static final int hintTxtItem=0x7f060007;
+        public static final int item_name_header=0x7f060008;
+        public static final int lblBtnAdd=0x7f060009;
+        public static final int message=0x7f06000a;
+        public static final int price_header=0x7f06000b;
+        public static final int rename=0x7f06000c;
+        public static final int tap_and_go_description=0x7f06000d;
+        public static final int tap_here_message=0x7f06000e;
+        public static final int title_activity_basket=0x7f06000f;
+        public static final int title_activity_home_tabbed=0x7f060010;
+        public static final int title_activity_item_detail=0x7f060011;
+        public static final int title_activity_items_in_aisle=0x7f060012;
+        public static final int title_section1=0x7f060013;
+        public static final int title_section2=0x7f060014;
+        public static final int txtEmpty=0x7f060015;
     }
     public static final class style {
         /** 

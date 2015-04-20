@@ -43,8 +43,8 @@ public class ItemDetailActivity extends Activity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        String itemId = bundle.getString(HomeFragment.ITEM_ID);
-        String tagId = bundle.getString(HomeFragment.TAG_ID);
+        String itemId = bundle.getString(AisleItemsFragment.ITEM_ID);
+        String tagId = bundle.getString(AisleItemsFragment.TAG_ID);
         String url = getString(R.string.awsLink) + "/tags/" + tagId + "/items/" + itemId;
         (new AsyncItemDetailsLoader()).execute(url);
 

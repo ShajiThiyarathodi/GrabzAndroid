@@ -38,11 +38,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class HomeFragment extends Fragment {
+public class AisleItemsFragment extends Fragment {
 
-    public static final String HomeTabTitle = "Grabz";
+    public static final String AisleItemsTabTitle = "Grabz";
     public static final String MIME_TEXT_PLAIN = "text/plain";
-    public static final String LOG_PREFIX = "HomeFragment";
+    public static final String LOG_PREFIX = "AisleItemsFragment";
     public static final String TAG_ID = "Tag_Id";
     public static final String ITEM_ID = "Item_Id";
 
@@ -57,11 +57,11 @@ public class HomeFragment extends Fragment {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 
-    public HomeFragment() {
+    public AisleItemsFragment() {
     }
 
-    public static HomeFragment newInstance(int sectionNumber) {
-        HomeFragment fragment = new HomeFragment();
+    public static AisleItemsFragment newInstance(int sectionNumber) {
+        AisleItemsFragment fragment = new AisleItemsFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
@@ -72,10 +72,10 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_home, container,
+        View rootView = inflater.inflate(R.layout.fragment_aisle_items, container,
                 false);
 
-        getActivity().setTitle(HomeTabTitle);
+        getActivity().setTitle(AisleItemsTabTitle);
         mTextView = (TextView) rootView.findViewById(R.id.textView_message);
         relativeLayout = (RelativeLayout) rootView.findViewById(R.id.tap_view_group);
         Context parentCtx = getActivity().getApplicationContext();

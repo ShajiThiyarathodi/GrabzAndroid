@@ -170,10 +170,11 @@ public class MainActivity extends FragmentActivity {
 
 		default:
 			Log.d("MainActivity", "Defaulting to home fragment");
-			fragment = new HomeFragment();
-			break;
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, HomeTabbedActivity.newInstance(), HomeTabbedActivity.CLASS_NAME).commit();
+            break;
 
-		}
+
+        }
 
 		mDrawerList.setItemChecked(position, true);
 		setTitle(mNavBarTitles[position]);

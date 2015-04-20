@@ -74,11 +74,11 @@ public class HomeTabbedActivity extends Fragment
             // below).
             switch (position) {
                 case 0:
-                    return HomeFragment.newInstance(position + 1);
+                    return AisleItemsFragment.newInstance(position + 1);
                 case 1:
                     return BasketsListFragment.newInstance(position + 1);
                 default:
-                    return HomeFragment.newInstance(position + 1);
+                    return AisleItemsFragment.newInstance(position + 1);
 
             }
         }
