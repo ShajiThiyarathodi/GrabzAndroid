@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android" >
-     <solid android:color="#00ffffff" />
+     <solid android:color="#4fddc19a" />
 
 </shape>
-<!-- From: file:/Users/shajithiyarathodi/project/GrabzAndroid/app/src/main/res/drawable-xhdpi/list_background2.xml -->
+<!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/src/main/res/drawable-xhdpi/list_background2.xml -->

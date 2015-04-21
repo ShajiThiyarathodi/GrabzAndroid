@@ -46,5 +46,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/inputRow"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         />
-</RelativeLayout><!-- From: file:/Users/shajithiyarathodi/project/GrabzAndroid/app/src/main/res/layout/baskets_list.xml -->
+</RelativeLayout><!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/src/main/res/layout/baskets_list.xml -->

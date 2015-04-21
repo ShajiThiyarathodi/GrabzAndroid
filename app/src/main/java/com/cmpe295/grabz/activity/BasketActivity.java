@@ -17,6 +17,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -51,7 +54,7 @@ public class BasketActivity extends Activity {
     static BasketItemAdapter basketAdapter;
     String getLink;
     static String putLink;
-    String delLink;
+    static String delLink;
     static String HOST;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -224,14 +227,14 @@ public class BasketActivity extends Activity {
 
     private static class AddItemRequestTask extends AsyncTask<String, Void, String> {
         int position;
-        String name;
+        String itemId;
         HttpStatus responseCode;
         @Override
         protected String doInBackground(String... params) {
             try {
                 String url= params[0];
                 position = Integer.parseInt(params[1]);
-                name = params[2];
+                itemId = params[2];
                 HttpHeaders requestHeaders = new HttpHeaders();
                 requestHeaders.setContentType(new MediaType("application","json"));
                 RestTemplate restTemplate = new RestTemplate();
@@ -240,7 +243,7 @@ public class BasketActivity extends Activity {
                 restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
                 Map<String,String> bName = new HashMap<String, String>();
                 bName.put("action","add_item");
-                bName.put("itemId", name);
+                bName.put("itemId", itemId);
                 HttpEntity<Map> requestEntity = new HttpEntity<Map>(bName,requestHeaders);
                 ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity,String.class);
 //                restTemplate.put(url,bName);
@@ -257,8 +260,13 @@ public class BasketActivity extends Activity {
         @Override
         protected void onPostExecute(String dummy) {
             if (responseCode == HttpStatus.OK) {
-                basketItems.add(searchedItems.get(position));
-                basketAdapter.notifyDataSetChanged();
+                ItemDto desirableItem = searchedItems.get(position);
+                if (!basketItems.contains(desirableItem)) {
+                    basketItems.add(searchedItems.get(position));
+                    basketAdapter.notifyDataSetChanged();
+                }
+                Toast.makeText(parentCtx,
+                        "Item Added", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -276,6 +284,26 @@ public class BasketActivity extends Activity {
             ItemDto item = basketItems.get(position);
             TextView itemName = (TextView) v.findViewById(R.id.basketItemName);
             itemName.setText(item.getItem().getName());
+            ImageButton delete = (ImageButton)v.findViewById(R.id.itemDelBtn);
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    (new DeleteItemRequestTask()).execute(HOST +delLink ,String.valueOf(position),
+                            basketItems.get(position).getItem().getItemId());
+                }
+            });
+            CheckBox check = (CheckBox) v.findViewById(R.id.basketItemCB);
+            check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                    View row = (View) buttonView.getParent();
+                    if (isChecked) {
+                        row.setBackgroundResource(R.drawable.item_checked_background);
+                    } else {
+                        row.setBackgroundResource(android.R.color.transparent);
+                    }
+                }
+            });
             TextView itemAisle = (TextView) v.findViewById(R.id.basketItemAisle);
             //TODO: get the Ailse after NFC tap detected.
 
@@ -317,4 +345,52 @@ public class BasketActivity extends Activity {
             basketAdapter.notifyDataSetChanged();
         }
     }
+
+    private static class DeleteItemRequestTask extends AsyncTask<String, Void, String> {
+        int position;
+        String itemId;
+        HttpStatus responseCode;
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                String url= params[0];
+                position = Integer.parseInt(params[1]);
+                itemId = params[2];
+                HttpHeaders requestHeaders = new HttpHeaders();
+                requestHeaders.setContentType(new MediaType("application","json"));
+                RestTemplate restTemplate = new RestTemplate();
+                MappingJackson2HttpMessageConverter mapper = new MappingJackson2HttpMessageConverter();
+                restTemplate.getMessageConverters().add(mapper);
+                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+                Map<String,String> bName = new HashMap<String, String>();
+                bName.put("action","remove_item");
+                bName.put("itemId", itemId);
+                HttpEntity<Map> requestEntity = new HttpEntity<Map>(bName,requestHeaders);
+                ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity,String.class);
+//                restTemplate.put(url,bName);
+                responseCode =  responseEntity.getStatusCode();
+                Log.d("Delete Task on", url+" " + responseCode.toString() + " " + responseEntity.getBody());
+                return "";
+            } catch (Exception e) {
+                Log.e("BasketRenameRequestTask", e.getMessage(), e);
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String dummy) {
+            if (responseCode == HttpStatus.OK) {
+                    basketItems.remove(position);
+                    basketAdapter.notifyDataSetChanged();
+            }
+        }
+    }
 }
+
+/*
+* Clean all items call
+* introduce checkbox boolean for each item in basket to persist item status
+* introduce aisleNumber for each item in basket
+* nested API call to set aisles number in each basket on NFC tap
+* */

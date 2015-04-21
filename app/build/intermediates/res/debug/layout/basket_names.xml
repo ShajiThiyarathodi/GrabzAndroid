@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:descendantFocusability="blocksDescendants">
+    android:descendantFocusability="blocksDescendants"
+    android:background="@drawable/basket_list_background">
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/basketNames"
         android:layout_width="match_parent"
@@ -11,7 +12,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:gravity="center_vertical"
         android:textColor="#ff052654"
-        android:paddingLeft="16dp"
+        android:paddingLeft="6dp"
         android:background="?android:attr/activatedBackgroundIndicator"
         android:minHeight="?android:attr/listPreferredItemHeightSmall"
         />
@@ -22,6 +23,7 @@
         android:layout_height="wrap_content"
         android:src="@android:drawable/ic_menu_delete"
         android:layout_alignParentRight="true"
+        android:background="@null"
         />
     <ImageButton
         android:id="@+id/basketEditBtn"
@@ -29,5 +31,6 @@
         android:layout_height="wrap_content"
         android:src="@android:drawable/ic_menu_edit"
         android:layout_toLeftOf="@id/basketDelBtn"
+        android:background="@null"
         />
-</RelativeLayout><!-- From: file:/Users/shajithiyarathodi/project/GrabzAndroid/app/src/main/res/layout/basket_names.xml -->
+</RelativeLayout><!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/src/main/res/layout/basket_names.xml -->

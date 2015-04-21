@@ -112,7 +112,6 @@ public class BasketsListFragment extends Fragment {
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
             //TODO: Initiate new activity
-            selectItem(position,"Basket");
             Intent basketActivity = new Intent(parentCtx,BasketActivity.class);
             BasketDto selectedBasket = list.get(position);
             String basketGet = null;
@@ -173,8 +172,8 @@ public class BasketsListFragment extends Fragment {
                             android.R.string.dialog_alert_title, position);
                     newFragment.show(fm, "dialog");
 
-                }
-            });
+                    }
+                });
             final ImageButton edit = (ImageButton) v.findViewById(R.id.basketEditBtn);
             edit.setOnClickListener(new View.OnClickListener() {
                 @Override
