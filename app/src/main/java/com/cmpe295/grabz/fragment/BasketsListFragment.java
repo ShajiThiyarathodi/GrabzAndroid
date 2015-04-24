@@ -306,7 +306,7 @@ public class BasketsListFragment extends Fragment {
 
         @Override
         protected void onPostExecute(BasketDto[] baskets) {
-            if (baskets.length != 0 && responseCode == HttpStatus.OK) {
+            if (baskets != null && responseCode == HttpStatus.OK) {
                 TextView tv = (TextView) rootView.findViewById(R.id.emptyTxt);
                 tv.setVisibility(View.INVISIBLE);
                 //TODO: Clearing the list is not right look for a better solution. Shouldn't it be list.addAll or list.clear ?

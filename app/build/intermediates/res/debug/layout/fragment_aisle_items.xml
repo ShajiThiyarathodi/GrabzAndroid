@@ -3,7 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00ffffff"
+    android:background="@drawable/background_frame"
     android:baselineAligned="false"
     android:orientation="vertical">
 
@@ -25,7 +25,9 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:text="@string/tap_here_message" />
+            android:background="@drawable/basket_list_background"
+            android:text="@string/tap_here_message"
+            android:textColor="#fff"/>
 
         <ImageView
             android:id="@+id/tap_and_go_image"

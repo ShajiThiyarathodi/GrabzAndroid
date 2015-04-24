@@ -1,6 +1,7 @@
 package com.cmpe295.grabz.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,8 @@ public class AisleItemAdapter extends ArrayAdapter<AisleItemDto>  {
 	private Context context;
 	private int[] listItemBackground = new int[] { R.drawable.list_background1,
 			R.drawable.list_background2 };
+    private int[] listItemTextColor = new int[] { Color.BLACK,
+            Color.WHITE};
     ImageLoader imageLoader;
 	
 	public List<AisleItemDto> getItemList() {
@@ -39,7 +42,7 @@ public class AisleItemAdapter extends ArrayAdapter<AisleItemDto>  {
 	public View getView(int position, View convertedView, ViewGroup parent) {
 		View v = convertedView;
 		ItemHolder holder = new ItemHolder();
-
+        int listItemBackgroundPosition = position % listItemBackground.length;
 		if (convertedView == null) {
 
 			LayoutInflater inflater = (LayoutInflater) context
@@ -51,6 +54,8 @@ public class AisleItemAdapter extends ArrayAdapter<AisleItemDto>  {
 					.findViewById(R.id.price);
             ImageView imageListV = (ImageView) v
                     .findViewById(R.id.thumbImage);
+            itemNameListV.setTextColor(listItemTextColor[listItemBackgroundPosition]);
+            priceListV.setTextColor(listItemTextColor[listItemBackgroundPosition]);
 			holder.itemNameView = itemNameListV;
 			holder.priceView = priceListV;
             holder.imageView = imageListV;
@@ -59,8 +64,7 @@ public class AisleItemAdapter extends ArrayAdapter<AisleItemDto>  {
 		} else
 			holder = (ItemHolder) v.getTag();
 
-		int listItemBackgroundPosition = position % listItemBackground.length;
-		v.setBackgroundResource(listItemBackground[listItemBackgroundPosition]);
+        v.setBackgroundResource(listItemBackground[listItemBackgroundPosition]);
 
         AisleItemDto aisleItem = itemList.get(position);
 		holder.itemNameView.setText(aisleItem.getAisleItem().getName());

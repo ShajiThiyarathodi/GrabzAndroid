@@ -7,6 +7,7 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,8 +26,11 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cmpe295.grabz.Dto.BasketItemDetailDto;
 import com.cmpe295.grabz.Dto.ItemDto;
 import com.cmpe295.grabz.R;
+import com.cmpe295.grabz.domain.BasketItemDetail;
+import com.cmpe295.grabz.fragment.AisleItemsFragment;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -49,13 +53,14 @@ public class BasketActivity extends Activity {
 
     static Context parentCtx;
     static ArrayList<ItemDto> searchedItems = new ArrayList<ItemDto>();
-    static ArrayList<ItemDto> basketItems = new ArrayList<ItemDto>();
+    static ArrayList<BasketItemDetailDto> basketItems = new ArrayList<BasketItemDetailDto>();
     static SearchItemAdapter searchAdapter;
     static BasketItemAdapter basketAdapter;
     String getLink;
     static String putLink;
     static String delLink;
     static String HOST;
+    static Map<String,Boolean> basketItemIds = new HashMap<String, Boolean>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +78,7 @@ public class BasketActivity extends Activity {
         //TODO: New adaptor that has item, aisle#
         basketAdapter = new BasketItemAdapter(parentCtx,basketItems);
         lv.setAdapter(basketAdapter);
+        lv.setOnItemClickListener(new ItemListItemClickListener());
         
 /*
         getActionBar().setHomeButtonEnabled(true);
@@ -116,14 +122,14 @@ public class BasketActivity extends Activity {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setView(view);
             builder.setTitle("Add Item");
-//            getDialog().setTitle("Add Item");
             SearchView search = (SearchView) view.findViewById(R.id.searchText);
             search.setQueryHint("Start typing to search...");
+            search.setIconifiedByDefault(false);
             final ListView lv = (ListView) view.findViewById(R.id.searchList);
             searchAdapter = new SearchItemAdapter(parentCtx,
                     searchedItems);
             lv.setAdapter(searchAdapter);
-            lv.setOnItemClickListener(new ListItemClickListener());
+            lv.setOnItemClickListener(new SearchListItemClickListener());
             search.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
                 @Override
                 public boolean onQueryTextSubmit(String query) {
@@ -181,7 +187,7 @@ public class BasketActivity extends Activity {
         }
     }
 
-    private static class ListItemClickListener implements
+    private static class SearchListItemClickListener implements
             AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -251,7 +257,7 @@ public class BasketActivity extends Activity {
                 Log.d("PUT Task on", url+" " + responseCode.toString() + " " + responseEntity.getBody());
                 return "";
             } catch (Exception e) {
-                Log.e("BasketRenameRequestTask", e.getMessage(), e);
+                Log.e("AddItemRequestTask", e.getMessage(), e);
             }
 
             return null;
@@ -261,18 +267,38 @@ public class BasketActivity extends Activity {
         protected void onPostExecute(String dummy) {
             if (responseCode == HttpStatus.OK) {
                 ItemDto desirableItem = searchedItems.get(position);
-                if (!basketItems.contains(desirableItem)) {
-                    basketItems.add(searchedItems.get(position));
+                BasketItemDetailDto newBasketItem = new BasketItemDetailDto();
+                newBasketItem.setLinks(desirableItem.getLinks());
+                newBasketItem.setBasketItemDetail(new BasketItemDetail(
+                        desirableItem.getItem().getItemId(),desirableItem.getItem().getName(),
+                        false,"?"));
+                if (!basketItemIds.containsKey(desirableItem.getItem().getItemId())) {
+                    basketItems.add(newBasketItem);
                     basketAdapter.notifyDataSetChanged();
+                    basketItemIds.put(desirableItem.getItem().getItemId(),true);
+                    Toast.makeText(parentCtx,
+                            "Item Added", Toast.LENGTH_SHORT).show();
                 }
-                Toast.makeText(parentCtx,
-                        "Item Added", Toast.LENGTH_SHORT).show();
+                else {
+                    if (basketItemIds.get(desirableItem.getItem().getItemId()) == false)
+                    {
+                        basketItems.add(newBasketItem);
+                        basketAdapter.notifyDataSetChanged();
+                        basketItemIds.put(desirableItem.getItem().getItemId(),true);
+                        Toast.makeText(parentCtx,
+                                "Item Added", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    Toast.makeText(parentCtx,
+                            "Item's been already added", Toast.LENGTH_SHORT).show();
+                }
+
             }
         }
     }
-    public static class BasketItemAdapter extends ArrayAdapter<ItemDto> {
+    public static class BasketItemAdapter extends ArrayAdapter<BasketItemDetailDto> {
         public BasketItemAdapter(Context ctx,
-                                 List<ItemDto> itemList) {
+                                 List<BasketItemDetailDto> itemList) {
             super(ctx, R.layout.fragment_search_item, itemList);
         }
 
@@ -281,41 +307,59 @@ public class BasketActivity extends Activity {
             LayoutInflater inflater = (LayoutInflater) parentCtx
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = inflater.inflate(R.layout.basket_item_row_layout, parent, false);
-            ItemDto item = basketItems.get(position);
-            TextView itemName = (TextView) v.findViewById(R.id.basketItemName);
-            itemName.setText(item.getItem().getName());
+            BasketItemDetailDto item = basketItems.get(position);
+            final TextView itemName = (TextView) v.findViewById(R.id.basketItemName);
+            itemName.setText(item.getBasketItemDetail().getName());
             ImageButton delete = (ImageButton)v.findViewById(R.id.itemDelBtn);
+            delete.setFocusable(false);
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     (new DeleteItemRequestTask()).execute(HOST +delLink ,String.valueOf(position),
-                            basketItems.get(position).getItem().getItemId());
+                            basketItems.get(position).getBasketItemDetail().getItemId());
                 }
             });
             CheckBox check = (CheckBox) v.findViewById(R.id.basketItemCB);
+            check.setChecked(basketItems.get(position).getBasketItemDetail().getCollected());
+            if (check.isChecked()) {
+                v.setBackgroundResource(R.drawable.item_checked_background);
+                itemName.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+            }
+            else {
+                v.setBackgroundResource(R.drawable.item_unchecked_background);
+            }
             check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
                     View row = (View) buttonView.getParent();
                     if (isChecked) {
                         row.setBackgroundResource(R.drawable.item_checked_background);
+                        itemName.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+                        (new CheckItemRequestTask()).execute(HOST +putLink ,String.valueOf(position),
+                                basketItems.get(position).getBasketItemDetail().getItemId());
+                        basketItems.get(position).getBasketItemDetail().setCollected(true);
                     } else {
-                        row.setBackgroundResource(android.R.color.transparent);
+                        row.setBackgroundResource(R.drawable.item_unchecked_background);
+                        //android.R.color.transparent
+                        itemName.setPaintFlags(itemName.getPaintFlags()
+                                & (~Paint.STRIKE_THRU_TEXT_FLAG));
+                        (new UncheckItemRequestTask()).execute(HOST +putLink ,String.valueOf(position),
+                                basketItems.get(position).getBasketItemDetail().getItemId());
+                        basketItems.get(position).getBasketItemDetail().setCollected(false);
                     }
                 }
             });
             TextView itemAisle = (TextView) v.findViewById(R.id.basketItemAisle);
-            //TODO: get the Ailse after NFC tap detected.
-
+            itemAisle.setText(basketItems.get(position).getBasketItemDetail().getAisleNum());
             return v;
         }
     }
 
-    private static class BasketItemGetRequestTask extends AsyncTask<String, Void, ItemDto[]> {
+    private static class BasketItemGetRequestTask extends AsyncTask<String, Void, BasketItemDetailDto[]> {
         HttpStatus responseCode;
 
         @Override
-        protected ItemDto[] doInBackground(String... params) {
+        protected BasketItemDetailDto[] doInBackground(String... params) {
             try {
                 final String url = params[0];
                 // Set the Accept header
@@ -325,20 +369,19 @@ public class BasketActivity extends Activity {
                 RestTemplate restTemplate = new RestTemplate();
                 MappingJackson2HttpMessageConverter mapper = new MappingJackson2HttpMessageConverter();
                 restTemplate.getMessageConverters().add(mapper);
-                ResponseEntity<ItemDto[]> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity,ItemDto[].class);
-                ItemDto[] items = responseEntity.getBody();
+                ResponseEntity<BasketItemDetailDto[]> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity,BasketItemDetailDto[].class);
+                BasketItemDetailDto[] items = responseEntity.getBody();
                 responseCode =  responseEntity.getStatusCode();
                 Log.d("GET Task on", url+" " + responseCode.toString());
                 return items;
             }catch (Exception e) {
-                Log.e("SearchItemGetTask", e.getMessage(), e);
+                Log.e("BasketItemGet", e.getMessage(), e);
                 return null;
             }
         }
         @Override
-        protected void onPostExecute(ItemDto[] items) {
+        protected void onPostExecute(BasketItemDetailDto[] items) {
             basketAdapter.clear();
-            searchedItems.clear();
             if (items.length != 0 && responseCode == HttpStatus.OK) {
                 basketAdapter.addAll(items);
             }
@@ -372,7 +415,7 @@ public class BasketActivity extends Activity {
                 Log.d("Delete Task on", url+" " + responseCode.toString() + " " + responseEntity.getBody());
                 return "";
             } catch (Exception e) {
-                Log.e("BasketRenameRequestTask", e.getMessage(), e);
+                Log.e("DeleteItemRequestTask", e.getMessage(), e);
             }
 
             return null;
@@ -381,9 +424,103 @@ public class BasketActivity extends Activity {
         @Override
         protected void onPostExecute(String dummy) {
             if (responseCode == HttpStatus.OK) {
-                    basketItems.remove(position);
-                    basketAdapter.notifyDataSetChanged();
+                basketItemIds.put(basketItems.get(position).getBasketItemDetail().getItemId(),false);
+                basketItems.remove(position);
+                basketAdapter.notifyDataSetChanged();
             }
+        }
+    }
+
+    private static class CheckItemRequestTask extends AsyncTask<String, Void, String> {
+        int position;
+        String itemId;
+        HttpStatus responseCode;
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                String url= params[0];
+                position = Integer.parseInt(params[1]);
+                itemId = params[2];
+                HttpHeaders requestHeaders = new HttpHeaders();
+                requestHeaders.setContentType(new MediaType("application","json"));
+                RestTemplate restTemplate = new RestTemplate();
+                MappingJackson2HttpMessageConverter mapper = new MappingJackson2HttpMessageConverter();
+                restTemplate.getMessageConverters().add(mapper);
+                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+                Map<String,String> bName = new HashMap<String, String>();
+                bName.put("action","set_collected");
+                bName.put("itemId", itemId);
+                HttpEntity<Map> requestEntity = new HttpEntity<Map>(bName,requestHeaders);
+                ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity,String.class);
+//                restTemplate.put(url,bName);
+                responseCode =  responseEntity.getStatusCode();
+                Log.d("Check Task on", url+" " + responseCode.toString() + " " + responseEntity.getBody());
+                return "";
+            } catch (Exception e) {
+                Log.e("CheckItemRequestTask", e.getMessage(), e);
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String dummy) {
+            if (responseCode != HttpStatus.OK) {
+                Log.e("Check  FAILED","Inside check item. Failed to check"+ basketItems.get(position).getBasketItemDetail().getName());
+            }
+        }
+    }
+    private static class UncheckItemRequestTask extends AsyncTask<String, Void, String> {
+        int position;
+        String itemId;
+        HttpStatus responseCode;
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                String url= params[0];
+                position = Integer.parseInt(params[1]);
+                itemId = params[2];
+                HttpHeaders requestHeaders = new HttpHeaders();
+                requestHeaders.setContentType(new MediaType("application","json"));
+                RestTemplate restTemplate = new RestTemplate();
+                MappingJackson2HttpMessageConverter mapper = new MappingJackson2HttpMessageConverter();
+                restTemplate.getMessageConverters().add(mapper);
+                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+                Map<String,String> bName = new HashMap<String, String>();
+                bName.put("action","unset_collected");
+                bName.put("itemId", itemId);
+                HttpEntity<Map> requestEntity = new HttpEntity<Map>(bName,requestHeaders);
+                ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity,String.class);
+//                restTemplate.put(url,bName);
+                responseCode =  responseEntity.getStatusCode();
+                Log.d("Check Task on", url+" " + responseCode.toString() + " " + responseEntity.getBody());
+                return "";
+            } catch (Exception e) {
+                Log.e("UncheckItemRequestTask", e.getMessage(), e);
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String dummy) {
+            if (responseCode != HttpStatus.OK) {
+                Log.e("Uncheck  FAILED","Inside check item. Failed to uncheck"+ basketItems.get(position).getBasketItemDetail().getName());
+            }
+        }
+    }
+    private class ItemListItemClickListener implements
+            AdapterView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position,
+                                long id) {
+            Intent intent = new Intent(parentCtx,
+                    ItemDetailActivity.class);
+
+            intent.putExtra(AisleItemsFragment.ITEM_ID, basketItems.get(position).getBasketItemDetail().getItemId());
+            intent.putExtra(AisleItemsFragment.SOURCE, "basketItem");
+            startActivity(intent);
+
         }
     }
 }
@@ -393,4 +530,12 @@ public class BasketActivity extends Activity {
 * introduce checkbox boolean for each item in basket to persist item status
 * introduce aisleNumber for each item in basket
 * nested API call to set aisles number in each basket on NFC tap
+*
+*
+xxxhdpi: 1280x1920 px
+xxhdpi: 960x1600 px
+xhdpi: 640x960 px
+hdpi: 480x800 px
+mdpi: 320x480 px
+ldpi: 240x320 px
 * */

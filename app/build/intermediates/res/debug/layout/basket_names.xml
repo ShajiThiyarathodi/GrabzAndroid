@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:gravity="center_vertical"
-        android:textColor="#ff052654"
-        android:paddingLeft="6dp"
+        android:textColor="#fff"
+        android:paddingLeft="4dp"
         android:background="?android:attr/activatedBackgroundIndicator"
         android:minHeight="?android:attr/listPreferredItemHeightSmall"
         />
@@ -22,6 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@android:drawable/ic_menu_delete"
+        android:layout_gravity="center_vertical"
         android:layout_alignParentRight="true"
         android:background="@null"
         />
@@ -32,5 +33,11 @@
         android:src="@android:drawable/ic_menu_edit"
         android:layout_toLeftOf="@id/basketDelBtn"
         android:background="@null"
+        android:layout_gravity="center_vertical"
         />
-</RelativeLayout><!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/src/main/res/layout/basket_names.xml -->
+</RelativeLayout>
+    <!--
+    #ff052654 Dark blue text
+    #fff white text
+
+    --><!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/src/main/res/layout/basket_names.xml -->

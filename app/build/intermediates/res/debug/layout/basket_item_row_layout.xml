@@ -7,7 +7,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:layout_gravity="center_vertical"/>
+        android:layout_gravity="center_vertical"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
     <TextView
         android:id="@+id/basketItemName"
         android:layout_width="0dp"
@@ -17,24 +19,29 @@
         android:layout_marginRight="2dp"
         android:layout_marginTop="2dp"
         android:layout_weight="4"
-        android:textColor="#000"
+        android:textColor="#fff"
         android:layout_gravity="center_vertical"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
         android:id="@+id/basketItemAisle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
+        android:layout_gravity="center_vertical"
         android:layout_marginBottom="2dp"
         android:layout_marginLeft="2dp"
         android:layout_marginRight="2dp"
         android:layout_marginTop="2dp"
         android:layout_weight="1"
-        android:textColor="#000"
+        android:textColor="#fff"
         android:gravity="left"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:paddingLeft="10dp" />
+        android:paddingLeft="10dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        />
     <ImageButton
         android:id="@+id/itemDelBtn"
         android:layout_width="wrap_content"
@@ -43,5 +50,11 @@
         android:layout_alignParentRight="true"
         android:background="@null"
         style="?android:attr/buttonStyleSmall"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         />
-</LinearLayout><!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/src/main/res/layout/basket_item_row_layout.xml -->
+</LinearLayout>
+    <!--
+    android:ellipsize="end"
+    android:singleLine="true"
+    --><!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/src/main/res/layout/basket_item_row_layout.xml -->

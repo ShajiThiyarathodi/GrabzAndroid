@@ -3,58 +3,49 @@ package com.cmpe295.grabz.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * This class represents the document of "baskets" collection.
- * Document Structure:
- * <pre>
- * {
-    "_id": {
-        "$oid": "550cc05215fa7b03d91cd93e"
-    },
-    "name": "MyBasket-1",
-    "itemIds": ["id1","id2","id3"]
-}
- * </pre>
- * @author Sina Nikkhah, Amit Dikkar, Shaji Thiyarathodi, Priyanka Deo
- *
- */
 public class BasketModel {
 
-	/**
-	 * Name of the basket. 
-	 * **/
-	private String name;
-	
-	/**
-	 * List of itemIds this basket contains. 
-	 * **/
-	private List<String> itemIds = new ArrayList<String>();
-	
-	public BasketModel(){
-	}
+    /**
+     * Name of the basket.
+     * **/
+    private String name;
 
-	public String getName() {
-		return name;
-	}
+    /**
+     * List of itemIds this basket contains.
+     * **/
+    //private List<String> itemIds = new ArrayList<String>();
 
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    private List<BasketItem> basketItems = new ArrayList<BasketItem>();
 
-	/**
-	 * @return the itemIds
-	 */
-	public List<String> getItemIds() {
-		return itemIds;
-	}
+    public BasketModel(){
+    }
 
-	/**
-	 * @param itemIds the itemIds to set
-	 */
-	public void setItemIds(List<String> itemIds) {
-		this.itemIds = itemIds;
-	}
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * @return the basketItems
+     */
+    public List<BasketItem> getBasketItems() {
+        return basketItems;
+    }
+
+    /**
+     * @param basketItems the basketItems to set
+     */
+    public void setBasketItems(List<BasketItem> basketItems) {
+        this.basketItems = basketItems;
+    }
+
 }

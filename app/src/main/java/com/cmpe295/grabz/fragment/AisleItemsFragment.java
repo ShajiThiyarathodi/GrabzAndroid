@@ -50,6 +50,7 @@ public class AisleItemsFragment extends Fragment {
     public static final String LOG_PREFIX = "AisleItemsFragment";
     public static final String TAG_ID = "Tag_Id";
     public static final String ITEM_ID = "Item_Id";
+    public static final String SOURCE = "source";
 
     private TextView mTextView;
     private NfcAdapter mNfcAdapter;
@@ -121,6 +122,7 @@ public class AisleItemsFragment extends Fragment {
 
                 intent.putExtra(TAG_ID, tagId);
                 intent.putExtra(ITEM_ID, ((AisleItemDto) lv.getItemAtPosition(position)).getAisleItem().getItemId());
+                intent.putExtra(SOURCE, "aisleItem");
                 startActivity(intent);
             }
         });

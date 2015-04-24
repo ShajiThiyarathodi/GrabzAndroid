@@ -9,8 +9,9 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.cmpe295.grabz.R;
+import com.cmpe295.grabz.Dto.ItemDto;
 import com.cmpe295.grabz.Dto.StoreItemDto;
+import com.cmpe295.grabz.R;
 import com.cmpe295.grabz.fragment.AisleItemsFragment;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -47,10 +48,16 @@ public class ItemDetailActivity extends Activity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         String itemId = bundle.getString(AisleItemsFragment.ITEM_ID);
-        String tagId = bundle.getString(AisleItemsFragment.TAG_ID);
-        String url = getString(R.string.awsLink) + "/tags/" + tagId + "/items/" + itemId;
-        (new AsyncItemDetailsLoader()).execute(url);
-
+        String source = bundle.getString(AisleItemsFragment.SOURCE);
+        if (source.equals("aisleItem")) {
+            String tagId = bundle.getString(AisleItemsFragment.TAG_ID);
+            String url = getString(R.string.awsLink) + "/tags/" + tagId + "/items/" + itemId;
+            (new AsyncItemDetailsLoader()).execute(url);
+        }
+        else if (source.equals("basketItem")){
+            String url = getString(R.string.awsLink) + "/items/" + itemId;
+            (new AsyncBasketItemDetailsLoader()).execute(url);
+        }
         itemNameView = (TextView)findViewById(R.id.itemNameDetail);
         imageView = (ImageView)findViewById(R.id.imageDetail);
         itemDescriptionView = (TextView)findViewById(R.id.itemDescriptionDetail);
@@ -138,6 +145,58 @@ public class ItemDetailActivity extends Activity {
                 restTemplate.getMessageConverters().add(mapper);
                 ResponseEntity<StoreItemDto> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity, StoreItemDto.class);
                 StoreItemDto storeItem = responseEntity.getBody();
+                responseCode = responseEntity.getStatusCode();
+
+
+                return storeItem;
+            } catch (Throwable t) {
+                t.printStackTrace();
+            }
+            return null;
+        }
+
+    }
+    private class AsyncBasketItemDetailsLoader extends
+            AsyncTask<String, Void, ItemDto> {
+        private final ProgressDialog dialog = new ProgressDialog(ItemDetailActivity.this);
+        HttpStatus responseCode;
+
+        @Override
+        protected void onPostExecute(ItemDto item) {
+            if (responseCode == HttpStatus.OK && item != null) {
+                dialog.dismiss();
+                itemNameView.setText(item.getItem().getName());
+                itemDescriptionView.setText(item.getItem().getDescription());
+                categoryView.setText(item.getItem().getCategory());
+                colorView.setText(item.getItem().getColor());
+                sizeView.setText(item.getItem().getSize());
+                priceView.setText("Varies for different outlets");
+
+                imageLoader = ImageLoader.getInstance();
+                imageLoader.displayImage(item.getItem().getImageUrl(),imageView);
+            }
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog.setMessage("Fetching item details..");
+            dialog.show();
+        }
+
+        @Override
+        protected ItemDto doInBackground(String... params) {
+
+            try {
+                String url = params[0];
+                HttpHeaders requestHeaders = new HttpHeaders();
+                requestHeaders.setAccept(Collections.singletonList(new MediaType("application", "json")));
+                HttpEntity<?> requestEntity = new HttpEntity<Object>(requestHeaders);
+                RestTemplate restTemplate = new RestTemplate();
+                MappingJackson2HttpMessageConverter mapper = new MappingJackson2HttpMessageConverter();
+                restTemplate.getMessageConverters().add(mapper);
+                ResponseEntity<ItemDto> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity, ItemDto.class);
+                ItemDto storeItem = responseEntity.getBody();
                 responseCode = responseEntity.getStatusCode();
 
 
