@@ -16,18 +16,19 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:hint="@string/hintTxtItem"
             />
 
-        <Button
+        <ImageButton
             android:id="@+id/btnAdd"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/lblBtnAdd"
-            android:layout_toRightOf="@id/txtItem"
-            android:drawableLeft="@android:drawable/ic_menu_add"
-            android:layout_weight="1"
+            android:src="@android:drawable/ic_menu_add"
+            android:layout_weight="0"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_gravity="center_vertical"
+            android:background="@null"
             />
     </LinearLayout>
     <TextView

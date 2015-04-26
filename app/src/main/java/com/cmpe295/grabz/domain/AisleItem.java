@@ -37,6 +37,33 @@ public class AisleItem{
     public String getItemId() {
         return itemId;
     }
+    private boolean onPromotion = false;
+    private float promotionalPrice = 0;
+    private String promotionName = "NO_NAME";
+
+    public boolean isOnPromotion() {
+        return onPromotion;
+    }
+
+    public void setOnPromotion(boolean onPromotion) {
+        this.onPromotion = onPromotion;
+    }
+
+    public float getPromotionalPrice() {
+        return promotionalPrice;
+    }
+
+    public void setPromotionalPrice(float promotionalPrice) {
+        this.promotionalPrice = promotionalPrice;
+    }
+
+    public String getPromotionName() {
+        return promotionName;
+    }
+
+    public void setPromotionName(String promotionName) {
+        this.promotionName = promotionName;
+    }
 
     public void setItemId(String itemId){
         this.itemId = itemId;

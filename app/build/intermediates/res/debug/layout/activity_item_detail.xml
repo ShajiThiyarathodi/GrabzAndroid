@@ -52,28 +52,6 @@
         android:paddingTop="4dp"
         android:background="#696969"
         android:layout_below="@id/topBox"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/priceHeader"
-        android:textStyle="bold"
-        android:layout_below="@id/view1"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginBottom="4dp" />
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/priceDetail"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/priceHeader"
-        android:layout_marginLeft="4dp"
-        android:layout_marginBottom="4dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -81,7 +59,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/categoryHeader"
         android:textStyle="bold"
-        android:layout_below="@id/priceDetail"
+        android:layout_below="@id/view1"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="4dp"
         android:layout_marginBottom="4dp" />
@@ -138,6 +116,28 @@
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/sizeHeader"
+        android:layout_marginLeft="4dp"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/priceHeader"
+        android:textStyle="bold"
+        android:layout_below="@id/size"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/priceDetail"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/priceHeader"
         android:layout_marginLeft="4dp"
         android:layout_marginBottom="4dp" />
 

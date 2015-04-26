@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -92,7 +91,7 @@ public class BasketsListFragment extends Fragment {
         mAdapter = new BasketListAdapter(parentCtx,list);
         lView.setAdapter(mAdapter);
         lView.setOnItemClickListener(new ListItemClickListener());
-        Button btn = (Button) rootView.findViewById(R.id.btnAdd);
+        ImageButton btn = (ImageButton) rootView.findViewById(R.id.btnAdd);
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Do something in response to button click

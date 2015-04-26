@@ -40,6 +40,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -60,12 +61,13 @@ public class BasketActivity extends Activity {
     static String putLink;
     static String delLink;
     static String HOST;
-    static Map<String,Boolean> basketItemIds = new HashMap<String, Boolean>();
-    @Override
+//    static Map<String,Boolean> basketItemIds = new HashMap<String, Boolean>();
+//    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         parentCtx = this;
         setContentView(R.layout.activity_basket);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intentExtras = getIntent();
         Bundle bundle = intentExtras.getExtras();
         getLink = bundle.getString("basketGet","No Get");
@@ -256,14 +258,19 @@ public class BasketActivity extends Activity {
                 responseCode =  responseEntity.getStatusCode();
                 Log.d("PUT Task on", url+" " + responseCode.toString() + " " + responseEntity.getBody());
                 return "";
-            } catch (Exception e) {
+            }
+            catch (HttpClientErrorException e){
+                Log.e("AddItemRequestTask", e.getMessage(), e);
+                responseCode = e.getStatusCode();
+            }
+            catch (Exception e) {
                 Log.e("AddItemRequestTask", e.getMessage(), e);
             }
 
             return null;
         }
 
-        @Override
+/*        @Override
         protected void onPostExecute(String dummy) {
             if (responseCode == HttpStatus.OK) {
                 ItemDto desirableItem = searchedItems.get(position);
@@ -293,6 +300,25 @@ public class BasketActivity extends Activity {
                             "Item's been already added", Toast.LENGTH_SHORT).show();
                 }
 
+            }
+        }*/
+        @Override
+        protected void onPostExecute(String dummy) {
+            if (responseCode == HttpStatus.OK) {
+                ItemDto desirableItem = searchedItems.get(position);
+                BasketItemDetailDto newBasketItem = new BasketItemDetailDto();
+                newBasketItem.setLinks(desirableItem.getLinks());
+                newBasketItem.setBasketItemDetail(new BasketItemDetail(
+                        desirableItem.getItem().getItemId(),desirableItem.getItem().getName(),
+                        false,"?"));
+                basketItems.add(newBasketItem);
+                basketAdapter.notifyDataSetChanged();
+                Toast.makeText(parentCtx,
+                        "Item Added", Toast.LENGTH_SHORT).show();
+            }
+            else if (responseCode == HttpStatus.CONFLICT){
+                Toast.makeText(parentCtx,
+                        "Item's been already added", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -424,7 +450,7 @@ public class BasketActivity extends Activity {
         @Override
         protected void onPostExecute(String dummy) {
             if (responseCode == HttpStatus.OK) {
-                basketItemIds.put(basketItems.get(position).getBasketItemDetail().getItemId(),false);
+//                basketItemIds.put(basketItems.get(position).getBasketItemDetail().getItemId(),false);
                 basketItems.remove(position);
                 basketAdapter.notifyDataSetChanged();
             }

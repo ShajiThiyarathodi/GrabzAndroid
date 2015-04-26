@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.ViewManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -49,15 +50,7 @@ public class ItemDetailActivity extends Activity {
         Bundle bundle = intent.getExtras();
         String itemId = bundle.getString(AisleItemsFragment.ITEM_ID);
         String source = bundle.getString(AisleItemsFragment.SOURCE);
-        if (source.equals("aisleItem")) {
-            String tagId = bundle.getString(AisleItemsFragment.TAG_ID);
-            String url = getString(R.string.awsLink) + "/tags/" + tagId + "/items/" + itemId;
-            (new AsyncItemDetailsLoader()).execute(url);
-        }
-        else if (source.equals("basketItem")){
-            String url = getString(R.string.awsLink) + "/items/" + itemId;
-            (new AsyncBasketItemDetailsLoader()).execute(url);
-        }
+
         itemNameView = (TextView)findViewById(R.id.itemNameDetail);
         imageView = (ImageView)findViewById(R.id.imageDetail);
         itemDescriptionView = (TextView)findViewById(R.id.itemDescriptionDetail);
@@ -65,9 +58,23 @@ public class ItemDetailActivity extends Activity {
         categoryView = (TextView)findViewById(R.id.category);
         colorView = (TextView)findViewById(R.id.color);
         sizeView = (TextView)findViewById(R.id.size);
+        if (source.equals("aisleItem")) {
+            String tagId = bundle.getString(AisleItemsFragment.TAG_ID);
+            String url = getString(R.string.awsLink) + "/tags/" + tagId + "/items/" + itemId;
+            (new AsyncItemDetailsLoader()).execute(url);
+            ((TextView)findViewById(R.id.priceHeader)).setText("Price:");
+        }
+        else if (source.equals("basketItem")){
+            String url = getString(R.string.awsLink) + "/items/" + itemId;
+            ((ViewManager)priceView.getParent()).removeView(priceView);
+            TextView priceHeader = (TextView) findViewById(R.id.priceHeader);
+            ((ViewManager)priceHeader.getParent()).removeView(priceHeader);
+            (new AsyncBasketItemDetailsLoader()).execute(url);
+
+        }
 
         setTitle(title);
-        ((TextView)findViewById(R.id.priceHeader)).setText("Price:");
+
         ((TextView)findViewById(R.id.categoryHeader)).setText("Category:");
         ((TextView)findViewById(R.id.colorHeader)).setText("Color:");
         ((TextView)findViewById(R.id.sizeHeader)).setText("Size:");
@@ -170,7 +177,7 @@ public class ItemDetailActivity extends Activity {
                 categoryView.setText(item.getItem().getCategory());
                 colorView.setText(item.getItem().getColor());
                 sizeView.setText(item.getItem().getSize());
-                priceView.setText("Varies for different outlets");
+//                priceView.setText("Varies for different outlets");
 
                 imageLoader = ImageLoader.getInstance();
                 imageLoader.displayImage(item.getItem().getImageUrl(),imageView);
