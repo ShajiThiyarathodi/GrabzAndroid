@@ -33,13 +33,16 @@
     </LinearLayout>
     <TextView
         android:id="@+id/emptyTxt"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/inputRow"
-        android:paddingTop="16dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/txtEmpty"
-        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="50dp"
+        android:background="@drawable/basket_list_background"
+        android:textColor="#fff"
         />
 
     <ListView

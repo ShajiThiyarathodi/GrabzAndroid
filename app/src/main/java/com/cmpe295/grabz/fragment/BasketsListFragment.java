@@ -57,7 +57,7 @@ public class BasketsListFragment extends Fragment {
     // This is the Adapter being used to display the list's data
     static ArrayAdapter<BasketDto> mAdapter;
     Context parentCtx;
-    View rootView;
+    static View rootView;
     EditText edit;
     static String deviceId;
     public BasketsListFragment() {
@@ -82,9 +82,14 @@ public class BasketsListFragment extends Fragment {
         deviceId = telephonyManager.getDeviceId();
         Log.d("DEVICE ID",deviceId);
         ListView lView = (ListView) rootView.findViewById(R.id.basketList);
+        TextView emptyMsg = (TextView) rootView.findViewById(R.id.emptyTxt);
         parentCtx = getActivity().getApplicationContext();
         (new BasketListGetRequestTask())
                 .execute("http://grabztestenv.elasticbeanstalk.com/baskets?phoneId="+deviceId);
+        if (list.size() == 0)
+            emptyMsg.setVisibility(View.VISIBLE);
+        else
+            emptyMsg.setVisibility(View.INVISIBLE);
 
         // Create an empty adapter we will use to display the loaded data.
         // We pass null for the cursor, then update it in onLoadFinished()
@@ -200,9 +205,10 @@ public class BasketsListFragment extends Fragment {
         }
         @Override
         public Dialog onCreateDialog(final Bundle savedInstanceState) {
+            String basketName = list.get(getArguments().getInt("position")).getBasket().getName();
             return new AlertDialog.Builder(getActivity())
                     .setTitle("Deletion Confirmation")
-                    .setMessage("Delete this basket permanently?")
+                    .setMessage("Delete \""+basketName+"\" permanently?")
                     .setIcon(android.R.drawable.ic_menu_delete)
                     .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                         @Override
@@ -211,22 +217,22 @@ public class BasketsListFragment extends Fragment {
                             Log.i("FragmentAlertDialog", "Negative click!"+getArguments().getInt("position"));
                         }
                     })
-                    .setPositiveButton(android.R.string.yes,  new DialogInterface.OnClickListener() {
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             // do something
                             BasketDto clickedBasket = list.get(getArguments().getInt("position"));
                             List<LinkDto> clickedLinks = clickedBasket.getLinks();
-                            for (LinkDto link : clickedLinks){
-                                if (link.getMethod().equals("DELETE")){
+                            for (LinkDto link : clickedLinks) {
+                                if (link.getMethod().equals("DELETE")) {
                                     (new BasketDeleteRequestTask())
-                                            .execute(getString(R.string.awsLink)+link.getHref(),String.valueOf(getArguments().getInt("position")));
+                                            .execute(getString(R.string.awsLink) + link.getHref(), String.valueOf(getArguments().getInt("position")));
                                     break;
                                 }
                             }
 //                            list.remove(getArguments().getInt("position"));
 //                            mAdapter.notifyDataSetChanged();
-                            Log.i("FragmentAlertDialog", "Positive click! "+getArguments().getInt("position"));
+                            Log.i("FragmentAlertDialog", "Positive click! " + getArguments().getInt("position"));
                         }
                     })
                     .create();
@@ -306,12 +312,14 @@ public class BasketsListFragment extends Fragment {
         @Override
         protected void onPostExecute(BasketDto[] baskets) {
             if (baskets != null && responseCode == HttpStatus.OK) {
-                TextView tv = (TextView) rootView.findViewById(R.id.emptyTxt);
-                tv.setVisibility(View.INVISIBLE);
-                //TODO: Clearing the list is not right look for a better solution. Shouldn't it be list.addAll or list.clear ?
-                mAdapter.clear();
-                mAdapter.addAll(baskets);
-                mAdapter.notifyDataSetChanged();
+                if (baskets.length!=0) {
+                    TextView tv = (TextView) rootView.findViewById(R.id.emptyTxt);
+                    tv.setVisibility(View.INVISIBLE);
+                    //TODO: Clearing the list is not right look for a better solution. Shouldn't it be list.addAll or list.clear ?
+                    mAdapter.clear();
+                    mAdapter.addAll(baskets);
+                    mAdapter.notifyDataSetChanged();
+                }
             }
         }
     }
@@ -384,6 +392,11 @@ public class BasketsListFragment extends Fragment {
             if (responseCode == HttpStatus.OK) {
                 list.remove(position);
                 mAdapter.notifyDataSetChanged();
+                if (list.size()==0){
+                    TextView tv = (TextView) rootView.findViewById(R.id.emptyTxt);
+                    tv.setVisibility(View.VISIBLE);
+                }
+
             }
         }
     }

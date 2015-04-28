@@ -100,7 +100,7 @@ public class AisleItemsFragment extends Fragment {
         if (!mNfcAdapter.isEnabled()) {
             mTextView.setText("NFC is disabled.");
         } else {
-            mTextView.setText(R.string.message);
+            mTextView.setVisibility(View.INVISIBLE);//Text(R.string.message);
         }
 
 

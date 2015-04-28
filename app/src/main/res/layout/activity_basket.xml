@@ -4,6 +4,18 @@
     android:background="@drawable/lightwood_background"
     tools:context="com.cmpe295.grabz.activity.BasketActivity">
 
+    <TextView
+        android:id="@+id/listEmptyTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/listEmpty"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/basket_list_background"
+        android:textColor="#fff"
+        android:layout_margin="80dp"
+        />
     <ListView
         android:id="@+id/basketItemList"
         android:layout_width="fill_parent"

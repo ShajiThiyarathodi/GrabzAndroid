@@ -24,7 +24,8 @@
 
     <string name="hintTxtItem">New list name...</string>
     <string name="lblBtnAdd">Add</string>
-    <string name="txtEmpty">Shopping list is empty</string>
+    <string name="txtEmpty">No Shopping List has been created. Type a name and tap on + to begin</string>
+    <string name="listEmpty">Shopping list is empty. Tap on + icon to start adding items</string>
     <string name="rename">Rename</string>
     <string name="title_activity_item_detail">ItemDetail</string>
     <string name="awsLink">http://grabztestenv.elasticbeanstalk.com</string>

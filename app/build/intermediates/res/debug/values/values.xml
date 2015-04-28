@@ -22,6 +22,7 @@
     <string name="hintTxtItem">New list name...</string>
     <string name="item_name_header">Item Name</string>
     <string name="lblBtnAdd">Add</string>
+    <string name="listEmpty">Shopping list is empty. Tap on + icon to start adding items</string>
     <string name="message"/>
     <string name="price_header">Price</string>
     <string name="rename">Rename</string>
@@ -33,7 +34,7 @@
     <string name="title_activity_items_in_aisle">ItemsInAisleActivity</string>
     <string name="title_section1">Aisle Items</string>
     <string name="title_section2">My Lists</string>
-    <string name="txtEmpty">Shopping list is empty</string>
+    <string name="txtEmpty">No Shopping List has been created. Type a name and tap on + to begin</string>
     <!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppBaseTheme" parent="android:Theme.Light">

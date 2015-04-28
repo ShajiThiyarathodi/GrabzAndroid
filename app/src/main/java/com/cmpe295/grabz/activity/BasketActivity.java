@@ -61,6 +61,7 @@ public class BasketActivity extends Activity {
     static String putLink;
     static String delLink;
     static String HOST;
+    static private TextView emptyMsg;
 //    static Map<String,Boolean> basketItemIds = new HashMap<String, Boolean>();
 //    @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,10 +78,14 @@ public class BasketActivity extends Activity {
         HOST = getString(R.string.awsLink);
         (new BasketItemGetRequestTask()).execute(HOST+getLink);
         final ListView lv = (ListView) findViewById(R.id.basketItemList);
-        //TODO: New adaptor that has item, aisle#
         basketAdapter = new BasketItemAdapter(parentCtx,basketItems);
         lv.setAdapter(basketAdapter);
         lv.setOnItemClickListener(new ItemListItemClickListener());
+        emptyMsg = (TextView) findViewById(R.id.listEmptyTxt);
+        if (basketItems.size() == 0)
+            emptyMsg.setVisibility(View.VISIBLE);
+        else
+            emptyMsg.setVisibility(View.INVISIBLE);
         
 /*
         getActionBar().setHomeButtonEnabled(true);
@@ -108,6 +113,9 @@ public class BasketActivity extends Activity {
                 new AddItemDiolog().show(getFragmentManager(), "Tag");
                 return true;
             case R.id.action_settings:
+                return true;
+            case android.R.id.home:
+                this.finish();
                 return true;
             default:
                 super.onOptionsItemSelected(item);
@@ -200,10 +208,11 @@ public class BasketActivity extends Activity {
     }
     private static class SearchItemGetRequestTask extends AsyncTask<String, Void, ItemDto[]> {
         HttpStatus responseCode;
-
+        long start,end;
         @Override
         protected ItemDto[] doInBackground(String... params) {
             try {
+                start = System.currentTimeMillis();
                 final String url = params[0];
                 Log.d("URI Search",url);
                 // Set the Accept header
@@ -226,6 +235,8 @@ public class BasketActivity extends Activity {
         @Override
         protected void onPostExecute(ItemDto[] items) {
             searchAdapter.clear();
+            end = System.currentTimeMillis();
+            Log.d("Time to Search", end-start+" ms");
             if (items.length != 0 && responseCode == HttpStatus.OK) {
                 searchAdapter.addAll(items);
             }
@@ -237,9 +248,12 @@ public class BasketActivity extends Activity {
         int position;
         String itemId;
         HttpStatus responseCode;
+        long start,end;
+
         @Override
         protected String doInBackground(String... params) {
             try {
+                start = System.currentTimeMillis();
                 String url= params[0];
                 position = Integer.parseInt(params[1]);
                 itemId = params[2];
@@ -270,40 +284,10 @@ public class BasketActivity extends Activity {
             return null;
         }
 
-/*        @Override
-        protected void onPostExecute(String dummy) {
-            if (responseCode == HttpStatus.OK) {
-                ItemDto desirableItem = searchedItems.get(position);
-                BasketItemDetailDto newBasketItem = new BasketItemDetailDto();
-                newBasketItem.setLinks(desirableItem.getLinks());
-                newBasketItem.setBasketItemDetail(new BasketItemDetail(
-                        desirableItem.getItem().getItemId(),desirableItem.getItem().getName(),
-                        false,"?"));
-                if (!basketItemIds.containsKey(desirableItem.getItem().getItemId())) {
-                    basketItems.add(newBasketItem);
-                    basketAdapter.notifyDataSetChanged();
-                    basketItemIds.put(desirableItem.getItem().getItemId(),true);
-                    Toast.makeText(parentCtx,
-                            "Item Added", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    if (basketItemIds.get(desirableItem.getItem().getItemId()) == false)
-                    {
-                        basketItems.add(newBasketItem);
-                        basketAdapter.notifyDataSetChanged();
-                        basketItemIds.put(desirableItem.getItem().getItemId(),true);
-                        Toast.makeText(parentCtx,
-                                "Item Added", Toast.LENGTH_SHORT).show();
-                    }
-                    else
-                    Toast.makeText(parentCtx,
-                            "Item's been already added", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        }*/
         @Override
         protected void onPostExecute(String dummy) {
+            end = System.currentTimeMillis();
+            Log.d("Time to Add Item", end-start+" ms");
             if (responseCode == HttpStatus.OK) {
                 ItemDto desirableItem = searchedItems.get(position);
                 BasketItemDetailDto newBasketItem = new BasketItemDetailDto();
@@ -313,6 +297,7 @@ public class BasketActivity extends Activity {
                         false,"?"));
                 basketItems.add(newBasketItem);
                 basketAdapter.notifyDataSetChanged();
+                emptyMsg.setVisibility(View.INVISIBLE);
                 Toast.makeText(parentCtx,
                         "Item Added", Toast.LENGTH_SHORT).show();
             }
@@ -383,10 +368,12 @@ public class BasketActivity extends Activity {
 
     private static class BasketItemGetRequestTask extends AsyncTask<String, Void, BasketItemDetailDto[]> {
         HttpStatus responseCode;
+        long start,end;
 
         @Override
         protected BasketItemDetailDto[] doInBackground(String... params) {
             try {
+                start = System.currentTimeMillis();
                 final String url = params[0];
                 // Set the Accept header
                 HttpHeaders requestHeaders = new HttpHeaders();
@@ -407,11 +394,16 @@ public class BasketActivity extends Activity {
         }
         @Override
         protected void onPostExecute(BasketItemDetailDto[] items) {
+            end = System.currentTimeMillis();
+            Log.d("Time to Get B-Items", end-start+" ms");
             basketAdapter.clear();
-            if (items.length != 0 && responseCode == HttpStatus.OK) {
-                basketAdapter.addAll(items);
+            if (items != null && responseCode == HttpStatus.OK) {
+                if (items.length != 0) {
+                    basketAdapter.addAll(items);
+                    basketAdapter.notifyDataSetChanged();
+                    emptyMsg.setVisibility(View.INVISIBLE);
+                }
             }
-            basketAdapter.notifyDataSetChanged();
         }
     }
 
@@ -419,9 +411,12 @@ public class BasketActivity extends Activity {
         int position;
         String itemId;
         HttpStatus responseCode;
+        long start,end;
+
         @Override
         protected String doInBackground(String... params) {
             try {
+                start = System.currentTimeMillis();
                 String url= params[0];
                 position = Integer.parseInt(params[1]);
                 itemId = params[2];
@@ -449,10 +444,15 @@ public class BasketActivity extends Activity {
 
         @Override
         protected void onPostExecute(String dummy) {
+            end = System.currentTimeMillis();
+            Log.d("Time to DeleteItem", end-start+" ms");
             if (responseCode == HttpStatus.OK) {
 //                basketItemIds.put(basketItems.get(position).getBasketItemDetail().getItemId(),false);
                 basketItems.remove(position);
                 basketAdapter.notifyDataSetChanged();
+                if (basketItems.size()==0){
+                    emptyMsg.setVisibility(View.VISIBLE);
+                }
             }
         }
     }
@@ -461,9 +461,12 @@ public class BasketActivity extends Activity {
         int position;
         String itemId;
         HttpStatus responseCode;
+        long start,end;
+
         @Override
         protected String doInBackground(String... params) {
             try {
+                start = System.currentTimeMillis();
                 String url= params[0];
                 position = Integer.parseInt(params[1]);
                 itemId = params[2];
@@ -491,6 +494,8 @@ public class BasketActivity extends Activity {
 
         @Override
         protected void onPostExecute(String dummy) {
+            end = System.currentTimeMillis();
+            Log.d("Time to CheckItem", end-start+" ms");
             if (responseCode != HttpStatus.OK) {
                 Log.e("Check  FAILED","Inside check item. Failed to check"+ basketItems.get(position).getBasketItemDetail().getName());
             }
@@ -500,9 +505,12 @@ public class BasketActivity extends Activity {
         int position;
         String itemId;
         HttpStatus responseCode;
+        long start,end;
+
         @Override
         protected String doInBackground(String... params) {
             try {
+                start = System.currentTimeMillis();
                 String url= params[0];
                 position = Integer.parseInt(params[1]);
                 itemId = params[2];
@@ -530,6 +538,8 @@ public class BasketActivity extends Activity {
 
         @Override
         protected void onPostExecute(String dummy) {
+            end = System.currentTimeMillis();
+            Log.d("Time to UnCheckItem", end-start+" ms");
             if (responseCode != HttpStatus.OK) {
                 Log.e("Uncheck  FAILED","Inside check item. Failed to uncheck"+ basketItems.get(position).getBasketItemDetail().getName());
             }

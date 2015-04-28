@@ -43,12 +43,12 @@
             android:id="@+id/textView_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tap_and_go_image"
-            android:layout_alignRight="@+id/tap_and_go_image"
-            android:layout_below="@+id/tap_and_go_image"
+            android:layout_below="@id/tap_and_go_image"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="35dp"
             android:text="@string/message"
+            android:background="@drawable/basket_list_background"
+            android:textColor="#fff"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
 

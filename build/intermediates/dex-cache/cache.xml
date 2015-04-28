@@ -23,18 +23,18 @@
         <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\spring-android-rest-template-1.0.1.RELEASE-4000ee5a580c935dc6f52dec3cbb151d10b2a8d2.jar" />
     </item>
     <item
-        jar="C:\Users\Sina\.gradle\caches\modules-2\files-2.1\org.springframework.android\spring-android-core\1.0.1.RELEASE\e68f0e8e4b636ee30c4de58953be38d9b72a5e3b\spring-android-core-1.0.1.RELEASE.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="e68f0e8e4b636ee30c4de58953be38d9b72a5e3b">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\spring-android-core-1.0.1.RELEASE-b1eeaa7bf914e937a8431569fb5249651e7a4aab.jar" />
-    </item>
-    <item
         jar="C:\Users\Sina\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-annotations\2.3.0\f5e853a20b60758922453d56f9ae1e64af5cb3da\jackson-annotations-2.3.0.jar"
         jumboMode="false"
         revision="22.0.0"
         sha1="f5e853a20b60758922453d56f9ae1e64af5cb3da">
         <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\jackson-annotations-2.3.0-23b4d01bce5478751b4da1f9fc1ff79800d3abea.jar" />
+    </item>
+    <item
+        jar="C:\Users\Sina\.gradle\caches\modules-2\files-2.1\org.springframework.android\spring-android-core\1.0.1.RELEASE\e68f0e8e4b636ee30c4de58953be38d9b72a5e3b\spring-android-core-1.0.1.RELEASE.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="e68f0e8e4b636ee30c4de58953be38d9b72a5e3b">
+        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\spring-android-core-1.0.1.RELEASE-b1eeaa7bf914e937a8431569fb5249651e7a4aab.jar" />
     </item>
     <item
         jar="C:\Workspace\cmpe295\GrabzAndroid\app\libs\TestJar.jar"
