@@ -3,6 +3,7 @@ package com.cmpe295.grabz.fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
@@ -51,12 +52,13 @@ public class AisleItemsFragment extends Fragment {
     public static final String TAG_ID = "Tag_Id";
     public static final String ITEM_ID = "Item_Id";
     public static final String SOURCE = "source";
+    public static final String GRABZPREFERENCES = "TAG_ID";
 
     private TextView mTextView;
     private NfcAdapter mNfcAdapter;
     private RelativeLayout relativeLayout;
     ListView lv;
-    private String tagId;
+    private SharedPreferences sharedPreferences;
 
     List<AisleItemDto> aisleItemList = new ArrayList<AisleItemDto>();
     ArrayAdapter aisleItemAdapter;
@@ -120,7 +122,7 @@ public class AisleItemsFragment extends Fragment {
                 Intent intent = new Intent(getActivity().getApplicationContext(),
                         ItemDetailActivity.class);
 
-                intent.putExtra(TAG_ID, tagId);
+                intent.putExtra(TAG_ID, sharedPreferences.getString(TAG_ID,""));
                 intent.putExtra(ITEM_ID, ((AisleItemDto) lv.getItemAtPosition(position)).getAisleItem().getItemId());
                 intent.putExtra(SOURCE, "aisleItem");
                 startActivity(intent);
@@ -208,9 +210,12 @@ public class AisleItemsFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             if (result != null) {
-                Log.d(LOG_PREFIX, "Tag content is: " + result);
-                tagId = result;
-                String url = getString(R.string.awsLink)+"/tags/"+tagId+"/items/";
+                sharedPreferences = getActivity().getSharedPreferences(GRABZPREFERENCES, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString(TAG_ID, result);
+                editor.commit();
+
+                String url = getString(R.string.awsLink)+"/tags/"+result+"/items/";
                 Log.e(LOG_PREFIX, "Url is : "+url);
 
                 (new AsyncListViewLoader())

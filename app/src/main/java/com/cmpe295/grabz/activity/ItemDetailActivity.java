@@ -3,6 +3,7 @@ package com.cmpe295.grabz.activity;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -39,6 +40,7 @@ public class ItemDetailActivity extends Activity {
     private TextView colorView;
     private TextView priceView;
     private ImageLoader imageLoader;
+    private TextView promoPriceView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,7 @@ public class ItemDetailActivity extends Activity {
         categoryView = (TextView)findViewById(R.id.category);
         colorView = (TextView)findViewById(R.id.color);
         sizeView = (TextView)findViewById(R.id.size);
+        promoPriceView = (TextView)findViewById(R.id.promoPriceDetail);
         if (source.equals("aisleItem")) {
             String tagId = bundle.getString(AisleItemsFragment.TAG_ID);
             String url = getString(R.string.awsLink) + "/tags/" + tagId + "/items/" + itemId;
@@ -125,8 +128,12 @@ public class ItemDetailActivity extends Activity {
                 categoryView.setText(storeItem.getStoreItem().getItem().getCategory());
                 colorView.setText(storeItem.getStoreItem().getItem().getColor());
                 sizeView.setText(storeItem.getStoreItem().getItem().getSize());
-                priceView.setText(String.valueOf(storeItem.getStoreItem().getPrice()));
-
+                priceView.setText('$'+String.valueOf(storeItem.getStoreItem().getPrice()));
+                if (storeItem.getStoreItem().isOnPromotion()) {
+                    priceView.setPaintFlags(priceView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                    promoPriceView.setText('$'+String.valueOf(storeItem.getStoreItem().getPromotionalPrice()));
+                    //((ViewManager)priceView.getParent()).addView(promoPriceView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT))
+                }
                 imageLoader = ImageLoader.getInstance();
                 imageLoader.displayImage(storeItem.getStoreItem().getItem().getImageUrl(),imageView);
             }

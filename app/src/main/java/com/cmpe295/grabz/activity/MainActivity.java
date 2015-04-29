@@ -16,7 +16,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.cmpe295.grabz.R;
+import com.cmpe295.grabz.fragment.AboutUsFragment;
 import com.cmpe295.grabz.fragment.HomeTabbedFragment;
+import com.cmpe295.grabz.fragment.PromotionsFragment;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -152,28 +154,28 @@ public class MainActivity extends FragmentActivity {
 	private void selectItem(int position) {
 		Fragment fragment = null;
 
-		switch (position) {
+        switch (position) {
 
-		case 0:
-			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, HomeTabbedFragment.newInstance(), HomeTabbedFragment.CLASS_NAME).commit();
-			break;
+            case 0:
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, HomeTabbedFragment.newInstance(), HomeTabbedFragment.CLASS_NAME).commit();
+                break;
 
-		case 1:
-			// fragment = new PromotionsFragment();
-			// TODO replace with proper fragments
-			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, HomeTabbedFragment.newInstance(), HomeTabbedFragment.CLASS_NAME).commit();
-			break;
+            case 1:
+                // fragment = new PromotionsFragment();
+                // TODO replace with proper fragments
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, PromotionsFragment.newInstance(), PromotionsFragment.CLASS_NAME).commit();
+                break;
 
-		case 2:
-			// fragment = new ContactFragment();
-			// TODO replace with proper fragments
-			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, HomeTabbedFragment.newInstance(), HomeTabbedFragment.CLASS_NAME).commit();
-			break;
+            case 2:
+                // fragment = new ContactFragment();
+                // TODO replace with proper fragments
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, AboutUsFragment.newInstance(), AboutUsFragment.CLASS_NAME).commit();
+                break;
 
-		default:
-			Log.d("MainActivity", "Defaulting to home fragment");
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, HomeTabbedFragment.newInstance(), HomeTabbedFragment.CLASS_NAME).commit();
-            break;
+            default:
+                Log.d("MainActivity", "Defaulting to home fragment");
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, HomeTabbedFragment.newInstance(), HomeTabbedFragment.CLASS_NAME).commit();
+                break;
 
 
         }

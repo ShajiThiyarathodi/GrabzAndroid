@@ -36,6 +36,8 @@
         android:textColor="#000"
         android:gravity="left"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:paddingLeft="10dp"/>
+        android:paddingLeft="10dp"
+        android:textIsSelectable="false" />
+
 
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.cmpe295.grabz.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,8 +66,19 @@ public class AisleItemAdapter extends ArrayAdapter<AisleItemDto>  {
 
         AisleItemDto aisleItem = itemList.get(position);
 		holder.itemNameView.setText(aisleItem.getAisleItem().getName());
-        String price = '$'+ String.valueOf(aisleItem.getAisleItem().getPrice());
-		holder.priceView.setText(price);
+        String price = null;
+
+        if (aisleItem.getAisleItem().isOnPromotion()) {
+           price = '$'+ String.valueOf(aisleItem.getAisleItem().getPromotionalPrice()) + " save!";
+           holder.priceView.setText(price);
+           holder.priceView.setTextColor(Color.RED);
+           holder.priceView.setTextSize(12);
+
+        }else {
+           price = '$'+ String.valueOf(aisleItem.getAisleItem().getPrice());
+           holder.priceView.setText(price);
+        }
+
         String imageUrl = aisleItem.getAisleItem().getImageUrl();
         imageLoader = ImageLoader.getInstance();
 

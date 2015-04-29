@@ -36,6 +36,8 @@
         android:textColor="#000"
         android:gravity="left"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:paddingLeft="10dp"/>
+        android:paddingLeft="10dp"
+        android:textIsSelectable="false" />
 
-</LinearLayout><!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/src/main/res/layout/item_row_layout.xml -->
+
+</LinearLayout><!-- From: file:/Users/shajithiyarathodi/project/2/GrabzAndroid/app/src/main/res/layout/item_row_layout.xml -->

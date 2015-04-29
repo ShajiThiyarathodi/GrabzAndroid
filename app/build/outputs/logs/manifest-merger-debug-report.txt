@@ -1,8 +1,6 @@
 -- Merging decision tree log ---
 manifest
 ADDED from AndroidManifest.xml:2:1
-	xmlns:android
-		ADDED from AndroidManifest.xml:2:11
 	package
 		ADDED from AndroidManifest.xml:3:5
 		INJECTED from AndroidManifest.xml:0:0
@@ -13,6 +11,8 @@ ADDED from AndroidManifest.xml:2:1
 		ADDED from AndroidManifest.xml:4:5
 		INJECTED from AndroidManifest.xml:0:0
 		INJECTED from AndroidManifest.xml:0:0
+	xmlns:android
+		ADDED from AndroidManifest.xml:2:11
 uses-sdk
 ADDED from AndroidManifest.xml:7:5
 MERGED from com.android.support:support-v4:22.0.0:20:5
@@ -69,41 +69,43 @@ activity#com.cmpe295.grabz.activity.MainActivity
 ADDED from AndroidManifest.xml:31:9
 	android:label
 		ADDED from AndroidManifest.xml:33:13
+	android:launchMode
+		ADDED from AndroidManifest.xml:34:13
 	android:name
 		ADDED from AndroidManifest.xml:32:13
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:34:13
+ADDED from AndroidManifest.xml:35:13
 action#android.intent.action.MAIN
-ADDED from AndroidManifest.xml:35:17
+ADDED from AndroidManifest.xml:36:17
 	android:name
-		ADDED from AndroidManifest.xml:35:25
+		ADDED from AndroidManifest.xml:36:25
 category#android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:37:17
+ADDED from AndroidManifest.xml:38:17
 	android:name
-		ADDED from AndroidManifest.xml:37:27
+		ADDED from AndroidManifest.xml:38:27
 intent-filter#android.intent.category.DEFAULT+android.nfc.action.NDEF_DISCOVERED
-ADDED from AndroidManifest.xml:39:13
+ADDED from AndroidManifest.xml:40:13
 action#android.nfc.action.NDEF_DISCOVERED
-ADDED from AndroidManifest.xml:40:17
+ADDED from AndroidManifest.xml:41:17
 	android:name
-		ADDED from AndroidManifest.xml:40:25
+		ADDED from AndroidManifest.xml:41:25
 category#android.intent.category.DEFAULT
-ADDED from AndroidManifest.xml:42:17
+ADDED from AndroidManifest.xml:43:17
 	android:name
-		ADDED from AndroidManifest.xml:42:27
+		ADDED from AndroidManifest.xml:43:27
 data
-ADDED from AndroidManifest.xml:44:17
+ADDED from AndroidManifest.xml:45:17
 	android:mimeType
-		ADDED from AndroidManifest.xml:44:23
+		ADDED from AndroidManifest.xml:45:23
 activity#com.cmpe295.grabz.activity.ItemDetailActivity
-ADDED from AndroidManifest.xml:48:9
+ADDED from AndroidManifest.xml:49:9
 	android:label
+		ADDED from AndroidManifest.xml:51:13
+	android:name
 		ADDED from AndroidManifest.xml:50:13
-	android:name
-		ADDED from AndroidManifest.xml:49:13
 activity#com.cmpe295.grabz.activity.BasketActivity
-ADDED from AndroidManifest.xml:52:9
+ADDED from AndroidManifest.xml:53:9
 	android:label
-		ADDED from AndroidManifest.xml:54:13
+		ADDED from AndroidManifest.xml:55:13
 	android:name
-		ADDED from AndroidManifest.xml:53:13
+		ADDED from AndroidManifest.xml:54:13

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#ccffffff"
+    android:padding="2dp"
+    android:layout_marginBottom="5dp">
+
+    <ImageView
+        android:id="@+id/promoThumbImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/promoItemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/originalPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black" />
+    <!--        android:layout_marginTop="2dp"-->
+
+    <TextView
+        android:id="@+id/promoPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textColor="#ffff3711"
+        android:textStyle="bold" />
+
+
+</LinearLayout>
+
+<!-- From: file:/Users/shajithiyarathodi/project/2/GrabzAndroid/app/src/main/res/layout/promotions_row_layout.xml -->
