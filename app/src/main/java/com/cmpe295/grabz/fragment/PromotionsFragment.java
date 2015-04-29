@@ -2,6 +2,7 @@ package com.cmpe295.grabz.fragment;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,11 +10,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 
 import com.cmpe295.grabz.Dto.AisleItemDto;
 import com.cmpe295.grabz.R;
+import com.cmpe295.grabz.activity.ItemDetailActivity;
 import com.cmpe295.grabz.adapter.PromotionsAdapter;
 
 import org.springframework.http.HttpEntity;
@@ -31,7 +34,7 @@ import java.util.List;
 
 
 public class PromotionsFragment extends Fragment {
-    public static final String PROMOTIONSTITLE = "Deal of the day!";
+    public static final String PROMOTIONSTITLE = "Deals of the day!";
     public static final String LOG_PREFIX = "PromotionsFragment";
     public static final String CLASS_NAME = PromotionsFragment.class.getSimpleName();
 
@@ -77,7 +80,21 @@ public class PromotionsFragment extends Fragment {
         promotionsAdapter = new PromotionsAdapter(parentCtx, aisleItemList);
 
         gridView.setAdapter(promotionsAdapter);
-        String tagId = getActivity().getSharedPreferences(AisleItemsFragment.GRABZPREFERENCES, Context.MODE_PRIVATE).getString(AisleItemsFragment.TAG_ID,"");
+        final String tagId = getActivity().getSharedPreferences(AisleItemsFragment.GRABZPREFERENCES, Context.MODE_PRIVATE).getString(AisleItemsFragment.TAG_ID,"");
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> parentAdapter, View view,
+                                    int position, long id) {
+                Intent intent = new Intent(getActivity().getApplicationContext(),
+                        ItemDetailActivity.class);
+
+                intent.putExtra(AisleItemsFragment.TAG_ID, tagId);
+                intent.putExtra(AisleItemsFragment.ITEM_ID, ((AisleItemDto) gridView.getItemAtPosition(position)).getAisleItem().getItemId());
+                intent.putExtra(AisleItemsFragment.SOURCE, "promotions");
+                startActivity(intent);
+            }
+        });
+
 
         String url = getString(R.string.awsLink)+"/tags/"+tagId+"/promotions/items/";
 
@@ -87,21 +104,6 @@ public class PromotionsFragment extends Fragment {
         // Inflate the layout for this fragment
         return rootView;
     }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    /*public interface OnFragmentInteractionListener {
-
-        public void onFragmentInteraction(Uri uri);
-    }*/
 
     private class AsyncPromoListLoader extends
             AsyncTask<String, Void, AisleItemDto[]> {

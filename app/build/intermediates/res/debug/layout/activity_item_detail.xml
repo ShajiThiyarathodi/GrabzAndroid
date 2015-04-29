@@ -163,9 +163,6 @@
             android:layout_below="@id/priceDetail"
             android:layout_marginLeft="4dp"
             android:layout_marginBottom="4dp" />
-
-
     </RelativeLayout>
-
 
 </ScrollView><!-- From: file:/Users/shajithiyarathodi/project/2/GrabzAndroid/app/src/main/res/layout/activity_item_detail.xml -->

@@ -51,7 +51,6 @@
             android:textColor="#fff"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-
     </RelativeLayout>
 
     <ListView

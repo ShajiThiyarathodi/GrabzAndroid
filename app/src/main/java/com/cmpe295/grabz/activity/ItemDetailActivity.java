@@ -61,7 +61,7 @@ public class ItemDetailActivity extends Activity {
         colorView = (TextView)findViewById(R.id.color);
         sizeView = (TextView)findViewById(R.id.size);
         promoPriceView = (TextView)findViewById(R.id.promoPriceDetail);
-        if (source.equals("aisleItem")) {
+        if (source.equals("aisleItem") || source.equals("promotions")) {
             String tagId = bundle.getString(AisleItemsFragment.TAG_ID);
             String url = getString(R.string.awsLink) + "/tags/" + tagId + "/items/" + itemId;
             (new AsyncItemDetailsLoader()).execute(url);

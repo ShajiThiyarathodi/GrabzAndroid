@@ -48,7 +48,7 @@ public class PromotionsAdapter extends ArrayAdapter<AisleItemDto> {
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = inflater.inflate(R.layout.promotions_row_layout, parent, false);
 
-            //TODO decide whether to show item name or not
+
             TextView itemNameListV = (TextView) v.findViewById(R.id.promoItemName);
             TextView priceListV = (TextView) v
                     .findViewById(R.id.originalPrice);
@@ -57,7 +57,7 @@ public class PromotionsAdapter extends ArrayAdapter<AisleItemDto> {
                     .findViewById(R.id.promoPrice);
             ImageView imageListV = (ImageView) v
                     .findViewById(R.id.promoThumbImage);
-            //TODO decide whether to show item name or not
+
             holder.itemNameView = itemNameListV;
             holder.priceView = priceListV;
             holder.imageView = imageListV;

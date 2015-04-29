@@ -69,7 +69,7 @@ public class AisleItemAdapter extends ArrayAdapter<AisleItemDto>  {
         String price = null;
 
         if (aisleItem.getAisleItem().isOnPromotion()) {
-           price = '$'+ String.valueOf(aisleItem.getAisleItem().getPromotionalPrice()) + " save!";
+           price = '$'+ String.valueOf(aisleItem.getAisleItem().getPromotionalPrice()) + " promo!";
            holder.priceView.setText(price);
            holder.priceView.setTextColor(Color.RED);
            holder.priceView.setTextSize(12);
