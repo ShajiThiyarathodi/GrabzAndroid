@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
@@ -152,7 +151,6 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	private void selectItem(int position) {
-		Fragment fragment = null;
 
         switch (position) {
 
@@ -161,15 +159,15 @@ public class MainActivity extends FragmentActivity {
                 break;
 
             case 1:
-                // fragment = new PromotionsFragment();
-                // TODO replace with proper fragments
+
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, PromotionsFragment.newInstance(), PromotionsFragment.CLASS_NAME).commit();
                 break;
 
             case 2:
-                // fragment = new ContactFragment();
-                // TODO replace with proper fragments
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, AboutUsFragment.newInstance(), AboutUsFragment.CLASS_NAME).commit();
+
+                AboutUsFragment fragment = new AboutUsFragment();
+                fragment.show(getSupportFragmentManager(), "About us");
+                //getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, AboutUsFragment.newInstance(), AboutUsFragment.CLASS_NAME).commit();
                 break;
 
             default:

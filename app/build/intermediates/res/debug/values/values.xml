@@ -5,7 +5,7 @@
     <string-array name="left_navigation_array">
         <item>Home</item>
         <item>Promotions</item>
-        <item>Contact Us</item>
+        <item>About Us</item>
     </string-array>
     <!-- From: file:/Users/shajithiyarathodi/project/2/GrabzAndroid/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
@@ -13,12 +13,13 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <!-- From: file:/Users/shajithiyarathodi/project/2/GrabzAndroid/app/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string name="about_us">Grabz is an android application created as a part of CMPE 295B project.\n\nAuthors are \n\t\tAmit Dikkar,\n\t\tPriyanka Deo,\n\t\tSina Nikkhah and\n\t\tShaji Thiyarathodi\n
+    </string>
     <string name="action_settings">Settings</string>
     <string name="app_name">Grabz</string>
     <string name="awsLink">http://grabztestenv.elasticbeanstalk.com</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="drawer_open">Open navigation drawer</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hintTxtItem">New list name...</string>
     <string name="item_name_header">Item Name</string>
     <string name="lblBtnAdd">Add</string>

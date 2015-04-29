@@ -118,12 +118,12 @@ public final class R {
         public static final int menu_item_detail=0x7f080004;
     }
     public static final class string {
-        public static final int action_settings=0x7f060000;
-        public static final int app_name=0x7f060001;
-        public static final int awsLink=0x7f060002;
-        public static final int drawer_close=0x7f060003;
-        public static final int drawer_open=0x7f060004;
-        public static final int hello_blank_fragment=0x7f060005;
+        public static final int about_us=0x7f060000;
+        public static final int action_settings=0x7f060001;
+        public static final int app_name=0x7f060002;
+        public static final int awsLink=0x7f060003;
+        public static final int drawer_close=0x7f060004;
+        public static final int drawer_open=0x7f060005;
         public static final int hintTxtItem=0x7f060006;
         public static final int item_name_header=0x7f060007;
         public static final int lblBtnAdd=0x7f060008;

@@ -5,7 +5,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/aboutUs" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/aboutUs"
+        android:maxLines="9"
+        android:singleLine="false"
+        android:text="@string/about_us"
+        android:layout_marginBottom="5dp" />
+
+
+
 </LinearLayout>
 <!-- From: file:/Users/shajithiyarathodi/project/2/GrabzAndroid/app/src/main/res/layout/fragment_about_us.xml -->
