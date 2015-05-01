@@ -10,8 +10,7 @@
         android:maxLines="9"
         android:singleLine="false"
         android:text="@string/about_us"
-        android:layout_marginBottom="5dp" />
-
-
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp" />
 
 </LinearLayout>

@@ -68,7 +68,11 @@ public class PromotionsAdapter extends ArrayAdapter<AisleItemDto> {
             holder = (ItemHolder) v.getTag();
 
         AisleItemDto aisleItem = itemList.get(position);
-        holder.itemNameView.setText(aisleItem.getAisleItem().getName());
+        String name = aisleItem.getAisleItem().getName();
+        if(name.length() > 50){
+            name = name.substring(0,50)+"...";
+        }
+        holder.itemNameView.setText(name);
         String price = '$'+ String.valueOf(aisleItem.getAisleItem().getPrice());
         holder.priceView.setText(price);
         String newPrice = '$'+ String.valueOf(aisleItem.getAisleItem().getPromotionalPrice());

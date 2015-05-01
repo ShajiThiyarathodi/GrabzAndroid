@@ -6,6 +6,7 @@ import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 
 import com.cmpe295.grabz.R;
 
@@ -16,9 +17,17 @@ public class AboutUsFragment extends DialogFragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_about_us, container,
                 false);
+        getDialog().requestWindowFeature(Window.FEATURE_LEFT_ICON);
+
         getDialog().setTitle("About Us");
-        // Do something else
         return rootView;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState)
+    {
+        super.onActivityCreated(savedInstanceState);
+        getDialog().setFeatureDrawableResource(Window.FEATURE_LEFT_ICON, R.drawable.logo1);
     }
 }
 

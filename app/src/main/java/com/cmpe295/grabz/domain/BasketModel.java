@@ -10,6 +10,8 @@ public class BasketModel {
      * **/
     private String name;
 
+    boolean updateRequired = false;
+
     /**
      * List of itemIds this basket contains.
      * **/
@@ -32,6 +34,20 @@ public class BasketModel {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @return the updateRequired
+     */
+    public boolean getUpdateRequired() {
+        return updateRequired;
+    }
+
+    /**
+     * @param updateRequired the updateRequired to set
+     */
+    public void setUpdateRequired(boolean updateRequired) {
+        this.updateRequired = updateRequired;
     }
 
     /**

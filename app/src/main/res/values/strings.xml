@@ -32,6 +32,7 @@
     <string name="title_activity_basket">BasketActivity</string>
 
 
-    <string name="about_us">Grabz is an android application created as a part of CMPE 295B project.\n\nAuthors are \n\t\tAmit Dikkar,\n\t\tPriyanka Deo,\n\t\tSina Nikkhah and\n\t\tShaji Thiyarathodi\n
+    <string name="about_us">Our mission is to build better shopping experience for our customers.\n\n
+        <b><u>The team</u></b>\n\t\tAmit Dikkar\n\t\tPriyanka Deo\n\t\tSina Nikkhah\n\t\tShaji Thiyarathodi\n\n
     </string>
 </resources>
