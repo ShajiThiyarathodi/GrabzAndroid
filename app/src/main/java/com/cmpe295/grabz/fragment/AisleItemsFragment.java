@@ -12,6 +12,7 @@ import android.nfc.tech.Ndef;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,7 +54,9 @@ public class AisleItemsFragment extends Fragment {
     public static final String ITEM_ID = "Item_Id";
     public static final String SOURCE = "source";
     public static final String GRABZPREFERENCES = "TAG_ID";
+    private String deviceId;
 
+    private static Context parentCtx;
     private TextView mTextView;
     private NfcAdapter mNfcAdapter;
     private RelativeLayout relativeLayout;
@@ -86,8 +89,10 @@ public class AisleItemsFragment extends Fragment {
         getActivity().setTitle(AisleItemsTabTitle);
         mTextView = (TextView) rootView.findViewById(R.id.textView_message);
         relativeLayout = (RelativeLayout) rootView.findViewById(R.id.tap_view_group);
-        Context parentCtx = getActivity().getApplicationContext();
-
+        parentCtx = getActivity().getApplicationContext();
+        TelephonyManager telephonyManager = (TelephonyManager)this.
+                getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+        deviceId = telephonyManager.getDeviceId();
         //NFC Tap screen
         mNfcAdapter = NfcAdapter.getDefaultAdapter(parentCtx);
 
@@ -220,6 +225,8 @@ public class AisleItemsFragment extends Fragment {
 
                 (new AsyncListViewLoader())
                         .execute(url);
+                (new PopulateAilseNumbers())
+                        .execute(getString(R.string.awsLink)+"/tags/"+result+"/users/"+deviceId+"/baskets/updateAisleNumbers");
             } else {
                 Log.e(LOG_PREFIX, "Tag reading failed");
                 mTextView.setText("Could not read the tag.");
@@ -269,6 +276,45 @@ public class AisleItemsFragment extends Fragment {
                 Log.d(LOG_PREFIX, String.valueOf(items.length));
 
                 return items;
+            } catch (Throwable t) {
+                t.printStackTrace();
+            }
+            return null;
+        }
+
+    }
+
+    private class PopulateAilseNumbers extends
+            AsyncTask<String, Void, Void> {
+
+        HttpStatus responseCode;
+
+        @Override
+        protected void onPostExecute(Void result) {
+            if (responseCode != HttpStatus.OK) {
+                Toast.makeText(parentCtx,"Aisle numbers didn't get updated",Toast.LENGTH_SHORT).show();
+            }
+            else if (responseCode == HttpStatus.UNPROCESSABLE_ENTITY){
+                Toast.makeText(parentCtx,"Wrong tag id",Toast.LENGTH_SHORT).show();
+            }
+        }
+
+
+        @Override
+        protected Void doInBackground(String... params) {
+
+            try {
+                String url = params[0];
+                HttpHeaders requestHeaders = new HttpHeaders();
+                requestHeaders.setAccept(Collections.singletonList(new MediaType("application", "json")));
+                HttpEntity<?> requestEntity = new HttpEntity<Object>(requestHeaders);
+                RestTemplate restTemplate = new RestTemplate();
+                MappingJackson2HttpMessageConverter mapper = new MappingJackson2HttpMessageConverter();
+                restTemplate.getMessageConverters().add(mapper);
+                ResponseEntity<Void> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity, Void.class);
+                responseCode = responseEntity.getStatusCode();
+                Log.d("PopulateAilseNumbers","PUT call on "+url+" Response:"+responseCode);
+                return null;
             } catch (Throwable t) {
                 t.printStackTrace();
             }

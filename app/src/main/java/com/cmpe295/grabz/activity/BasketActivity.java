@@ -112,10 +112,11 @@ public class BasketActivity extends Activity {
             case R.id.addItem:
                 new AddItemDiolog().show(getFragmentManager(), "Tag");
                 return true;
-            case R.id.action_settings:
-                return true;
             case android.R.id.home:
                 this.finish();
+                return true;
+            case R.id.deleteAllItem:
+                (new DeleteAllItemRequestTask()).execute(HOST+putLink);
                 return true;
             default:
                 super.onOptionsItemSelected(item);
@@ -147,7 +148,7 @@ public class BasketActivity extends Activity {
                 }
                 @Override
                 public boolean onQueryTextChange(String newText) {
-                    if (newText.length() > 3){
+                    if (newText.length() > 1){
                         (new SearchItemGetRequestTask()).execute(HOST
                                 +"/items?searchText="+newText);
                         lv.setVisibility(view.VISIBLE);
@@ -557,6 +558,52 @@ public class BasketActivity extends Activity {
             intent.putExtra(AisleItemsFragment.SOURCE, "basketItem");
             startActivity(intent);
 
+        }
+    }
+
+    private static class DeleteAllItemRequestTask extends AsyncTask<String, Void, String> {
+        int position;
+        String itemId;
+        HttpStatus responseCode;
+        long start,end;
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                start = System.currentTimeMillis();
+                String url= params[0];
+                HttpHeaders requestHeaders = new HttpHeaders();
+                requestHeaders.setContentType(new MediaType("application","json"));
+                RestTemplate restTemplate = new RestTemplate();
+                MappingJackson2HttpMessageConverter mapper = new MappingJackson2HttpMessageConverter();
+                restTemplate.getMessageConverters().add(mapper);
+                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+                Map<String,String> bName = new HashMap<String, String>();
+                bName.put("action","remove_all_items");
+                HttpEntity<Map> requestEntity = new HttpEntity<Map>(bName,requestHeaders);
+                ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity,String.class);
+//                restTemplate.put(url,bName);
+                responseCode =  responseEntity.getStatusCode();
+                Log.d("Delete ALL Task on", url+" " + responseCode.toString() + " " + responseEntity.getBody());
+                return "";
+            } catch (Exception e) {
+                Log.e("DeleteItemRequestTask", e.getMessage(), e);
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String dummy) {
+            end = System.currentTimeMillis();
+            Log.d("Time to DeleteItem", end-start+" ms");
+            if (responseCode == HttpStatus.OK) {
+                Toast.makeText(parentCtx,"All items deleted successfully",Toast.LENGTH_SHORT);
+                basketItems.clear();
+                basketAdapter.notifyDataSetChanged();
+            }
+            else
+                Toast.makeText(parentCtx,"All items deletion failed!",Toast.LENGTH_SHORT);
         }
     }
 }

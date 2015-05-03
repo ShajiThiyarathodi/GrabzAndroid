@@ -85,7 +85,7 @@ public class BasketsListFragment extends Fragment {
         TextView emptyMsg = (TextView) rootView.findViewById(R.id.emptyTxt);
         parentCtx = getActivity().getApplicationContext();
         (new BasketListGetRequestTask())
-                .execute("http://grabztestenv.elasticbeanstalk.com/baskets?phoneId=353411068081191"+deviceId);
+                .execute("http://grabztestenv.elasticbeanstalk.com/baskets?phoneId="+deviceId);
         if (list.size() == 0)
             emptyMsg.setVisibility(View.VISIBLE);
         else

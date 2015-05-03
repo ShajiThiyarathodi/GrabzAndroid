@@ -52,7 +52,7 @@ public final class R {
         public static final int color=0x7f09000c;
         public static final int colorHeader=0x7f09000b;
         public static final int content_frame=0x7f090013;
-        public static final int deleteItem=0x7f090038;
+        public static final int deleteAllItem=0x7f090038;
         public static final int drawer_layout=0x7f090012;
         public static final int emptyTxt=0x7f09001f;
         public static final int imageDetail=0x7f090006;

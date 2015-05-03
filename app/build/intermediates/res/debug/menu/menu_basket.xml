@@ -1,14 +1,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" tools:context="com.cmpe295.grabz.activity.BasketActivity">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" android:showAsAction="never" />
     <item android:id="@+id/addItem"
         android:title="Add"
         android:icon="@android:drawable/ic_menu_add"
         android:showAsAction="always" />
-    <item android:id="@+id/deleteItem"
-        android:title="Delete"
-        android:icon="@android:drawable/ic_menu_delete"/>
+    <item android:id="@+id/deleteAllItem"
+        android:title="Delete All"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:showAsAction="never"/>
 
 </menu>
-<!-- From: file:/Users/shajithiyarathodi/project/2/GrabzAndroid/app/src/main/res/menu/menu_basket.xml -->
+<!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/src/main/res/menu/menu_basket.xml -->
