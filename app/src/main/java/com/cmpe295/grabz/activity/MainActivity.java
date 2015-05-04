@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -72,7 +71,7 @@ public class MainActivity extends FragmentActivity {
 
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        //Configuration for image loader library
+        // Configuration for image loader library
         initImageLoader(this);
 
 		if (savedInstanceState == null) {
@@ -97,7 +96,6 @@ public class MainActivity extends FragmentActivity {
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.main, menu);
 		return super.onCreateOptionsMenu(menu);
 
 	}
@@ -105,11 +103,6 @@ public class MainActivity extends FragmentActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (mDrawerToggle.onOptionsItemSelected(item)) {
-			return true;
-		}
-
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -136,8 +129,6 @@ public class MainActivity extends FragmentActivity {
 
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-		menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
 		return super.onPrepareOptionsMenu(menu);
 	}
 
@@ -167,11 +158,9 @@ public class MainActivity extends FragmentActivity {
 
                 AboutUsFragment fragment = new AboutUsFragment();
                 fragment.show(getSupportFragmentManager(), "About us");
-                //getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, AboutUsFragment.newInstance(), AboutUsFragment.CLASS_NAME).commit();
                 break;
 
             default:
-                Log.d("MainActivity", "Defaulting to home fragment");
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, HomeTabbedFragment.newInstance(), HomeTabbedFragment.CLASS_NAME).commit();
                 break;
 

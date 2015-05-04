@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 
 import com.cmpe295.grabz.Dto.AisleItemDto;
+import com.cmpe295.grabz.Dto.LinkDto;
 import com.cmpe295.grabz.R;
 import com.cmpe295.grabz.activity.ItemDetailActivity;
 import com.cmpe295.grabz.adapter.PromotionsAdapter;
@@ -30,6 +31,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -85,11 +87,19 @@ public class PromotionsFragment extends Fragment {
 
             public void onItemClick(AdapterView<?> parentAdapter, View view,
                                     int position, long id) {
+                String itemHref = null;
+                LinkDto link = null;
                 Intent intent = new Intent(getActivity().getApplicationContext(),
                         ItemDetailActivity.class);
-
-                intent.putExtra(AisleItemsFragment.TAG_ID, tagId);
-                intent.putExtra(AisleItemsFragment.ITEM_ID, ((AisleItemDto) gridView.getItemAtPosition(position)).getAisleItem().getItemId());
+                Iterator<LinkDto> iterator =  ((AisleItemDto)gridView.getItemAtPosition(position)).getLinks().iterator();
+                while(iterator.hasNext()){
+                    link = iterator.next();
+                    if(link.getRel().equals("view-item")){
+                        itemHref = link.getHref();
+                        break;
+                    }
+                }
+                intent.putExtra(AisleItemsFragment.ITEM_HREF, itemHref);
                 intent.putExtra(AisleItemsFragment.SOURCE, "promotions");
                 startActivity(intent);
             }

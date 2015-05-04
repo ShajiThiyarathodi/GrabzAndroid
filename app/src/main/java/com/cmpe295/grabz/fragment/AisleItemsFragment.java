@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cmpe295.grabz.Dto.AisleItemDto;
+import com.cmpe295.grabz.Dto.LinkDto;
 import com.cmpe295.grabz.activity.ItemDetailActivity;
 import com.cmpe295.grabz.R;
 import com.cmpe295.grabz.adapter.AisleItemAdapter;
@@ -43,6 +44,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 public class AisleItemsFragment extends Fragment {
@@ -51,7 +53,7 @@ public class AisleItemsFragment extends Fragment {
     public static final String MIME_TEXT_PLAIN = "text/plain";
     public static final String LOG_PREFIX = "AisleItemsFragment";
     public static final String TAG_ID = "Tag_Id";
-    public static final String ITEM_ID = "Item_Id";
+    public static final String ITEM_HREF = "Item_href";
     public static final String SOURCE = "source";
     public static final String GRABZPREFERENCES = "TAG_ID";
     private String deviceId;
@@ -90,7 +92,7 @@ public class AisleItemsFragment extends Fragment {
         mTextView = (TextView) rootView.findViewById(R.id.textView_message);
         relativeLayout = (RelativeLayout) rootView.findViewById(R.id.tap_view_group);
         parentCtx = getActivity().getApplicationContext();
-        TelephonyManager telephonyManager = (TelephonyManager)this.
+        TelephonyManager telephonyManager = (TelephonyManager) this.
                 getActivity().getSystemService(Context.TELEPHONY_SERVICE);
         deviceId = telephonyManager.getDeviceId();
         //NFC Tap screen
@@ -107,13 +109,12 @@ public class AisleItemsFragment extends Fragment {
         if (!mNfcAdapter.isEnabled()) {
             mTextView.setText("NFC is disabled.");
         } else {
-            mTextView.setVisibility(View.INVISIBLE);//Text(R.string.message);
+            mTextView.setVisibility(View.INVISIBLE);
         }
 
 
         //Aisle item list view, empty list now
         lv = (ListView) rootView.findViewById(R.id.aisleItemListView);
-
 
 
         aisleItemAdapter = new AisleItemAdapter(parentCtx, aisleItemList);
@@ -126,9 +127,21 @@ public class AisleItemsFragment extends Fragment {
                                     int position, long id) {
                 Intent intent = new Intent(getActivity().getApplicationContext(),
                         ItemDetailActivity.class);
+                String itemHref = null;
+                LinkDto link = null;
+                Iterator<LinkDto> iterator = ((AisleItemDto) lv.getItemAtPosition(position)).getLinks().iterator();
+                while (iterator.hasNext()) {
+                    link = iterator.next();
+                    if (link.getRel().equals("view-AisleItem")) {
+                        itemHref = link.getHref();
+                        break;
+                    }
+                }
+                // href is required to load item details
+                intent.putExtra(ITEM_HREF, itemHref);
+                //intent.putExtra(ITEM_ID, ((AisleItemDto) lv.getItemAtPosition(position)).getAisleItem().getItemId());
 
-                intent.putExtra(TAG_ID, sharedPreferences.getString(TAG_ID,""));
-                intent.putExtra(ITEM_ID, ((AisleItemDto) lv.getItemAtPosition(position)).getAisleItem().getItemId());
+                // source is used to detect if the user comes from aisle items screen or shopping list screen
                 intent.putExtra(SOURCE, "aisleItem");
                 startActivity(intent);
             }
@@ -220,13 +233,12 @@ public class AisleItemsFragment extends Fragment {
                 editor.putString(TAG_ID, result);
                 editor.commit();
 
-                String url = getString(R.string.awsLink)+"/tags/"+result+"/items/";
-                Log.e(LOG_PREFIX, "Url is : "+url);
+                String url = getString(R.string.awsLink) + "/tags/" + result + "/items/";
 
                 (new AsyncListViewLoader())
                         .execute(url);
                 (new PopulateAilseNumbers())
-                        .execute(getString(R.string.awsLink)+"/tags/"+result+"/users/"+deviceId+"/baskets/updateAisleNumbers");
+                        .execute(getString(R.string.awsLink) + "/tags/" + result + "/users/" + deviceId + "/baskets/updateAisleNumbers");
             } else {
                 Log.e(LOG_PREFIX, "Tag reading failed");
                 mTextView.setText("Could not read the tag.");
@@ -244,7 +256,6 @@ public class AisleItemsFragment extends Fragment {
         @Override
         protected void onPostExecute(AisleItemDto[] result) {
             if (responseCode == HttpStatus.OK && result != null) {
-                Log.d(LOG_PREFIX, "In Post Execute" + String.valueOf(result.length));
                 dialog.dismiss();
                 ((LinearLayout) relativeLayout.getParent()).removeView(relativeLayout);
                 aisleItemAdapter.addAll(result);
@@ -273,7 +284,6 @@ public class AisleItemsFragment extends Fragment {
                 ResponseEntity<AisleItemDto[]> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity, AisleItemDto[].class);
                 AisleItemDto[] items = responseEntity.getBody();
                 responseCode = responseEntity.getStatusCode();
-                Log.d(LOG_PREFIX, String.valueOf(items.length));
 
                 return items;
             } catch (Throwable t) {
@@ -292,10 +302,9 @@ public class AisleItemsFragment extends Fragment {
         @Override
         protected void onPostExecute(Void result) {
             if (responseCode != HttpStatus.OK) {
-                Toast.makeText(parentCtx,"Aisle numbers didn't get updated",Toast.LENGTH_SHORT).show();
-            }
-            else if (responseCode == HttpStatus.UNPROCESSABLE_ENTITY){
-                Toast.makeText(parentCtx,"Wrong tag id",Toast.LENGTH_SHORT).show();
+                Toast.makeText(parentCtx, "Aisle numbers didn't get updated", Toast.LENGTH_SHORT).show();
+            } else if (responseCode == HttpStatus.UNPROCESSABLE_ENTITY) {
+                Toast.makeText(parentCtx, "Wrong tag id", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -313,7 +322,6 @@ public class AisleItemsFragment extends Fragment {
                 restTemplate.getMessageConverters().add(mapper);
                 ResponseEntity<Void> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity, Void.class);
                 responseCode = responseEntity.getStatusCode();
-                Log.d("PopulateAilseNumbers","PUT call on "+url+" Response:"+responseCode);
                 return null;
             } catch (Throwable t) {
                 t.printStackTrace();

@@ -62,6 +62,7 @@ public class BasketActivity extends Activity {
     static String delLink;
     static String HOST;
     static private TextView emptyMsg;
+    public static final String ITEM_ID = "Item_Id";
 //    static Map<String,Boolean> basketItemIds = new HashMap<String, Boolean>();
 //    @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -554,7 +555,7 @@ public class BasketActivity extends Activity {
             Intent intent = new Intent(parentCtx,
                     ItemDetailActivity.class);
 
-            intent.putExtra(AisleItemsFragment.ITEM_ID, basketItems.get(position).getBasketItemDetail().getItemId());
+            intent.putExtra(ITEM_ID, basketItems.get(position).getBasketItemDetail().getItemId());
             intent.putExtra(AisleItemsFragment.SOURCE, "basketItem");
             startActivity(intent);
 

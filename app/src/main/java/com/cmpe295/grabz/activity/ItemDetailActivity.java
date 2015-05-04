@@ -50,7 +50,6 @@ public class ItemDetailActivity extends Activity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        String itemId = bundle.getString(AisleItemsFragment.ITEM_ID);
         String source = bundle.getString(AisleItemsFragment.SOURCE);
 
         itemNameView = (TextView)findViewById(R.id.itemNameDetail);
@@ -61,13 +60,15 @@ public class ItemDetailActivity extends Activity {
         colorView = (TextView)findViewById(R.id.color);
         sizeView = (TextView)findViewById(R.id.size);
         promoPriceView = (TextView)findViewById(R.id.promoPriceDetail);
+
         if (source.equals("aisleItem") || source.equals("promotions")) {
-            String tagId = bundle.getString(AisleItemsFragment.TAG_ID);
-            String url = getString(R.string.awsLink) + "/tags/" + tagId + "/items/" + itemId;
+            String itemDetailsLink = bundle.getString(AisleItemsFragment.ITEM_HREF);
+            String url = getString(R.string.awsLink) + itemDetailsLink;
             (new AsyncItemDetailsLoader()).execute(url);
             ((TextView)findViewById(R.id.priceHeader)).setText("Price:");
         }
         else if (source.equals("basketItem")){
+            String itemId = bundle.getString(BasketActivity.ITEM_ID);
             String url = getString(R.string.awsLink) + "/items/" + itemId;
             ((ViewManager)priceView.getParent()).removeView(priceView);
             TextView priceHeader = (TextView) findViewById(R.id.priceHeader);
@@ -84,16 +85,6 @@ public class ItemDetailActivity extends Activity {
 
     }
 
-/*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_item_detail, menu);
-        return true;
-    }
-
-    */
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -105,11 +96,6 @@ public class ItemDetailActivity extends Activity {
                 this.finish();
                 return true;
         }
-
-/*        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }*/
 
         return super.onOptionsItemSelected(item);
     }
@@ -184,7 +170,6 @@ public class ItemDetailActivity extends Activity {
                 categoryView.setText(item.getItem().getCategory());
                 colorView.setText(item.getItem().getColor());
                 sizeView.setText(item.getItem().getSize());
-//                priceView.setText("Varies for different outlets");
 
                 imageLoader = ImageLoader.getInstance();
                 imageLoader.displayImage(item.getItem().getImageUrl(),imageView);

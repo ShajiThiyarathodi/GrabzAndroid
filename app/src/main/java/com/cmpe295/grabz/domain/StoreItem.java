@@ -7,19 +7,19 @@ public class StoreItem {
     private ItemModel item;
 
     /**
-     * Price of the item in perticular store.
+     * Price of the item in particular store.
      */
-    private double price;
+    private float price;
     private boolean onPromotion;
-    private double promotionalPrice;
+    private float promotionalPrice;
     private String promotionName;
 
 
     public StoreItem(){
 
     }
-    public StoreItem(ItemModel item, double price, boolean onPromotion,
-                     double promotionalPrice, String promotionName) {
+    public StoreItem(ItemModel item, float price, boolean onPromotion,
+                     float promotionalPrice, String promotionName) {
         super();
         this.item = item;
         this.price = price;
@@ -45,14 +45,14 @@ public class StoreItem {
     /**
      * @return the price
      */
-    public double getPrice() {
+    public float getPrice() {
         return price;
     }
 
     /**
      * @param price the price to set
      */
-    public void setPrice(double price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
@@ -73,14 +73,14 @@ public class StoreItem {
     /**
      * @return the promotionalPrice
      */
-    public double getPromotionalPrice() {
+    public float getPromotionalPrice() {
         return promotionalPrice;
     }
 
     /**
      * @param promotionalPrice the promotionalPrice to set
      */
-    public void setPromotionalPrice(double promotionalPrice) {
+    public void setPromotionalPrice(float promotionalPrice) {
         this.promotionalPrice = promotionalPrice;
     }
 
