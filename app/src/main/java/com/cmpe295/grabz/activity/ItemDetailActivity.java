@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.ViewManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -70,9 +69,10 @@ public class ItemDetailActivity extends Activity {
         else if (source.equals("basketItem")){
             String itemId = bundle.getString(BasketActivity.ITEM_ID);
             String url = getString(R.string.awsLink) + "/items/" + itemId;
-            ((ViewManager)priceView.getParent()).removeView(priceView);
-            TextView priceHeader = (TextView) findViewById(R.id.priceHeader);
-            ((ViewManager)priceHeader.getParent()).removeView(priceHeader);
+            // price header and price is not set if the source is basket activity
+            // ((ViewManager)priceView.getParent()).removeView(priceView);
+            // TextView priceHeader = (TextView) findViewById(R.id.priceHeader);
+            // ((ViewManager)priceHeader.getParent()).removeView(priceHeader);
             (new AsyncBasketItemDetailsLoader()).execute(url);
 
         }
