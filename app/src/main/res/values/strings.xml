@@ -13,6 +13,7 @@
     <string-array name="left_navigation_array">
         <item>Home</item>
         <item>Promotions</item>
+        <item>Logout</item>
         <item>About Us</item>
     </string-array>
 

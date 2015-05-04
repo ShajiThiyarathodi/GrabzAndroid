@@ -6,10 +6,10 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +27,7 @@ import com.cmpe295.grabz.Dto.BasketDto;
 import com.cmpe295.grabz.Dto.LinkDto;
 import com.cmpe295.grabz.R;
 import com.cmpe295.grabz.activity.BasketActivity;
+import com.cmpe295.grabz.activity.MainActivity;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -59,7 +60,6 @@ public class BasketsListFragment extends Fragment {
     Context parentCtx;
     static View rootView;
     EditText edit;
-    static String deviceId;
     public BasketsListFragment() {
     }
 
@@ -74,16 +74,18 @@ public class BasketsListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        parentCtx = getActivity().getApplicationContext();
         rootView = inflater.inflate(R.layout.baskets_list, container,
                 false);
-        TelephonyManager telephonyManager = (TelephonyManager)this.
+        SharedPreferences settings = parentCtx.getSharedPreferences(MainActivity.PREFS_NAME, 0);
+        final String deviceId = settings.getString("deviceId", null);
+/*        TelephonyManager telephonyManager = (TelephonyManager)this.
                 getActivity().getSystemService(Context.TELEPHONY_SERVICE);
         deviceId = telephonyManager.getDeviceId();
-        Log.d("DEVICE ID",deviceId);
+        Log.d("DEVICE ID",deviceId);*/
         ListView lView = (ListView) rootView.findViewById(R.id.basketList);
         TextView emptyMsg = (TextView) rootView.findViewById(R.id.emptyTxt);
-        parentCtx = getActivity().getApplicationContext();
+
         (new BasketListGetRequestTask())
                 .execute("http://grabztestenv.elasticbeanstalk.com/baskets?phoneId="+deviceId);
         if (list.size() == 0)

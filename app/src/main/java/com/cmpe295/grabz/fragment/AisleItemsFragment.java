@@ -29,6 +29,7 @@ import com.cmpe295.grabz.Dto.AisleItemDto;
 import com.cmpe295.grabz.Dto.LinkDto;
 import com.cmpe295.grabz.activity.ItemDetailActivity;
 import com.cmpe295.grabz.R;
+import com.cmpe295.grabz.activity.MainActivity;
 import com.cmpe295.grabz.adapter.AisleItemAdapter;
 
 import org.springframework.http.HttpEntity;
@@ -56,7 +57,7 @@ public class AisleItemsFragment extends Fragment {
     public static final String ITEM_HREF = "Item_href";
     public static final String SOURCE = "source";
     public static final String GRABZPREFERENCES = "TAG_ID";
-    private String deviceId;
+//    private String deviceId;
 
     private static Context parentCtx;
     private TextView mTextView;
@@ -94,7 +95,7 @@ public class AisleItemsFragment extends Fragment {
         parentCtx = getActivity().getApplicationContext();
         TelephonyManager telephonyManager = (TelephonyManager) this.
                 getActivity().getSystemService(Context.TELEPHONY_SERVICE);
-        deviceId = telephonyManager.getDeviceId();
+//        deviceId = telephonyManager.getDeviceId();
         //NFC Tap screen
         mNfcAdapter = NfcAdapter.getDefaultAdapter(parentCtx);
 
@@ -234,7 +235,8 @@ public class AisleItemsFragment extends Fragment {
                 editor.commit();
 
                 String url = getString(R.string.awsLink) + "/tags/" + result + "/items/";
-
+                SharedPreferences settings = parentCtx.getSharedPreferences(MainActivity.PREFS_NAME, 0);
+                final String deviceId = settings.getString("deviceId", null);
                 (new AsyncListViewLoader())
                         .execute(url);
                 (new PopulateAilseNumbers())
