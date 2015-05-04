@@ -7,11 +7,11 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:id="@+id/aboutUs"
-        android:maxLines="9"
+        android:maxLines="12"
         android:singleLine="false"
         android:text="@string/about_us"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="10dp" />
 
 </LinearLayout>
-<!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/src/main/res/layout/fragment_about_us.xml -->
+<!-- From: file:/Users/shajithiyarathodi/project/4/GrabzAndroid/app/src/main/res/layout/fragment_about_us.xml -->

@@ -174,19 +174,17 @@ public class MainActivity extends FragmentActivity {
                 break;
 
             case 2:
+                AboutUsFragment fragment = new AboutUsFragment();
+                fragment.show(getSupportFragmentManager(), "About Grabz");
+                break;
+            case 3:
                 SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putString("deviceId", null);
                 editor.commit();
                 finish();
                 break;
-            case 3:
-
-                AboutUsFragment fragment = new AboutUsFragment();
-                fragment.show(getSupportFragmentManager(), "About us");
-                break;
-
-            default:
+        default:
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, HomeTabbedFragment.newInstance(), HomeTabbedFragment.CLASS_NAME).commit();
                 break;
 

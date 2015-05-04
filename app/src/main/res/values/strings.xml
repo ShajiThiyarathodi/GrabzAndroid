@@ -13,8 +13,8 @@
     <string-array name="left_navigation_array">
         <item>Home</item>
         <item>Promotions</item>
+        <item>About Grabz</item>
         <item>Logout</item>
-        <item>About Us</item>
     </string-array>
 
     <string name="drawer_open">Open navigation drawer</string>
@@ -34,6 +34,8 @@
 
 
     <string name="about_us">Our mission is to build better shopping experience for our customers.\n\n
-        <b><u>The team</u></b>\n\t\tAmit Dikkar\n\t\tPriyanka Deo\n\t\tSina Nikkhah\n\t\tShaji Thiyarathodi\n\n
+        To learn more about Grabz, visit our
+        <a href="http://amitdikkar.x10host.com/grabz/grabz_web/appstar/demo/index4-2.html">website</a>.\n\n
+        <b><u>The team</u></b>\n\t\tAmit Dikkar\n\t\tPriyanka Deo\n\t\tSina Nikkhah\n\t\tShaji Thiyarathodi\n
     </string>
 </resources>

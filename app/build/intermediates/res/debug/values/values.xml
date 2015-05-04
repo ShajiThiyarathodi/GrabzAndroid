@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/Users/shajithiyarathodi/project/4/GrabzAndroid/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string-array name="left_navigation_array">
         <item>Home</item>
         <item>Promotions</item>
+        <item>About Grabz</item>
         <item>Logout</item>
-        <item>About Us</item>
     </string-array>
-    <!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.3.0/res/values/common_colors.xml -->
+    <!-- From: file:/Users/shajithiyarathodi/project/4/GrabzAndroid/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.3.0/res/values/common_colors.xml -->
     <eat-comment/>
     <color name="common_action_bar_splitter">#d2d2d2</color>
     <color name="common_signin_btn_dark_text_default">@android:color/white</color>
@@ -20,7 +20,7 @@
     <color name="common_signin_btn_light_text_disabled">#FFAAAAAA</color>
     <color name="common_signin_btn_light_text_focused">#FF737373</color>
     <color name="common_signin_btn_light_text_pressed">@android:color/white</color>
-    <!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.3.0/res/values/wallet_colors.xml -->
+    <!-- From: file:/Users/shajithiyarathodi/project/4/GrabzAndroid/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.3.0/res/values/wallet_colors.xml -->
     <eat-comment/>
     <color name="wallet_bright_foreground_disabled_holo_light">#ffb2b2b2</color>
     <color name="wallet_bright_foreground_holo_dark">#fff3f3f3</color>
@@ -41,27 +41,29 @@
     <declare-styleable name="MapAttrs"><attr format="enum" name="mapType"><enum name="none" value="0"/><enum name="normal" value="1"/><enum name="satellite" value="2"/><enum name="terrain" value="3"/><enum name="hybrid" value="4"/></attr><attr format="float" name="cameraBearing"/><attr format="float" name="cameraTargetLat"/><attr format="float" name="cameraTargetLng"/><attr format="float" name="cameraTilt"/><attr format="float" name="cameraZoom"/><attr format="boolean" name="liteMode"/><attr format="boolean" name="uiCompass"/><attr format="boolean" name="uiRotateGestures"/><attr format="boolean" name="uiScrollGestures"/><attr format="boolean" name="uiTiltGestures"/><attr format="boolean" name="uiZoomControls"/><attr format="boolean" name="uiZoomGestures"/><attr format="boolean" name="useViewLifecycle"/><attr format="boolean" name="zOrderOnTop"/><attr format="boolean" name="uiMapToolbar"/></declare-styleable>
     <declare-styleable name="WalletFragmentOptions"><attr format="enum" name="appTheme"><enum name="holo_dark" value="0"/><enum name="holo_light" value="1"/></attr><attr format="enum" name="environment"><enum name="production" value="1"/><enum name="sandbox" value="0"/><enum name="strict_sandbox" value="2"/></attr><attr format="reference" name="fragmentStyle"/><attr format="enum" name="fragmentMode"><enum name="buyButton" value="1"/><enum name="selectionDetails" value="2"/></attr></declare-styleable>
     <declare-styleable name="WalletFragmentStyle"><attr format="dimension" name="buyButtonHeight"><enum name="match_parent" value="-1"/><enum name="wrap_content" value="-2"/></attr><attr format="dimension" name="buyButtonWidth"><enum name="match_parent" value="-1"/><enum name="wrap_content" value="-2"/></attr><attr format="enum" name="buyButtonText"><enum name="buy_with_google" value="1"/><enum name="buy_now" value="2"/><enum name="book_now" value="3"/><enum name="donate_with_google" value="4"/></attr><attr format="enum" name="buyButtonAppearance"><enum name="classic" value="1"/><enum name="grayscale" value="2"/><enum name="monochrome" value="3"/></attr><attr format="reference" name="maskedWalletDetailsTextAppearance"/><attr format="reference" name="maskedWalletDetailsHeaderTextAppearance"/><attr format="reference|color" name="maskedWalletDetailsBackground"/><attr format="reference" name="maskedWalletDetailsButtonTextAppearance"/><attr format="reference|color" name="maskedWalletDetailsButtonBackground"/><attr format="color" name="maskedWalletDetailsLogoTextColor"/><attr format="enum" name="maskedWalletDetailsLogoImageType"><enum name="classic" value="1"/><enum name="monochrome" value="2"/></attr></declare-styleable>
-    <!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/src/main/res/values/dimens.xml -->
+    <!-- From: file:/Users/shajithiyarathodi/project/4/GrabzAndroid/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.3.0/res/values/version.xml -->
+    <!-- From: file:/Users/shajithiyarathodi/project/4/GrabzAndroid/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.3.0/res/values/version.xml -->
     <eat-comment/>
     <integer name="google_play_services_version">7327000</integer>
-    <!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/Users/shajithiyarathodi/project/4/GrabzAndroid/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="about_us">Our mission is to build better shopping experience for our customers.\n\n
-        <b><u>The team</u></b>\n\t\tAmit Dikkar\n\t\tPriyanka Deo\n\t\tSina Nikkhah\n\t\tShaji Thiyarathodi\n\n
+        To learn more about Grabz, visit our
+        <a href="http://amitdikkar.x10host.com/grabz/grabz_web/appstar/demo/index4-2.html">website</a>.\n\n
+        <b><u>The team</u></b>\n\t\tAmit Dikkar\n\t\tPriyanka Deo\n\t\tSina Nikkhah\n\t\tShaji Thiyarathodi\n
     </string>
-    <!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.3.0/res/values/admob_strings.xml -->
+    <!-- From: file:/Users/shajithiyarathodi/project/4/GrabzAndroid/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.3.0/res/values/admob_strings.xml -->
     <eat-comment/>
     <string name="accept">Accept</string>
-    <!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/Users/shajithiyarathodi/project/4/GrabzAndroid/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="action_settings">Settings</string>
     <string name="app_name">Grabz</string>
     <string name="awsLink">http://grabztestenv.elasticbeanstalk.com</string>
-    <!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.3.0/res/values/common_strings.xml -->
+    <!-- From: file:/Users/shajithiyarathodi/project/4/GrabzAndroid/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.3.0/res/values/common_strings.xml -->
     <eat-comment/>
     <string name="common_android_wear_notification_needs_update_text">An application requires an update to the Android Wear app.</string>
     <string name="common_android_wear_update_text">This app won\'t run unless you update the Android Wear app.</string>
@@ -95,12 +97,12 @@
     <string name="common_signin_button_text_long">Sign in with Google</string>
     <string name="commono_google_play_services_api_unavailable_text">This app requires one or more Google Play services that are not currently
 available. Please contact the developer for assistance.</string>
-    <!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.3.0/res/values/admob_strings.xml -->
+    <!-- From: file:/Users/shajithiyarathodi/project/4/GrabzAndroid/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.3.0/res/values/admob_strings.xml -->
     <eat-comment/>
     <string name="create_calendar_message">Allow Ad to create a calendar event?</string>
     <string name="create_calendar_title">Create calendar event</string>
     <string name="decline">Decline</string>
-    <!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/Users/shajithiyarathodi/project/4/GrabzAndroid/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="drawer_open">Open navigation drawer</string>
@@ -111,11 +113,11 @@ available. Please contact the developer for assistance.</string>
     <string name="message"/>
     <string name="price_header">Price</string>
     <string name="rename">Rename</string>
-    <!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.3.0/res/values/admob_strings.xml -->
+    <!-- From: file:/Users/shajithiyarathodi/project/4/GrabzAndroid/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.3.0/res/values/admob_strings.xml -->
     <eat-comment/>
     <string name="store_picture_message">"Allow Ad to store image in Picture gallery?"</string>
     <string name="store_picture_title">Save image</string>
-    <!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/Users/shajithiyarathodi/project/4/GrabzAndroid/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="tap_and_go_description">Tap your phone on the NFC tag</string>
     <string name="tap_here_message">Tap your phone on NFC tag</string>
@@ -126,10 +128,10 @@ available. Please contact the developer for assistance.</string>
     <string name="title_section1">Aisle Items</string>
     <string name="title_section2">My Lists</string>
     <string name="txtEmpty">No Shopping List has been created. Type a name and tap on + to begin</string>
-    <!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.3.0/res/values/wallet_strings.xml -->
+    <!-- From: file:/Users/shajithiyarathodi/project/4/GrabzAndroid/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.3.0/res/values/wallet_strings.xml -->
     <eat-comment/>
     <string name="wallet_buy_button_place_holder" translation_description="Text on a button that allows a user to make a payment with Google Wallet [CHAR LIMIT=30]">Buy with Google</string>
-    <!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/Users/shajithiyarathodi/project/4/GrabzAndroid/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
@@ -141,7 +143,7 @@ available. Please contact the developer for assistance.</string>
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-    <!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.3.0/res/values/admob_iap_style.xml -->
+    <!-- From: file:/Users/shajithiyarathodi/project/4/GrabzAndroid/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.3.0/res/values/admob_iap_style.xml -->
     <eat-comment/>
     <style name="Theme.IAPTheme" parent="android:Theme">
     <item name="android:windowIsTranslucent">true</item>
@@ -151,7 +153,7 @@ available. Please contact the developer for assistance.</string>
     <item name="android:windowIsFloating">true</item>
     <item name="android:backgroundDimEnabled">false</item>
   </style>
-    <!-- From: file:/C:/Workspace/cmpe295/GrabzAndroid/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.3.0/res/values/wallet_styles.xml -->
+    <!-- From: file:/Users/shajithiyarathodi/project/4/GrabzAndroid/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.3.0/res/values/wallet_styles.xml -->
     <eat-comment/>
     <style name="WalletFragmentDefaultButtonTextAppearance">
         <item name="android:textColor">@color/wallet_primary_text_holo_light</item>
