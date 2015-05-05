@@ -239,8 +239,10 @@ public class AisleItemsFragment extends Fragment {
                 final String deviceId = settings.getString("deviceId", null);
                 (new AsyncListViewLoader())
                         .execute(url);
-                (new PopulateAilseNumbers())
-                        .execute(getString(R.string.awsLink) + "/tags/" + result + "/users/" + deviceId + "/baskets/updateAisleNumbers");
+                if (deviceId!=null)
+                    (new PopulateAilseNumbers())
+                            .execute(getString(R.string.awsLink) + "/tags/" +
+                                    result + "/users/" + deviceId + "/baskets/updateAisleNumbers");
             } else {
                 Log.e(LOG_PREFIX, "Tag reading failed");
                 mTextView.setText("Could not read the tag.");
@@ -296,7 +298,7 @@ public class AisleItemsFragment extends Fragment {
 
     }
 
-    private class PopulateAilseNumbers extends
+    public static class PopulateAilseNumbers extends
             AsyncTask<String, Void, Void> {
 
         HttpStatus responseCode;
@@ -324,6 +326,7 @@ public class AisleItemsFragment extends Fragment {
                 restTemplate.getMessageConverters().add(mapper);
                 ResponseEntity<Void> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity, Void.class);
                 responseCode = responseEntity.getStatusCode();
+                Log.d("PopulateAilseNumbers", "on "+url+" "+responseCode);
                 return null;
             } catch (Throwable t) {
                 t.printStackTrace();

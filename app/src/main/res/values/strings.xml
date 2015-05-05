@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Grabz</string>
+    <string name="app_name">Grabz Shopper</string>
     <string name="tap_here_message">Tap your phone on NFC tag</string>
     <string name="tap_and_go_description">Tap your phone on the NFC tag</string>
     <string name="action_settings">Settings</string>

@@ -16,6 +16,7 @@
         android:name="android.hardware.nfc"
         android:required="true" />
 
+    <!--
     <android:uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
@@ -23,7 +24,7 @@
     <android:uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
-
+    -->
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo1"

@@ -85,8 +85,8 @@ public class BasketsListFragment extends Fragment {
         Log.d("DEVICE ID",deviceId);*/
         ListView lView = (ListView) rootView.findViewById(R.id.basketList);
         TextView emptyMsg = (TextView) rootView.findViewById(R.id.emptyTxt);
-
-        (new BasketListGetRequestTask())
+        if (deviceId!= null)
+            (new BasketListGetRequestTask())
                 .execute("http://grabztestenv.elasticbeanstalk.com/baskets?phoneId="+deviceId);
         if (list.size() == 0)
             emptyMsg.setVisibility(View.VISIBLE);
@@ -285,7 +285,7 @@ public class BasketsListFragment extends Fragment {
         }
     }
 
-    private class BasketListGetRequestTask extends AsyncTask<String, Void, BasketDto[]> {
+    public static class BasketListGetRequestTask extends AsyncTask<String, Void, BasketDto[]> {
         HttpStatus responseCode;
         @Override
         protected BasketDto[] doInBackground(String... params) {

@@ -19,6 +19,8 @@ import android.widget.ListView;
 
 import com.cmpe295.grabz.R;
 import com.cmpe295.grabz.fragment.AboutUsFragment;
+import com.cmpe295.grabz.fragment.AisleItemsFragment;
+import com.cmpe295.grabz.fragment.BasketsListFragment;
 import com.cmpe295.grabz.fragment.HomeTabbedFragment;
 import com.cmpe295.grabz.fragment.PromotionsFragment;
 import com.google.android.gms.auth.GoogleAuthUtil;
@@ -205,6 +207,12 @@ public class MainActivity extends FragmentActivity {
             SharedPreferences.Editor editor = settings.edit();
             editor.putString("deviceId", accountName);
             editor.commit();
+            (new BasketsListFragment.BasketListGetRequestTask())
+                    .execute("http://grabztestenv.elasticbeanstalk.com/baskets?phoneId=" + accountName);
+            String tagId = settings.getString(AisleItemsFragment.TAG_ID, null);
+            if (tagId != null)
+                (new AisleItemsFragment.PopulateAilseNumbers()).execute(getString(R.string.awsLink) +
+                    "/tags/" + tagId + "/users/" + accountName + "/baskets/updateAisleNumbers");
         }
     }
 
