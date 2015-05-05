@@ -2,214 +2,214 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Sina\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-databind\2.3.2\c75edc740a6d8cb1cef6fa82fa594e0bce561916\jackson-databind-2.3.2.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="c75edc740a6d8cb1cef6fa82fa594e0bce561916">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\jackson-databind-2.3.2-fe0e6e2fe5e8ab052e1860d28032c9ab4f3edbd4.jar" />
-    </item>
-    <item
-        jar="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="0708ef60917bf94913fe9ef972a655b99462dca7">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-b7f139b7b5311058be73b6758bf02e3559342946.jar" />
-    </item>
-    <item
-        jar="C:\Users\Sina\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-core\2.3.2\559b70ac8a0d5cad611da4223137a920147201ba\jackson-core-2.3.2.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="559b70ac8a0d5cad611da4223137a920147201ba">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\jackson-core-2.3.2-6d75902b85f163a78847ecf96af04c9941470883.jar" />
-    </item>
-    <item
-        jar="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="e5bf453b070c1e39297986144960e45afa0fdfad">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-54bd8f385d8e98cbf9dd3edb17f5d98d7a2d7d8f.jar" />
-    </item>
-    <item
-        jar="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="a0ce76dfaccbfbd6c551ed2174280aaabe60fe47">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-dda8de5042539c6a928d667e96447a94a5ef5867.jar" />
-    </item>
-    <item
-        jar="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="59652857a825fff0de62166fca1bc9553cc01abb">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-e766adac004e9843214cdd9344433cc44d4ce8bc.jar" />
-    </item>
-    <item
-        jar="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="b48d5c51a9a9e329005106b4667f54948de4d4d8">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-2fa1d00774fb9f05e63ee449bd3ab41f440e4965.jar" />
-    </item>
-    <item
-        jar="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appinvite\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="bb36004beb02b69562cbec9aa7d6a3cf16bf5d1b">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-66f81fb13527cdc7fb5043b7cb91dbd483e6bc0d.jar" />
-    </item>
-    <item
-        jar="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appstate\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="0180d031a7b54dabb93b4af3869468b55dc938bd">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-19f17217d034fb2e4151ba4bf2a10db3358598e5.jar" />
-    </item>
-    <item
-        jar="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="9c9dea9e85aceb09d95df5e6f7bc8a43fc286068">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-170a2cb9242537ef92a1e4dd4050de5a5b2d8bc3.jar" />
-    </item>
-    <item
-        jar="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="6046e5cdaf799120b7c56a5a061d80e8854c4d34">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-71ec43363441343c9c6ee7b8ec68b2dfaf8f5fe2.jar" />
-    </item>
-    <item
-        jar="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="3b4ff5c39dace8f3b4ab4cab8191785547a0815f">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-fc586ea000787edd8973b95c8c529e5de79198ed.jar" />
-    </item>
-    <item
-        jar="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="b2c07cdb814fe988ad05f7b4d767a841514a5991">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-0836304fa277563ba34368a4b41a7a1e93af731f.jar" />
-    </item>
-    <item
-        jar="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="e5b9f5b0aa8dee788beb63d23832cb29ce771343">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-55fcb82cb57c8108f99091d29cab794ad3086abb.jar" />
-    </item>
-    <item
-        jar="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\classes.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-679997a902afbd6e3a7231f1f5a5b80a91cd0313.jar" />
-    </item>
-    <item
-        jar="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="fe3e0c6de7cceed888b277487238b6af9a1cc299">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-fdd56892495cc8313cb31727315d2a34c2b842e8.jar" />
-    </item>
-    <item
-        jar="C:\Users\Sina\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-annotations\2.3.0\f5e853a20b60758922453d56f9ae1e64af5cb3da\jackson-annotations-2.3.0.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="f5e853a20b60758922453d56f9ae1e64af5cb3da">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\jackson-annotations-2.3.0-23b4d01bce5478751b4da1f9fc1ff79800d3abea.jar" />
-    </item>
-    <item
-        jar="C:\Users\Sina\.gradle\caches\modules-2\files-2.1\com.nostra13.universalimageloader\universal-image-loader\1.9.3\a85588bec3e2c4584d593d3f15df1677321bca72\universal-image-loader-1.9.3.jar"
+        jar="C:\Users\Amit\.gradle\caches\modules-2\files-2.1\com.nostra13.universalimageloader\universal-image-loader\1.9.3\a85588bec3e2c4584d593d3f15df1677321bca72\universal-image-loader-1.9.3.jar"
         jumboMode="false"
         revision="22.0.0"
         sha1="a85588bec3e2c4584d593d3f15df1677321bca72">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\universal-image-loader-1.9.3-db119515761a9fdd7bd9faa9acb2c9de097cfe40.jar" />
+        <dex dex="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\pre-dexed\debug\universal-image-loader-1.9.3-be2957ac54af786e56d22f60286c7338fc775781.jar" />
     </item>
     <item
-        jar="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\libs\internal_impl-22.0.0.jar"
+        jar="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\7.3.0\classes.jar"
         jumboMode="false"
         revision="22.0.0"
-        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-7a209d81fdd4f15a2fa26a66422ea4fc1e549e8b.jar" />
+        sha1="b2c07cdb814fe988ad05f7b4d767a841514a5991">
+        <dex dex="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-b0ec1a2c03c9282f1dfb9e7388c4150fb3427a60.jar" />
     </item>
     <item
-        jar="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="4f4fe3c23776540625f3c2844152a7510fddf9f1">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-d791e61d6a1670ad434c8bb5954a5342739e6e76.jar" />
-    </item>
-    <item
-        jar="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="565a01f90f1529f73362707c4c185d0623a68782">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-da55f9ee1fdf8cd77dbe0d9a5e3cc4359b6f3696.jar" />
-    </item>
-    <item
-        jar="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="7215ac1f2fca947b9415a6ee2a1bf991364aab24">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-0c7e3aa90b625f3df024dd0eceb4667e9425b92d.jar" />
-    </item>
-    <item
-        jar="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\7.3.0\classes.jar"
+        jar="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\7.3.0\classes.jar"
         jumboMode="false"
         revision="22.0.0"
         sha1="e35fae1b377c23aa5fd2d309a190c2d0f73d54ec">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-f2c1549b6bed9f0fa1e66e234a5abc9956c65a9e.jar" />
+        <dex dex="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-ad8719af96a85d3cf2752c6fc9ec3dd40b4b160f.jar" />
     </item>
     <item
-        jar="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\7.3.0\classes.jar"
+        jar="C:\Users\Amit\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-databind\2.3.2\c75edc740a6d8cb1cef6fa82fa594e0bce561916\jackson-databind-2.3.2.jar"
         jumboMode="false"
         revision="22.0.0"
-        sha1="3988694bf9d8186ff97ad5cdfa4ed88b5010fe08">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-fc36f67784487686aacdb6353ef42e70693b6a23.jar" />
+        sha1="c75edc740a6d8cb1cef6fa82fa594e0bce561916">
+        <dex dex="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\pre-dexed\debug\jackson-databind-2.3.2-2339090cc17bd6433c9962ce244a36c02bacd505.jar" />
     </item>
     <item
-        jar="C:\Users\Sina\.gradle\caches\modules-2\files-2.1\org.springframework.android\spring-android-rest-template\1.0.1.RELEASE\e132d929bd181941f79b0d63edafb8a86ae6fd33\spring-android-rest-template-1.0.1.RELEASE.jar"
+        jar="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\7.3.0\classes.jar"
         jumboMode="false"
         revision="22.0.0"
-        sha1="e132d929bd181941f79b0d63edafb8a86ae6fd33">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\spring-android-rest-template-1.0.1.RELEASE-4000ee5a580c935dc6f52dec3cbb151d10b2a8d2.jar" />
+        sha1="565a01f90f1529f73362707c4c185d0623a68782">
+        <dex dex="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-68b4d87cda8e0487bc8c1c1fb8b47339bbe94c1f.jar" />
     </item>
     <item
-        jar="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\classes.jar"
+        jar="C:\Users\Amit\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-core\2.3.2\559b70ac8a0d5cad611da4223137a920147201ba\jackson-core-2.3.2.jar"
         jumboMode="false"
         revision="22.0.0"
-        sha1="f2f7ec211ce4d244ee97a57523eeb4526dc3cf8a">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-0a509c0a71eeede74a4db906da197e388f9368be.jar" />
+        sha1="559b70ac8a0d5cad611da4223137a920147201ba">
+        <dex dex="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\pre-dexed\debug\jackson-core-2.3.2-08a8d7e3e08ad773baec8a902f9ad5cfe2a29384.jar" />
     </item>
     <item
-        jar="C:\Users\Sina\.gradle\caches\modules-2\files-2.1\org.springframework.android\spring-android-core\1.0.1.RELEASE\e68f0e8e4b636ee30c4de58953be38d9b72a5e3b\spring-android-core-1.0.1.RELEASE.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="e68f0e8e4b636ee30c4de58953be38d9b72a5e3b">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\spring-android-core-1.0.1.RELEASE-b1eeaa7bf914e937a8431569fb5249651e7a4aab.jar" />
-    </item>
-    <item
-        jar="C:\Users\Sina\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.0.0\support-annotations-22.0.0.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\support-annotations-22.0.0-b6f1b4dcab0f995baef36bf86fa203dc5c07fc91.jar" />
-    </item>
-    <item
-        jar="C:\Workspace\cmpe295\GrabzAndroid\app\libs\TestJar.jar"
+        jar="C:\Users\Amit\git\GrabzAndroid\app\libs\TestJar.jar"
         jumboMode="false"
         revision="22.0.0"
         sha1="41f91343743df974c5356af62426d3297863a788">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\TestJar-80ecacf9ce978be87f3cc574dfc34b551ac2a0ef.jar" />
+        <dex dex="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\pre-dexed\debug\TestJar-2aa949115897ce7e94bbb39b1ab8615038989784.jar" />
     </item>
     <item
-        jar="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\7.3.0\classes.jar"
+        jar="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-3a6c1e8e8889a936a5340c56e7fc20b24fd6e7be.jar" />
+    </item>
+    <item
+        jar="C:\Users\Amit\.gradle\caches\modules-2\files-2.1\org.springframework.android\spring-android-core\1.0.1.RELEASE\e68f0e8e4b636ee30c4de58953be38d9b72a5e3b\spring-android-core-1.0.1.RELEASE.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="e68f0e8e4b636ee30c4de58953be38d9b72a5e3b">
+        <dex dex="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\pre-dexed\debug\spring-android-core-1.0.1.RELEASE-50a00881f5bf87747b0df96f14591feb461d8237.jar" />
+    </item>
+    <item
+        jar="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="7215ac1f2fca947b9415a6ee2a1bf991364aab24">
+        <dex dex="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-e1377a3721022f09fd329fa9d5835016542e2263.jar" />
+    </item>
+    <item
+        jar="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appstate\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="0180d031a7b54dabb93b4af3869468b55dc938bd">
+        <dex dex="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-cd42079171121e6ee33f3ae05307b5a05e02f9c0.jar" />
+    </item>
+    <item
+        jar="C:\Program Files (x86)\Android\android-sdk\extras\android\m2repository\com\android\support\support-annotations\22.0.0\support-annotations-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\pre-dexed\debug\support-annotations-22.0.0-5f7b639de8135024e42567e7fe1ddfdfd8bac0f0.jar" />
+    </item>
+    <item
+        jar="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\7.3.0\classes.jar"
         jumboMode="false"
         revision="22.0.0"
         sha1="5ea948d825957be6c4358c48422bee60eef2d487">
-        <dex dex="C:\Workspace\cmpe295\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-4104938057c6ec8e560f9ca5c1dab895c75f27b1.jar" />
+        <dex dex="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-f68085da7edc5b561c1841fccdb98cb57c0e85c7.jar" />
+    </item>
+    <item
+        jar="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="fe3e0c6de7cceed888b277487238b6af9a1cc299">
+        <dex dex="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-06ab70d6a1ca25413f75153f773ea65ea07d0f0d.jar" />
+    </item>
+    <item
+        jar="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="9c9dea9e85aceb09d95df5e6f7bc8a43fc286068">
+        <dex dex="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-9ffaf0aa952d38cd2c4ae7a958340410bff81191.jar" />
+    </item>
+    <item
+        jar="C:\Users\Amit\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-annotations\2.3.0\f5e853a20b60758922453d56f9ae1e64af5cb3da\jackson-annotations-2.3.0.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="f5e853a20b60758922453d56f9ae1e64af5cb3da">
+        <dex dex="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\pre-dexed\debug\jackson-annotations-2.3.0-70b44c80651f9ead84f45ac5e9a3067364133068.jar" />
+    </item>
+    <item
+        jar="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="f2f7ec211ce4d244ee97a57523eeb4526dc3cf8a">
+        <dex dex="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-d162d9286ff75e9cc756296beec347dce6613f3a.jar" />
+    </item>
+    <item
+        jar="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="e5bf453b070c1e39297986144960e45afa0fdfad">
+        <dex dex="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-d58dccf549d490e9a2bbbd6e9f9e36441ca79877.jar" />
+    </item>
+    <item
+        jar="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="59652857a825fff0de62166fca1bc9553cc01abb">
+        <dex dex="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-7344638159b72c4496de2e5e5ea3526a6a2b28cd.jar" />
+    </item>
+    <item
+        jar="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="3988694bf9d8186ff97ad5cdfa4ed88b5010fe08">
+        <dex dex="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-e4af93078da397627aca988436924b573cf57993.jar" />
+    </item>
+    <item
+        jar="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="a0ce76dfaccbfbd6c551ed2174280aaabe60fe47">
+        <dex dex="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-f5e1511e2a17d6371559d6f284b10bb4baca493a.jar" />
+    </item>
+    <item
+        jar="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="6046e5cdaf799120b7c56a5a061d80e8854c4d34">
+        <dex dex="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-3cd82bd888198a4467d60d63ed138ed523186ddb.jar" />
+    </item>
+    <item
+        jar="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appinvite\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="bb36004beb02b69562cbec9aa7d6a3cf16bf5d1b">
+        <dex dex="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-f6550b182cdb273dec6a964bfbdc173ab6c00b91.jar" />
+    </item>
+    <item
+        jar="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="3b4ff5c39dace8f3b4ab4cab8191785547a0815f">
+        <dex dex="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-1fc2b126ea6446eb63d71ff29d6820c88e041a73.jar" />
+    </item>
+    <item
+        jar="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\libs\internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-0adf6cbb8f4620cb4d484e975730476fdd74fb5a.jar" />
+    </item>
+    <item
+        jar="C:\Users\Amit\.gradle\caches\modules-2\files-2.1\org.springframework.android\spring-android-rest-template\1.0.1.RELEASE\e132d929bd181941f79b0d63edafb8a86ae6fd33\spring-android-rest-template-1.0.1.RELEASE.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="e132d929bd181941f79b0d63edafb8a86ae6fd33">
+        <dex dex="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\pre-dexed\debug\spring-android-rest-template-1.0.1.RELEASE-0d6cc058082cd8dc105c6a59e4405bcd6533908e.jar" />
+    </item>
+    <item
+        jar="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="0708ef60917bf94913fe9ef972a655b99462dca7">
+        <dex dex="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-9a6dd126304fdb20ec3bacbce1011fd5319e46b4.jar" />
+    </item>
+    <item
+        jar="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="e5b9f5b0aa8dee788beb63d23832cb29ce771343">
+        <dex dex="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-75f95d5608533a7510d5d2798a5457b0af55d8d2.jar" />
+    </item>
+    <item
+        jar="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="b48d5c51a9a9e329005106b4667f54948de4d4d8">
+        <dex dex="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-8cf823aa072309e9c9554dfd6f29108036e723de.jar" />
+    </item>
+    <item
+        jar="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="4f4fe3c23776540625f3c2844152a7510fddf9f1">
+        <dex dex="C:\Users\Amit\git\GrabzAndroid\app\build\intermediates\pre-dexed\debug\classes-5ddae7eccde303c368c6830fb6b1f97c70c84080.jar" />
     </item>
 
 </items>
