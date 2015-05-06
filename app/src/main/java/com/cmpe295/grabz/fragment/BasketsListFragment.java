@@ -6,7 +6,6 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -77,17 +76,17 @@ public class BasketsListFragment extends Fragment {
         parentCtx = getActivity().getApplicationContext();
         rootView = inflater.inflate(R.layout.baskets_list, container,
                 false);
-        SharedPreferences settings = parentCtx.getSharedPreferences(MainActivity.PREFS_NAME, 0);
-        final String deviceId = settings.getString("deviceId", null);
+/*        SharedPreferences settings = parentCtx.getSharedPreferences(MainActivity.PREFS_NAME, 0);
+        final String deviceId = settings.getString("deviceId", null);*/
 /*        TelephonyManager telephonyManager = (TelephonyManager)this.
                 getActivity().getSystemService(Context.TELEPHONY_SERVICE);
         deviceId = telephonyManager.getDeviceId();
         Log.d("DEVICE ID",deviceId);*/
         ListView lView = (ListView) rootView.findViewById(R.id.basketList);
         TextView emptyMsg = (TextView) rootView.findViewById(R.id.emptyTxt);
-        if (deviceId!= null)
+        if (MainActivity.deviceId!= null)
             (new BasketListGetRequestTask())
-                .execute("http://grabztestenv.elasticbeanstalk.com/baskets?phoneId="+deviceId);
+                .execute("http://grabztestenv.elasticbeanstalk.com/baskets?phoneId="+MainActivity.deviceId);
         if (list.size() == 0)
             emptyMsg.setVisibility(View.VISIBLE);
         else
@@ -105,7 +104,7 @@ public class BasketsListFragment extends Fragment {
                 edit = (EditText) rootView.findViewById(R.id.txtItem);
                 if (!edit.getText().toString().equals("")) {
                     (new BasketPostRequestTask())
-                            .execute("http://grabztestenv.elasticbeanstalk.com/baskets?phoneId="+deviceId);
+                            .execute("http://grabztestenv.elasticbeanstalk.com/baskets?phoneId="+MainActivity.deviceId);
                 }
             }
         });

@@ -45,6 +45,7 @@ public class MainActivity extends FragmentActivity {
 	private String[] mNavBarTitles;
     private static final int REQUEST_CODE_EMAIL = 69;
     public static final String PREFS_NAME = "MyPrefsFile";
+    public static String deviceId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +90,7 @@ public class MainActivity extends FragmentActivity {
         }
         //check whether user has logged in or not.
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-        String deviceId = settings.getString("deviceId", null);
+        deviceId = settings.getString("deviceId", null);
         if (deviceId == null){
             try {
                 Intent intent = AccountPicker.newChooseAccountIntent(null, null,
@@ -205,6 +206,7 @@ public class MainActivity extends FragmentActivity {
             String accountName = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
             SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
             SharedPreferences.Editor editor = settings.edit();
+            deviceId = accountName;
             editor.putString("deviceId", accountName);
             editor.commit();
             (new BasketsListFragment.BasketListGetRequestTask())
